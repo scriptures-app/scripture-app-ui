@@ -20,7 +20,7 @@
       "npm run clean && ts-node --project src/tools src/tools/generate.ts"
   },
   "devDependencies": {
-    "@scripture-app/bible-converter": "^0.2.0",
+    "@scripture-app/bible-converter": "^0.2.2",
     "@types/adm-zip": "^0.4.31",
     "@types/jest": "^21.1.8",
     "@types/mz": "^0.0.31",

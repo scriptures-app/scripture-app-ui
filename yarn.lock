@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@scripture-app/bible-converter@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@scripture-app/bible-converter/-/bible-converter-0.2.0.tgz#37a94fa9c2d98ad21eb291702b2194c107a8d49a"
+"@scripture-app/bible-converter@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@scripture-app/bible-converter/-/bible-converter-0.2.2.tgz#93a306b208883d68ae17a56a9dad0cd87052917c"
   dependencies:
     "@types/fs-promise" "^1.0.3"
     "@types/node" "^8.0.2"
