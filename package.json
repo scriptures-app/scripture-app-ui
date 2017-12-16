@@ -16,8 +16,8 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate": "npm run clean && ts-node src/tools/generate.ts",
-    "postinstall": "npm run generate"
+    "generate":
+      "npm run clean && ts-node --project src/tools src/tools/generate.ts"
   },
   "devDependencies": {
     "@scripture-app/bible-converter": "^0.2.0",
