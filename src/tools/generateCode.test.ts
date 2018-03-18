@@ -1,3 +1,5 @@
+import { ChapterReference } from "@scripture-app/types";
+
 import generateCode from "./generateCode";
 
 const bibles = [
@@ -19,8 +21,8 @@ const bibles = [
   }
 ];
 
-const defaultChapter: IPassageCoords = {
-  bibleId: "en_kjv",
+const defaultChapter: ChapterReference = {
+  versionId: "en_kjv",
   book: "gen",
   chapter: 1
 };

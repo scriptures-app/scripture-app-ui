@@ -10,7 +10,7 @@ const initialChapter  = {\\"verses\\":[\\"In the beginning God created the heave
 export default {
   bibles,
   defaultPassage: {
-    bibleId: \\"en_kjv\\",
+    versionId: \\"en_kjv\\",
     book: \\"gen\\",
     chapter: 1,
     verses: initialChapter.verses
