@@ -17,11 +17,12 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate": "npm run clean && ts-node --project src/tools src/tools/generate.ts"
+    "generate":
+      "npm run clean && ts-node --project src/tools src/tools/generate.ts"
   },
   "devDependencies": {
-    "@scripture-app/bible-converter": "^0.6.3",
-    "@scripture-app/types": "^0.6.3",
+    "@scripture-app/bible-converter": "^0.6.6",
+    "@scripture-app/types": "^0.6.6",
     "@types/adm-zip": "^0.4.31",
     "@types/jest": "^21.1.8",
     "@types/mz": "^0.0.31",

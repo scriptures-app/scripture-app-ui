@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@scripture-app/bible-converter@^0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@scripture-app/bible-converter/-/bible-converter-0.6.3.tgz#52e8117ab9bdbfa1f75972cb9c4dec6837dd54b1"
+"@scripture-app/bible-converter@^0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@scripture-app/bible-converter/-/bible-converter-0.6.6.tgz#d3ff9ed7d5fb9d1e10003f5107528c3136e564b5"
   dependencies:
     "@scripture-app/common" "^0.5.0"
-    "@scripture-app/types" "^0.6.3"
+    "@scripture-app/types" "^0.6.6"
     "@types/fs-promise" "^1.0.3"
     "@types/node" "^8.0.2"
     "@types/xml-parser" "^1.2.28"
@@ -30,9 +30,9 @@
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@scripture-app/types/-/types-0.6.1.tgz#a42167d0742ba7a42ad1961fac8c552d7da12715"
 
-"@scripture-app/types@^0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@scripture-app/types/-/types-0.6.3.tgz#02b7079bdd0e0ec90cfa43813ddd89947adfe07a"
+"@scripture-app/types@^0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@scripture-app/types/-/types-0.6.6.tgz#83404ed218bfbc2a5ae33f3bca8c34db812b9121"
 
 "@types/adm-zip@^0.4.31":
   version "0.4.31"
