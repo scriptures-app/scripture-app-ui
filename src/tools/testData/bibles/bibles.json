@@ -1,1 +1,14 @@
-{"cz_bkr":{"id":"cz_bkr","lang":"cz","name":"Bible Kralická","short":"BKR","type":"unbound"},"en_kjv":{"id":"en_kjv","lang":"en","name":"King James Version","short":"KJV","type":"opensong"}}
+{
+  "bkr": {
+    "id": "bkr",
+    "lang": "cz",
+    "name": "Bible Kralická",
+    "type": "unbound"
+  },
+  "kjv": {
+    "id": "kjv",
+    "lang": "en",
+    "name": "King James Version",
+    "type": "opensong"
+  }
+}
