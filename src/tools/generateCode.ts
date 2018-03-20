@@ -13,17 +13,19 @@ function generateCode(
  * This file is generated using npm run generate and is not to be manualy modified.
  */
  /* tslint:disable */
+import { ChapterContent } from "@scripture-app/types";
+import { BibleVersionsMap } from "./types";
 `;
   bibles.forEach(({ id, lang, name }: BibleInputConfig) => {
-    const statsJSON = require(`${publicPath}/${id}/v11n.json`);
-    biblesJSON[id].stats = statsJSON;
+    const v11nJSON = require(`${publicPath}/${id}/v11n.json`);
+    biblesJSON[id].v11n = v11nJSON;
   });
-  code += `const bibles = ${JSON.stringify(biblesJSON)};\n`;
+  code += `const bibles: BibleVersionsMap = ${JSON.stringify(biblesJSON)};\n`;
   const initialChapterJSON = require(`${publicPath}/${versionId}/${book}/ch${pad(
     chapter.toString(),
     3
   )}.json`);
-  code += `const initialChapter`;
+  code += `const initialChapter: ChapterContent`;
   code += `  = ${JSON.stringify(initialChapterJSON)};\n`;
   code += "export default {\n";
   code += "  bibles,\n";
