@@ -1,8 +1,25 @@
 import * as React from "react";
+import { Chapter } from "@scripture-app/types";
+
+import {
+  BibleVersionsMap,
+  PassageAddFunc,
+  PassageChangeFunc,
+  PassageCloseFunc
+} from "../../types";
+
 import PassageView from "../PassageView";
 
-class MainLayout extends React.Component<IMainLayoutProps> {
-  props: IMainLayoutProps;
+interface MainLayoutProps {
+  bibles: BibleVersionsMap;
+  passages: Chapter[];
+  onPassageAdd: PassageAddFunc;
+  onPassageChange: PassageChangeFunc;
+  onPassageClose: PassageCloseFunc;
+}
+
+class MainLayout extends React.Component<MainLayoutProps> {
+  props: MainLayoutProps;
 
   render() {
     const {
@@ -25,20 +42,23 @@ class MainLayout extends React.Component<IMainLayoutProps> {
         <div className="content">
           <div className="main">
             {passages.map(
-              ({ bibleId, book, chapter, verses }: IPassage, index: number) => (
+              (
+                { versionId, book, chapter, verses }: Chapter,
+                index: number
+              ) => (
                 <PassageView
-                  key={`${bibleId}_${book}_${chapter}_${index}`}
-                  allBibleIds={Object.keys(bibles)}
-                  bibleId={bibleId}
+                  key={`${versionId}_${book}_${chapter}_${index}`}
+                  allVersionIds={Object.keys(bibles)}
+                  versionId={versionId}
                   book={book}
                   chapter={chapter}
-                  stats={bibles[bibleId].stats}
+                  stats={bibles[versionId].v11n}
                   verses={verses}
                   onPassageChange={(
-                    bibleId: string,
+                    versionId: string,
                     book: string,
                     chapter: number
-                  ) => onPassageChange(index, bibleId, book, chapter)}
+                  ) => onPassageChange(index, versionId, book, chapter)}
                   onPassageClose={() => onPassageClose(index)}
                 />
               )

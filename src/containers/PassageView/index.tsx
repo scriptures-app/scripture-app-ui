@@ -1,23 +1,38 @@
 import * as React from "react";
+import { Versification } from "@scripture-app/types";
+
+import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
+
 import PassageSelect from "../../components/PassageSelect";
 import ShadowScrollbar from "../ShadowScrollbar";
 
-const PassageView: React.SFC<IPassageViewProps> = ({
-  allBibleIds,
-  bibleId,
+interface PassageViewProps {
+  allVersionIds: string[];
+  versionId: string;
+  book: string;
+  chapter: number;
+  stats: Versification;
+  verses: string[];
+  onPassageChange: PassageChangeFuncCurried;
+  onPassageClose: PassageCloseFuncCurried;
+}
+
+const PassageView: React.SFC<PassageViewProps> = ({
+  allVersionIds,
+  versionId,
   book,
   chapter,
   stats,
   verses,
   onPassageChange,
   onPassageClose
-}: IPassageViewProps) =>
+}: PassageViewProps) => (
   <div className="passage-wrapper">
     <div className="passage">
       <div className="passage-header">
         <PassageSelect
-          allBibleIds={allBibleIds}
-          bibleId={bibleId}
+          allVersionIds={allVersionIds}
+          versionId={versionId}
           book={book}
           chapter={chapter}
           stats={stats}
@@ -27,15 +42,16 @@ const PassageView: React.SFC<IPassageViewProps> = ({
       </div>
       <div className="passage-verses">
         <ShadowScrollbar autoHide style={{ height: "100%" }}>
-          {verses.map((text, index) =>
-            <p key={index + 1}><sup>{index + 1}</sup> {text}</p>
-          )}
+          {verses.map((text, index) => (
+            <p key={index + 1}>
+              <sup>{index + 1}</sup> {text}
+            </p>
+          ))}
         </ShadowScrollbar>
       </div>
-      <div className="passage-footer">
-        {bibleId}
-      </div>
+      <div className="passage-footer">{versionId}</div>
     </div>
-  </div>;
+  </div>
+);
 
 export default PassageView;

@@ -1,22 +1,20 @@
 import { fs } from "mz";
 import * as path from "path";
+import { BibleVersionContent } from "@scripture-app/types";
 import * as xml2json from "@scripture-app/bible-converter";
+import { BibleInputConfig } from "../types";
 import readSource from "./readSource";
 import generateCode from "./generateCode";
-import {
-  _outputPath as outputPath,
-  bibles,
-  defaultChapter
-} from "../../config.json";
+import { outputPath, bibles, defaultChapter } from "../config";
 
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
 Promise.all(
-  bibles.map(bible => {
+  bibles.map((bible: BibleInputConfig) => {
     const parseData = xml2json.getParser(bible.type);
     return readSource(path.join(bible.input || ""), bible.pathInArchive)
-      .then(data => parseData(data, bible.name))
-      .then((bibleObj: IBibleInputObject) => {
+      .then(data => parseData(data, bible.id, bible.name, bible.lang))
+      .then((bibleObj: BibleVersionContent) => {
         const pathOut = path.join(publicBiblesPath, bible.id);
         return xml2json.generate(pathOut, bibleObj);
       })
@@ -26,7 +24,10 @@ Promise.all(
             ...map,
             [bible.id]: {
               ...bible,
-              input: undefined
+              // "un-define" config-specific fields
+              input: undefined,
+              pathInArchive: undefined,
+              type: undefined
             }
           }),
           {}
@@ -42,7 +43,7 @@ Promise.all(
   })
 )
   .then(() => {
-    console.log("The conversion finished successfully.");
+    // console.log("The conversion finished successfully.");
   })
   .then(() => {
     const preBundledFile = "../initialDataGenerated.ts";
@@ -52,7 +53,7 @@ Promise.all(
     );
   })
   .then(() => {
-    console.log("Code generated successfully.");
+    // console.log("Code generated successfully.");
   })
   .catch(err => {
     throw err;

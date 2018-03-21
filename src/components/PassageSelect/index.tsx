@@ -1,12 +1,25 @@
 import * as React from "react";
+import { Versification } from "@scripture-app/types";
+
+import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
+
+interface PassageSelectProps {
+  allVersionIds: string[];
+  versionId: string;
+  book: string;
+  chapter: number;
+  stats: Versification;
+  onPassageChange: PassageChangeFuncCurried;
+  onPassageClose: PassageCloseFuncCurried;
+}
 
 export default class PassageSelect extends React.Component<
-  IPassageSelectProps,
-  IPassageSelectState
+  PassageSelectProps,
+  {}
 > {
-  props: IPassageSelectProps;
+  props: PassageSelectProps;
 
-  constructor(props: IPassageSelectProps) {
+  constructor(props: PassageSelectProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -18,7 +31,7 @@ export default class PassageSelect extends React.Component<
     const value = target.value;
 
     const currentPassage = {
-      bibleId: this.props.bibleId,
+      versionId: this.props.versionId,
       book: this.props.book,
       chapter: this.props.chapter
     };
@@ -29,7 +42,7 @@ export default class PassageSelect extends React.Component<
     };
 
     this.props.onPassageChange(
-      newPassage.bibleId,
+      newPassage.versionId,
       newPassage.book,
       newPassage.chapter
     );
@@ -41,27 +54,27 @@ export default class PassageSelect extends React.Component<
 
   render() {
     const {
-      allBibleIds,
-      bibleId,
+      allVersionIds,
+      versionId,
       book,
       chapter,
       stats
-    }: IPassageSelectProps = this.props;
+    }: PassageSelectProps = this.props;
     return (
       <div>
         <select
-          name="bibleId"
-          defaultValue={bibleId}
+          name="versionId"
+          defaultValue={versionId}
           onChange={this.handleChange}
         >
-          {allBibleIds.map((bibleOption: string) =>
+          {allVersionIds.map((bibleOption: string) => (
             <option key={bibleOption}>{bibleOption}</option>
-          )}
+          ))}
         </select>
         <select name="book" defaultValue={book} onChange={this.handleChange}>
-          {Object.keys(stats).map(bookId =>
+          {Object.keys(stats).map(bookId => (
             <option key={bookId}>{bookId}</option>
-          )}
+          ))}
         </select>
         <input
           name="chapter"
