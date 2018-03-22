@@ -11,7 +11,7 @@ interface PassageViewProps {
   versionId: string;
   book: string;
   chapter: number;
-  stats: Versification;
+  v11n: Versification;
   verses: string[];
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
@@ -22,7 +22,7 @@ const PassageView: React.SFC<PassageViewProps> = ({
   versionId,
   book,
   chapter,
-  stats,
+  v11n,
   verses,
   onPassageChange,
   onPassageClose
@@ -35,7 +35,7 @@ const PassageView: React.SFC<PassageViewProps> = ({
           versionId={versionId}
           book={book}
           chapter={chapter}
-          stats={stats}
+          v11n={v11n}
           onPassageChange={onPassageChange}
           onPassageClose={onPassageClose}
         />

@@ -52,7 +52,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
                   versionId={versionId}
                   book={book}
                   chapter={chapter}
-                  stats={bibles[versionId].v11n}
+                  v11n={bibles[versionId].v11n}
                   verses={verses}
                   onPassageChange={(
                     versionId: string,

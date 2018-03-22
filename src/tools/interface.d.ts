@@ -1,29 +1,24 @@
+import { ChapterReference } from "@scripture-app/types";
+
 declare module "*config.json" {
-  const config: IConfig;
+  const config: Config;
   export default config;
   export const _outputPath: string;
-  export const bibles: Array<IBibleInputConfig>;
-  export const defaultChapter: IPassage;
+  export const bibles: Array<BibleInputConfig>;
+  export const defaultChapter: ChapterReference;
 }
 
-interface IConfig {
+interface Config {
   outputPath: string;
-  bibles: Array<IBibleInputConfig>;
-  defaultChapter: IPassage;
+  bibles: Array<BibleInputConfig>;
+  defaultChapter: ChapterReference;
 }
 
-interface IBibleInputConfig {
+interface BibleInputConfig {
   id: string;
   lang: string;
   name: string;
-  short: string;
   input: string;
   pathInArchive?: string;
   type: string;
-}
-
-interface IBibleInputObject {
-  name: string;
-  books: IBibleBooks;
-  stats: IBibleStats;
 }

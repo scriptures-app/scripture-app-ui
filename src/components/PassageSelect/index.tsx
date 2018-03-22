@@ -8,7 +8,7 @@ interface PassageSelectProps {
   versionId: string;
   book: string;
   chapter: number;
-  stats: Versification;
+  v11n: Versification;
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
 }
@@ -58,7 +58,7 @@ export default class PassageSelect extends React.Component<
       versionId,
       book,
       chapter,
-      stats
+      v11n
     }: PassageSelectProps = this.props;
     return (
       <div>
@@ -72,7 +72,7 @@ export default class PassageSelect extends React.Component<
           ))}
         </select>
         <select name="book" defaultValue={book} onChange={this.handleChange}>
-          {Object.keys(stats).map(bookId => (
+          {Object.keys(v11n).map(bookId => (
             <option key={bookId}>{bookId}</option>
           ))}
         </select>
