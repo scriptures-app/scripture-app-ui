@@ -60,6 +60,9 @@ export default class PassageSelect extends React.Component<
       chapter,
       v11n
     }: PassageSelectProps = this.props;
+
+    const numberOfChapters = v11n[book].length;
+
     return (
       <div>
         <select
@@ -76,12 +79,15 @@ export default class PassageSelect extends React.Component<
             <option key={bookId}>{bookId}</option>
           ))}
         </select>
-        <input
+        <select
           name="chapter"
-          type="number"
           defaultValue={String(chapter)}
           onChange={this.handleChange}
-        />
+        >
+          {Array.from(Array(numberOfChapters).keys()).map(chapterNumber => (
+            <option key={chapterNumber + 1}>{chapterNumber + 1}</option>
+          ))}
+        </select>
         <button onClick={this.handleClose}>⨯</button>
       </div>
     );
