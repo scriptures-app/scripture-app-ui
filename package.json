@@ -6,6 +6,7 @@
     "@scripture-app/common": "^0.5.0",
     "@scripture-app/reference-validator": "^0.6.1",
     "dom-css": "^2.1.0",
+    "downshift": "^1.31.2",
     "react": "^16.2.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.2.0",
@@ -17,8 +18,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate":
-      "npm run clean && ts-node --project src/tools src/tools/generate.ts"
+    "generate": "npm run clean && ts-node --project src/tools src/tools/generate.ts"
   },
   "devDependencies": {
     "@scripture-app/bible-converter": "^0.6.6",
