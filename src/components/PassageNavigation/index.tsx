@@ -3,7 +3,9 @@ import { Versification } from "@scripture-app/types";
 
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
-interface PassageSelectProps {
+import ChapterSelect from "../../components/ChapterSelect";
+
+interface PassageNavigationProps {
   allVersionIds: string[];
   versionId: string;
   book: string;
@@ -13,13 +15,13 @@ interface PassageSelectProps {
   onPassageClose: PassageCloseFuncCurried;
 }
 
-export default class PassageSelect extends React.Component<
-  PassageSelectProps,
+export default class PassageNavigation extends React.Component<
+  PassageNavigationProps,
   {}
 > {
-  props: PassageSelectProps;
+  props: PassageNavigationProps;
 
-  constructor(props: PassageSelectProps) {
+  constructor(props: PassageNavigationProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -59,7 +61,7 @@ export default class PassageSelect extends React.Component<
       book,
       chapter,
       v11n
-    }: PassageSelectProps = this.props;
+    }: PassageNavigationProps = this.props;
 
     const numberOfChapters = v11n[book].length;
 
@@ -74,11 +76,11 @@ export default class PassageSelect extends React.Component<
             <option key={bibleOption}>{bibleOption}</option>
           ))}
         </select>
-        <select name="book" defaultValue={book} onChange={this.handleChange}>
-          {Object.keys(v11n).map(bookId => (
-            <option key={bookId}>{bookId}</option>
-          ))}
-        </select>
+        <ChapterSelect
+          defaultValue={book}
+          items={Object.keys(v11n)}
+          onChange={this.handleChange}
+        />
         <select
           name="chapter"
           defaultValue={String(chapter)}

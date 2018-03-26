@@ -3,7 +3,7 @@ import { Versification } from "@scripture-app/types";
 
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
-import PassageSelect from "../../components/PassageSelect";
+import PassageNavigation from "../../components/PassageNavigation";
 import ShadowScrollbar from "../ShadowScrollbar";
 
 interface PassageViewProps {
@@ -30,7 +30,7 @@ const PassageView: React.SFC<PassageViewProps> = ({
   <div className="passage-wrapper">
     <div className="passage">
       <div className="passage-header">
-        <PassageSelect
+        <PassageNavigation
           allVersionIds={allVersionIds}
           versionId={versionId}
           book={book}
