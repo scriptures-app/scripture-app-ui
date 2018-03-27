@@ -19,8 +19,6 @@ export default class PassageNavigation extends React.Component<
   PassageNavigationProps,
   {}
 > {
-  props: PassageNavigationProps;
-
   constructor(props: PassageNavigationProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -50,6 +48,10 @@ export default class PassageNavigation extends React.Component<
     );
   }
 
+  onChapterChange = (book: string, chapter: number) => {
+    this.props.onPassageChange(this.props.versionId, book, chapter);
+  };
+
   handleClose() {
     this.props.onPassageClose();
   }
@@ -63,8 +65,6 @@ export default class PassageNavigation extends React.Component<
       v11n
     }: PassageNavigationProps = this.props;
 
-    const numberOfChapters = v11n[book].length;
-
     return (
       <div>
         <select
@@ -77,19 +77,11 @@ export default class PassageNavigation extends React.Component<
           ))}
         </select>
         <ChapterSelect
-          defaultValue={book}
-          items={Object.keys(v11n)}
-          onChange={this.handleChange}
+          book={book}
+          chapter={chapter}
+          v11n={v11n}
+          onChange={this.onChapterChange}
         />
-        <select
-          name="chapter"
-          defaultValue={String(chapter)}
-          onChange={this.handleChange}
-        >
-          {Array.from(Array(numberOfChapters).keys()).map(chapterNumber => (
-            <option key={chapterNumber + 1}>{chapterNumber + 1}</option>
-          ))}
-        </select>
         <button onClick={this.handleClose}>⨯</button>
       </div>
     );
