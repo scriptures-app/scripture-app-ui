@@ -1,5 +1,5 @@
 import * as React from "react";
-import Downshift from "downshift";
+import Downshift, { StateChangeOptions } from "downshift";
 
 import { Versification } from "@scripture-app/types";
 
@@ -18,6 +18,9 @@ enum SelectionType {
 interface ChapterSelectState {
   beingSelected: SelectionType;
   selectedBook: string;
+  selectedChapter: number;
+  inputValue: string;
+  isOpen: boolean;
 }
 
 export default class ChapterSelect extends React.Component<
@@ -28,15 +31,20 @@ export default class ChapterSelect extends React.Component<
     super(props);
     this.state = {
       beingSelected: SelectionType.CHAPTER,
-      selectedBook: props.book
+      selectedBook: props.book,
+      selectedChapter: props.chapter,
+      inputValue: `${props.book} ${props.chapter}`,
+      isOpen: false
     };
   }
 
   onChange = (selectedItem: string) => {
-    if (this.state.beingSelected !== SelectionType.CHAPTER) {
+    if (this.state.beingSelected === SelectionType.BOOK) {
       this.setState({
         beingSelected: SelectionType.CHAPTER,
-        selectedBook: selectedItem
+        selectedBook: selectedItem,
+        inputValue: selectedItem,
+        isOpen: true
       });
     } else {
       const book = this.state.selectedBook;
@@ -52,20 +60,47 @@ export default class ChapterSelect extends React.Component<
     }
   };
 
-  onInputValueChange = (inputValue: string) => {
+  onInputValueChange = (inputValue: string, isOpen: boolean) => {
     if (inputValue.indexOf(this.state.selectedBook) !== 0) {
-      this.setState({
+      this.setState(oldState => ({
+        ...oldState,
         beingSelected: SelectionType.BOOK
-      });
+      }));
+    }
+    this.setState(oldState => ({
+      ...oldState,
+      inputValue,
+      isOpen
+    }));
+  };
+
+  onBlur = () => {
+    this.setState(oldState => ({
+      beingSelected: SelectionType.CHAPTER,
+      selectedBook: this.props.book,
+      selectedChapter: this.props.chapter,
+      inputValue: `${this.props.book} ${this.props.chapter}`
+    }));
+  };
+
+  onDownshiftStateChange = (changes: StateChangeOptions) => {
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.changeInput:
+        this.onInputValueChange(changes.inputValue, changes.isOpen);
+        break;
+      case Downshift.stateChangeTypes.blurInput:
+      case Downshift.stateChangeTypes.mouseUp:
+        this.onBlur();
+        break;
+      default:
     }
   };
 
   render() {
-    const { chapter, v11n } = this.props;
-    const { selectedBook, beingSelected } = this.state;
+    const { v11n } = this.props;
+    const { selectedBook, beingSelected, isOpen, inputValue } = this.state;
 
     let items: string[];
-    const defaultValue = `${selectedBook} ${chapter}`;
 
     if (beingSelected === SelectionType.CHAPTER) {
       const numberOfChapters = v11n[selectedBook].length;
@@ -78,9 +113,10 @@ export default class ChapterSelect extends React.Component<
 
     return (
       <Downshift
-        defaultSelectedItem={defaultValue}
+        isOpen={isOpen}
+        inputValue={inputValue}
+        onStateChange={this.onDownshiftStateChange}
         onChange={this.onChange}
-        onInputValueChange={this.onInputValueChange}
         render={({
           getInputProps,
           getItemProps,
