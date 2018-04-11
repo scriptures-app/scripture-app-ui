@@ -1,5 +1,5 @@
 import * as React from "react";
-import Downshift, { StateChangeOptions } from "downshift";
+import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
 
 import { Versification } from "@scripture-app/types";
 
@@ -19,8 +19,6 @@ interface ChapterSelectState {
   beingSelected: SelectionType;
   selectedBook: string;
   selectedChapter: number;
-  inputValue: string;
-  isOpen: boolean;
 }
 
 export default class ChapterSelect extends React.Component<
@@ -32,9 +30,7 @@ export default class ChapterSelect extends React.Component<
     this.state = {
       beingSelected: SelectionType.CHAPTER,
       selectedBook: props.book,
-      selectedChapter: props.chapter,
-      inputValue: `${props.book} ${props.chapter}`,
-      isOpen: false
+      selectedChapter: props.chapter
     };
   }
 
@@ -42,9 +38,7 @@ export default class ChapterSelect extends React.Component<
     if (this.state.beingSelected === SelectionType.BOOK) {
       this.setState({
         beingSelected: SelectionType.CHAPTER,
-        selectedBook: selectedItem,
-        inputValue: selectedItem,
-        isOpen: true
+        selectedBook: selectedItem
       });
     } else {
       const book = this.state.selectedBook;
@@ -60,33 +54,27 @@ export default class ChapterSelect extends React.Component<
     }
   };
 
-  onInputValueChange = (inputValue: string, isOpen: boolean) => {
+  onInputValueChange = (inputValue: string) => {
     if (inputValue.indexOf(this.state.selectedBook) !== 0) {
       this.setState(oldState => ({
         ...oldState,
         beingSelected: SelectionType.BOOK
       }));
     }
-    this.setState(oldState => ({
-      ...oldState,
-      inputValue,
-      isOpen
-    }));
   };
 
   onBlur = () => {
     this.setState(oldState => ({
       beingSelected: SelectionType.CHAPTER,
       selectedBook: this.props.book,
-      selectedChapter: this.props.chapter,
-      inputValue: `${this.props.book} ${this.props.chapter}`
+      selectedChapter: this.props.chapter
     }));
   };
 
   onDownshiftStateChange = (changes: StateChangeOptions) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.changeInput:
-        this.onInputValueChange(changes.inputValue, changes.isOpen);
+        this.onInputValueChange(changes.inputValue);
         break;
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
@@ -96,9 +84,41 @@ export default class ChapterSelect extends React.Component<
     }
   };
 
+  downshiftStateReducer = (
+    state: DownshiftState,
+    changes: StateChangeOptions
+  ): StateChangeOptions => {
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.changeInput:
+        return {
+          ...changes,
+          highlightedIndex: 0
+        };
+      case Downshift.stateChangeTypes.keyDownEnter:
+      case Downshift.stateChangeTypes.clickItem:
+        return {
+          ...changes,
+          isOpen: this.state.beingSelected === SelectionType.BOOK,
+          highlightedIndex:
+            this.state.beingSelected === SelectionType.BOOK
+              ? 0
+              : state.highlightedIndex || 0
+        };
+      case Downshift.stateChangeTypes.blurInput:
+      case Downshift.stateChangeTypes.mouseUp:
+        return {
+          ...changes,
+          inputValue: `${this.props.book} ${this.props.chapter}`
+        };
+      default:
+        return changes;
+    }
+  };
+
   render() {
     const { v11n } = this.props;
-    const { selectedBook, beingSelected, isOpen, inputValue } = this.state;
+    const { selectedBook, beingSelected } = this.state;
+    const defaultInputValue = `${this.props.book} ${this.props.chapter}`;
 
     let items: string[];
 
@@ -113,9 +133,9 @@ export default class ChapterSelect extends React.Component<
 
     return (
       <Downshift
-        isOpen={isOpen}
-        inputValue={inputValue}
+        defaultInputValue={defaultInputValue}
         onStateChange={this.onDownshiftStateChange}
+        stateReducer={this.downshiftStateReducer}
         onChange={this.onChange}
         render={({
           getInputProps,
