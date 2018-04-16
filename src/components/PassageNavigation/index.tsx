@@ -5,6 +5,8 @@ import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
 import ChapterSelect from "../../components/ChapterSelect";
 
+import "./PassageNavigation.css";
+
 interface PassageNavigationProps {
   allVersionIds: string[];
   versionId: string;
@@ -66,22 +68,24 @@ export default class PassageNavigation extends React.Component<
     }: PassageNavigationProps = this.props;
 
     return (
-      <div>
-        <select
-          name="versionId"
-          defaultValue={versionId}
-          onChange={this.handleChange}
-        >
-          {allVersionIds.map((bibleOption: string) => (
-            <option key={bibleOption}>{bibleOption}</option>
-          ))}
-        </select>
+      <div className="PassageNavigation">
         <ChapterSelect
           book={book}
           chapter={chapter}
           v11n={v11n}
           onChange={this.onChapterChange}
         />
+        <div>
+          <select
+            name="versionId"
+            defaultValue={versionId}
+            onChange={this.handleChange}
+          >
+            {allVersionIds.map((bibleOption: string) => (
+              <option key={bibleOption}>{bibleOption}</option>
+            ))}
+          </select>
+        </div>
         <button onClick={this.handleClose}>⨯</button>
       </div>
     );

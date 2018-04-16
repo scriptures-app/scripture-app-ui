@@ -145,7 +145,7 @@ export default class ChapterSelect extends React.Component<
           selectedItem,
           highlightedIndex
         }) => (
-          <span>
+          <div>
             <input {...getInputProps({ placeholder: "Book" })} />
             {isOpen ? (
               <div style={{ border: "1px solid #ccc" }}>
@@ -170,7 +170,7 @@ export default class ChapterSelect extends React.Component<
                   ))}
               </div>
             ) : null}
-          </span>
+          </div>
         )}
       />
     );
