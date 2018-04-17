@@ -86,7 +86,12 @@ export default class PassageNavigation extends React.Component<
             ))}
           </select>
         </div>
-        <button onClick={this.handleClose}>⨯</button>
+        <button
+          className="PassageNavigation_close-button"
+          onClick={this.handleClose}
+        >
+          ⨯
+        </button>
       </div>
     );
   }

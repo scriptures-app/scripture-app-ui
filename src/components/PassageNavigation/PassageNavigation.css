@@ -2,3 +2,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.PassageNavigation_close-button {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  -webkit-appearance: none;
+  font-size: 15px;
+  color: #aaa;
+}
