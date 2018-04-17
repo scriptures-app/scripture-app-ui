@@ -89,6 +89,7 @@ export default class PassageNavigation extends React.Component<
         <button
           className="PassageNavigation_close-button"
           onClick={this.handleClose}
+          title="Close"
         >
           ⨯
         </button>
