@@ -3,11 +3,18 @@ import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
 
 import { Versification } from "@scripture-app/types";
 
+import { bibleBookNames } from "../../lang/bibleBookNames.en";
+
 interface ChapterSelectProps {
   book: string;
   chapter: number;
   v11n: Versification;
   onChange: (book: string, chapter: number) => void;
+}
+
+interface ListItem {
+  value: string;
+  text: string;
 }
 
 enum SelectionType {
@@ -34,15 +41,15 @@ export default class ChapterSelect extends React.Component<
     };
   }
 
-  onChange = (selectedItem: string) => {
+  onChange = (selectedItem: ListItem) => {
     if (this.state.beingSelected === SelectionType.BOOK) {
       this.setState({
         beingSelected: SelectionType.CHAPTER,
-        selectedBook: selectedItem
+        selectedBook: selectedItem.value
       });
     } else {
       const book = this.state.selectedBook;
-      const chapter = selectedItem
+      const chapter = selectedItem.value
         .trim()
         .slice(book.length)
         .trim();
@@ -55,7 +62,7 @@ export default class ChapterSelect extends React.Component<
   };
 
   onInputValueChange = (inputValue: string) => {
-    if (inputValue.indexOf(this.state.selectedBook) !== 0) {
+    if (inputValue.indexOf(bibleBookNames[this.state.selectedBook]) !== 0) {
       this.setState(oldState => ({
         ...oldState,
         beingSelected: SelectionType.BOOK
@@ -108,7 +115,7 @@ export default class ChapterSelect extends React.Component<
       case Downshift.stateChangeTypes.mouseUp:
         return {
           ...changes,
-          inputValue: `${this.props.book} ${this.props.chapter}`
+          inputValue: `${bibleBookNames[this.props.book]} ${this.props.chapter}`
         };
       default:
         return changes;
@@ -118,25 +125,37 @@ export default class ChapterSelect extends React.Component<
   render() {
     const { v11n } = this.props;
     const { selectedBook, beingSelected } = this.state;
-    const defaultInputValue = `${this.props.book} ${this.props.chapter}`;
+    const defaultInputValue = `${bibleBookNames[this.props.book]} ${
+      this.props.chapter
+    }`;
+    const defaultSelectedItem = {
+      value: this.props.book,
+      text: defaultInputValue
+    };
 
-    let items: string[];
+    let items: ListItem[];
 
     if (beingSelected === SelectionType.CHAPTER) {
       const numberOfChapters = v11n[selectedBook].length;
-      items = Array.from(Array(numberOfChapters).keys()).map(
-        chapterNumber => `${selectedBook} ${chapterNumber + 1}`
-      );
+      items = Array.from(Array(numberOfChapters).keys()).map(chapterNumber => ({
+        value: `${selectedBook} ${chapterNumber + 1}`,
+        text: `${bibleBookNames[selectedBook]} ${chapterNumber + 1}`
+      }));
     } else {
-      items = Object.keys(v11n);
+      items = Object.keys(v11n).map(value => ({
+        value,
+        text: bibleBookNames[value]
+      }));
     }
 
     return (
       <Downshift
+        defaultSelectedItem={defaultSelectedItem}
         defaultInputValue={defaultInputValue}
         onStateChange={this.onDownshiftStateChange}
         stateReducer={this.downshiftStateReducer}
         onChange={this.onChange}
+        itemToString={item => item.text}
         render={({
           getInputProps,
           getItemProps,
@@ -153,19 +172,19 @@ export default class ChapterSelect extends React.Component<
                   .filter(
                     i =>
                       !inputValue ||
-                      i.toLowerCase().includes(inputValue.toLowerCase())
+                      i.text.toLowerCase().includes(inputValue.toLowerCase())
                   )
                   .map((item, index) => (
                     <div
                       {...getItemProps({ item })}
-                      key={item}
+                      key={item.value}
                       style={{
                         backgroundColor:
                           highlightedIndex === index ? "gray" : "white",
                         fontWeight: selectedItem === item ? "bold" : "normal"
                       }}
                     >
-                      {item}
+                      {item.text}
                     </div>
                   ))}
               </div>
