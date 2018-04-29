@@ -85,6 +85,7 @@ export default class ChapterSelect extends React.Component<
         break;
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
+      case Downshift.stateChangeTypes.keyDownEscape:
         this.onBlur();
         break;
       default:
@@ -113,6 +114,7 @@ export default class ChapterSelect extends React.Component<
         };
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
+      case Downshift.stateChangeTypes.keyDownEscape:
         return {
           ...changes,
           inputValue: `${bibleBookNames[this.props.book]} ${this.props.chapter}`
