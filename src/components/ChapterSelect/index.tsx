@@ -13,7 +13,7 @@ interface ChapterSelectProps {
 }
 
 interface ListItem {
-  value: string;
+  value: string | number;
   text: string;
 }
 
@@ -43,21 +43,15 @@ export default class ChapterSelect extends React.Component<
 
   onChange = (selectedItem: ListItem) => {
     if (this.state.beingSelected === SelectionType.BOOK) {
+      // we only change mode from BOOK to CHAPTER and set book
       this.setState({
         beingSelected: SelectionType.CHAPTER,
-        selectedBook: selectedItem.value
+        selectedBook: selectedItem.value.toString()
       });
     } else {
-      const book = this.state.selectedBook;
-      const chapter = selectedItem.value
-        .trim()
-        .slice(book.length)
-        .trim();
-
-      const chapterNumber = parseInt(chapter, 10);
-      if (chapterNumber && chapterNumber > 0) {
-        this.props.onChange(this.state.selectedBook, chapterNumber);
-      }
+      // when chapter is selected, we also submit the result using onChange action
+      const chapter = parseInt(selectedItem.value.toString(), 10);
+      this.props.onChange(this.state.selectedBook, chapter);
     }
   };
 
@@ -137,13 +131,18 @@ export default class ChapterSelect extends React.Component<
 
     let items: ListItem[];
 
+    /**
+     * The autocomplete shows either list of books or list of chapters depending on the current selection mode
+     */
     if (beingSelected === SelectionType.CHAPTER) {
       const numberOfChapters = v11n[selectedBook].length;
+      // e.g. items = [{ value: 1, text: "Genesis 1" }, { value: 2, text: "Genesis 2" }, ... ]
       items = Array.from(Array(numberOfChapters).keys()).map(chapterNumber => ({
-        value: `${selectedBook} ${chapterNumber + 1}`,
+        value: chapterNumber + 1,
         text: `${bibleBookNames[selectedBook]} ${chapterNumber + 1}`
       }));
     } else {
+      // e.g. items = [{ value: "gen", text: "Genesis" }, { value: "exo", text: "Exodus" }, ... ]
       items = Object.keys(v11n).map(value => ({
         value,
         text: bibleBookNames[value]
@@ -172,9 +171,9 @@ export default class ChapterSelect extends React.Component<
               <div style={{ border: "1px solid #ccc" }}>
                 {items
                   .filter(
-                    i =>
+                    item =>
                       !inputValue ||
-                      i.text.toLowerCase().includes(inputValue.toLowerCase())
+                      item.text.toLowerCase().includes(inputValue.toLowerCase())
                   )
                   .map((item, index) => (
                     <div
