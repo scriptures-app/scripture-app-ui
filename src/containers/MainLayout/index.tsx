@@ -35,7 +35,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
         <div className="toolbar">
           <div className="header">
             <header>
-              <h1>Scripure App</h1>
+              <h1>Scripture App</h1>
             </header>
           </div>
         </div>
