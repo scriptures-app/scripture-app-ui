@@ -22,11 +22,6 @@ export default class PassageNavigation extends React.Component<
   PassageNavigationProps,
   {}
 > {
-  constructor(props: PassageNavigationProps) {
-    super(props);
-    this.handleClose = this.handleClose.bind(this);
-  }
-
   onChapterChange = (book: string, chapter: number) => {
     this.props.onPassageChange(this.props.versionId, book, chapter);
   };
@@ -35,9 +30,9 @@ export default class PassageNavigation extends React.Component<
     this.props.onPassageChange(versionId, this.props.book, this.props.chapter);
   };
 
-  handleClose() {
+  handleClose = () => {
     this.props.onPassageClose();
-  }
+  };
 
   render() {
     const {
