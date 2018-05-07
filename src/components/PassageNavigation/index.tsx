@@ -4,6 +4,7 @@ import { Versification } from "@scripture-app/types";
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
 import ChapterSelect from "../../components/ChapterSelect";
+import BibleVersionSelect from "../../components/BibleVersionSelect";
 
 import "./PassageNavigation.css";
 
@@ -23,35 +24,15 @@ export default class PassageNavigation extends React.Component<
 > {
   constructor(props: PassageNavigationProps) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
-  }
-
-  handleChange(event: React.FormEvent<HTMLSelectElement | HTMLInputElement>) {
-    const target = event.currentTarget;
-    const name = target.name;
-    const value = target.value;
-
-    const currentPassage = {
-      versionId: this.props.versionId,
-      book: this.props.book,
-      chapter: this.props.chapter
-    };
-
-    const newPassage = {
-      ...currentPassage,
-      [name]: value
-    };
-
-    this.props.onPassageChange(
-      newPassage.versionId,
-      newPassage.book,
-      newPassage.chapter
-    );
   }
 
   onChapterChange = (book: string, chapter: number) => {
     this.props.onPassageChange(this.props.versionId, book, chapter);
+  };
+
+  onVersionChange = (versionId: string) => {
+    this.props.onPassageChange(versionId, this.props.book, this.props.chapter);
   };
 
   handleClose() {
@@ -75,17 +56,11 @@ export default class PassageNavigation extends React.Component<
           v11n={v11n}
           onChange={this.onChapterChange}
         />
-        <div>
-          <select
-            name="versionId"
-            defaultValue={versionId}
-            onChange={this.handleChange}
-          >
-            {allVersionIds.map((bibleOption: string) => (
-              <option key={bibleOption}>{bibleOption}</option>
-            ))}
-          </select>
-        </div>
+        <BibleVersionSelect
+          versionId={versionId}
+          allVersionIds={allVersionIds}
+          onChange={this.onVersionChange}
+        />
         <button
           className="PassageNavigation_close-button"
           onClick={this.handleClose}
