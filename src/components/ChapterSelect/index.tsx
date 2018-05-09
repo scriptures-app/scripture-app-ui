@@ -1,6 +1,8 @@
 import * as React from "react";
 import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
 
+import "./ChapterSelect.css";
+
 import { Versification } from "@scripture-app/types";
 
 import { bibleBookNames } from "../../lang/bibleBookNames.en";
@@ -165,7 +167,7 @@ export default class ChapterSelect extends React.Component<
           selectedItem,
           highlightedIndex
         }) => (
-          <div>
+          <div className="ChapterSelect">
             <input {...getInputProps({ placeholder: "Book" })} />
             {isOpen ? (
               <div style={{ border: "1px solid #ccc" }}>

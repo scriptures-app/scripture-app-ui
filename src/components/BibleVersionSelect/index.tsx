@@ -1,6 +1,8 @@
 import * as React from "react";
 import Downshift from "downshift";
 
+import "./BibleVersionSelect.css";
+
 import { bibles } from "../../config";
 const versionsData = bibles.reduce((data, bible) => {
   return {
@@ -60,8 +62,11 @@ export default class BibleVersionSelect extends React.Component<
           selectedItem,
           highlightedIndex
         }) => (
-          <div>
-            <input {...getInputProps({ placeholder: "Version" })} />
+          <div className="BibleVersionSelect">
+            <input
+              {...getInputProps({ placeholder: "Version" })}
+              className="BibleVersionSelect__input"
+            />
             {isOpen ? (
               <div style={{ border: "1px solid #ccc" }}>
                 {items
