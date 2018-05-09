@@ -168,7 +168,10 @@ export default class ChapterSelect extends React.Component<
           highlightedIndex
         }) => (
           <div className="ChapterSelect">
-            <input {...getInputProps({ placeholder: "Book" })} />
+            <input
+              {...getInputProps({ placeholder: "Book" })}
+              className="ChapterSelect__input"
+            />
             {isOpen ? (
               <div style={{ border: "1px solid #ccc" }}>
                 {items
