@@ -63,7 +63,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
                 />
               )
             )}
-            <div className="passage-wrapper add-passage">
+            <div className="PassageView add-passage">
               <button onClick={onPassageAdd}>Add</button>
             </div>
           </div>

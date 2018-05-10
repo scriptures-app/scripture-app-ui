@@ -1,0 +1,48 @@
+.PassageView {
+  width: 35rem;
+  height: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.PassageView.add-passage {
+  width: 4rem;
+}
+
+.PassageView__passage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  white-space: normal;
+  background-color: white;
+  box-shadow: inset 2px 0 2px #ddd, 5px 0 10px #ddd;
+}
+
+.PassageView:first-child .PassageView__passage {
+  box-shadow: 0 0 20px 3px #ddd;
+}
+
+.PassageView__header {
+  flex: 0 0 auto;
+  position: relative;
+  min-height: 18px;
+}
+
+.PassageView__verses {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  z-index: 1;
+  height: 100%;
+  font-size: 1.5rem;
+}
+
+.PassageView__passage p {
+  padding-left: 1.5rem;
+  padding-right: 2.5rem;
+  white-space: normal;
+}
