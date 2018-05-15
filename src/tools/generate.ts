@@ -1,7 +1,7 @@
 import { fs } from "mz";
 import * as path from "path";
-import { BibleVersionContent } from "@scripture-app/types";
-import * as xml2json from "@scripture-app/bible-converter";
+import { BibleVersionContent } from "@bible-reader/types";
+import * as xml2json from "@bible-reader/bible-converter";
 import { BibleInputConfig } from "../types";
 import readSource from "./readSource";
 import generateCode from "./generateCode";

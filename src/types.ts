@@ -1,4 +1,4 @@
-import { BibleVersion, Chapter } from "@scripture-app/types";
+import { BibleVersion, Chapter } from "@bible-reader/types";
 
 export interface AppState {
   passages: Chapter[];

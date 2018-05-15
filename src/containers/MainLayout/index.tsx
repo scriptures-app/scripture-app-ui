@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Chapter } from "@scripture-app/types";
+import { Chapter } from "@bible-reader/types";
 
 import {
   BibleVersionsMap,

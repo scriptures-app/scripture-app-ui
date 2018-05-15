@@ -1,4 +1,4 @@
-import { ChapterReference } from "@scripture-app/types";
+import { ChapterReference } from "@bible-reader/types";
 
 declare module "*config.json" {
   const config: Config;

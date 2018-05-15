@@ -3,7 +3,7 @@ import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
 
 import "./ChapterSelect.css";
 
-import { Versification } from "@scripture-app/types";
+import { Versification } from "@bible-reader/types";
 
 import { bibleBookNames } from "../../lang/bibleBookNames.en";
 

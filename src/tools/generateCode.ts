@@ -1,4 +1,4 @@
-import { ChapterReference } from "@scripture-app/types";
+import { ChapterReference } from "@bible-reader/types";
 import { BibleInputConfig } from "../types";
 
 import { pad } from "../utils/utils";
@@ -13,7 +13,7 @@ function generateCode(
  * This file is generated using npm run generate and is not to be manualy modified.
  */
  /* tslint:disable */
-import { ChapterContent } from "@scripture-app/types";
+import { ChapterContent } from "@bible-reader/types";
 import { BibleVersionsMap } from "./types";
 `;
   bibles.forEach(({ id, lang, name }: BibleInputConfig) => {

@@ -1,6 +1,6 @@
 {
-  "name": "scripture-app-ui",
-  "homepage": "https://scripture-app.github.io",
+  "name": "static-web-app-generator",
+  "homepage": "https://bible-reader.github.io",
   "repository": {
     "type": "git",
     "url": "https://github.com/bible-reader/static-web-app-generator.git"
@@ -8,8 +8,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@scripture-app/common": "^0.5.0",
-    "@scripture-app/reference-validator": "^0.6.1",
+    "@bible-reader/common": "^0.5.0",
+    "@bible-reader/reference-validator": "^0.6.1",
     "dom-css": "^2.1.0",
     "downshift": "^1.31.2",
     "react": "^16.2.0",
@@ -26,11 +26,11 @@
     "generate":
       "npm run clean && ts-node --project src/tools src/tools/generate.ts",
     "deploy":
-      "gh-pages -d build -r git@github.com:scripture-app/scripture-app.github.io.git -b master"
+      "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master"
   },
   "devDependencies": {
-    "@scripture-app/bible-converter": "^0.6.6",
-    "@scripture-app/types": "^0.6.6",
+    "@bible-reader/bible-converter": "^0.6.6",
+    "@bible-reader/types": "^0.6.6",
     "@types/adm-zip": "^0.4.31",
     "@types/jest": "^21.1.8",
     "@types/mz": "^0.0.31",

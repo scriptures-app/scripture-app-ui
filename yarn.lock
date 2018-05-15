@@ -2,37 +2,37 @@
 # yarn lockfile v1
 
 
-"@scripture-app/bible-converter@^0.6.6":
+"@bible-reader/bible-converter@^0.6.6":
   version "0.6.6"
-  resolved "https://registry.yarnpkg.com/@scripture-app/bible-converter/-/bible-converter-0.6.6.tgz#d3ff9ed7d5fb9d1e10003f5107528c3136e564b5"
+  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-0.6.6.tgz#d3ff9ed7d5fb9d1e10003f5107528c3136e564b5"
   dependencies:
-    "@scripture-app/common" "^0.5.0"
-    "@scripture-app/types" "^0.6.6"
+    "@bible-reader/common" "^0.5.0"
+    "@bible-reader/types" "^0.6.6"
     "@types/fs-promise" "^1.0.3"
     "@types/node" "^8.0.2"
     "@types/xml-parser" "^1.2.28"
     fs-promise "^1.0.0"
     xml-parser "^1.2.1"
 
-"@scripture-app/common@^0.5.0":
+"@bible-reader/common@^0.5.0":
   version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@scripture-app/common/-/common-0.5.0.tgz#790c3215f5eeca64498a38b460f0fc4755a8548b"
+  resolved "https://registry.yarnpkg.com/@bible-reader/common/-/common-0.5.0.tgz#790c3215f5eeca64498a38b460f0fc4755a8548b"
 
-"@scripture-app/reference-validator@^0.6.1":
+"@bible-reader/reference-validator@^0.6.1":
   version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@scripture-app/reference-validator/-/reference-validator-0.6.1.tgz#8b46a0c162c4a39546f2b08a975316120009e67a"
+  resolved "https://registry.yarnpkg.com/@bible-reader/reference-validator/-/reference-validator-0.6.1.tgz#8b46a0c162c4a39546f2b08a975316120009e67a"
   dependencies:
-    "@scripture-app/common" "^0.5.0"
-    "@scripture-app/types" "^0.6.1"
+    "@bible-reader/common" "^0.5.0"
+    "@bible-reader/types" "^0.6.1"
     "@types/node" "^8.0.2"
 
-"@scripture-app/types@^0.6.1":
+"@bible-reader/types@^0.6.1":
   version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@scripture-app/types/-/types-0.6.1.tgz#a42167d0742ba7a42ad1961fac8c552d7da12715"
+  resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-0.6.1.tgz#a42167d0742ba7a42ad1961fac8c552d7da12715"
 
-"@scripture-app/types@^0.6.6":
+"@bible-reader/types@^0.6.6":
   version "0.6.6"
-  resolved "https://registry.yarnpkg.com/@scripture-app/types/-/types-0.6.6.tgz#83404ed218bfbc2a5ae33f3bca8c34db812b9121"
+  resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-0.6.6.tgz#83404ed218bfbc2a5ae33f3bca8c34db812b9121"
 
 "@types/adm-zip@^0.4.31":
   version "0.4.31"

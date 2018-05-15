@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Versification } from "@scripture-app/types";
+import { Versification } from "@bible-reader/types";
 
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
