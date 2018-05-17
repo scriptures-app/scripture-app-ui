@@ -1,22 +1,12 @@
 {
   "name": "static-web-app-generator",
-  "homepage": "https://bible-reader.github.io",
+  "homepage": "https://biblereader.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/bible-reader/static-web-app-generator.git"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "dependencies": {
-    "@bible-reader/common": "^0.7.0",
-    "@bible-reader/reference-validator": "^0.7.0",
-    "dom-css": "^2.1.0",
-    "downshift": "^1.31.2",
-    "react": "^16.2.0",
-    "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.2.0",
-    "typestyle": "^1.3.4"
-  },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
@@ -28,6 +18,16 @@
     "deploy":
       "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
     "postinstall": "yarn run generate"
+  },
+  "dependencies": {
+    "@bible-reader/common": "^0.7.0",
+    "@bible-reader/reference-validator": "^0.7.0",
+    "dom-css": "^2.1.0",
+    "downshift": "^1.31.2",
+    "react": "^16.2.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^16.2.0",
+    "typestyle": "^1.3.4"
   },
   "devDependencies": {
     "@bible-reader/bible-converter": "^0.7.0",
