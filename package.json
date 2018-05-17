@@ -8,8 +8,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bible-reader/common": "^0.5.0",
-    "@bible-reader/reference-validator": "^0.6.1",
+    "@bible-reader/common": "^0.7.0",
+    "@bible-reader/reference-validator": "^0.7.0",
     "dom-css": "^2.1.0",
     "downshift": "^1.31.2",
     "react": "^16.2.0",
@@ -30,8 +30,8 @@
     "postinstall": "yarn run generate"
   },
   "devDependencies": {
-    "@bible-reader/bible-converter": "^0.6.6",
-    "@bible-reader/types": "^0.6.6",
+    "@bible-reader/bible-converter": "^0.7.0",
+    "@bible-reader/types": "^0.7.0",
     "@types/adm-zip": "^0.4.31",
     "@types/jest": "^21.1.8",
     "@types/mz": "^0.0.31",
