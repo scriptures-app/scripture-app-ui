@@ -24,9 +24,10 @@
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
     "generate":
-      "npm run clean && ts-node --project src/tools src/tools/generate.ts",
+      "yarn run clean && ts-node --project src/tools src/tools/generate.ts",
     "deploy":
-      "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master"
+      "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
+    "postinstall": "yarn run generate"
   },
   "devDependencies": {
     "@bible-reader/bible-converter": "^0.6.6",
