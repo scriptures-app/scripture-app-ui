@@ -26,10 +26,11 @@ html {
 }
 
 .toolbar {
+  z-index: 10;
   padding-bottom: 0.5rem;
   flex: 0 0 auto;
   background-color: #784321;
-  box-shadow: 0 0 0.3rem black;
+  box-shadow: 0 0 3px #555;
 }
 
 .container .header h1 {
