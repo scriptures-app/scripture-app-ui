@@ -1,0 +1,13 @@
+.BibleVersionAutocomplete {
+  width: 5em;
+}
+
+.BibleVersionAutocomplete__input {
+  line-height: 2em;
+  width: 100%;
+  padding-left: 0.5em;
+  appearance: none;
+  border: none;
+  border-bottom: 1px lightgray solid;
+  font-size: 150%;
+}

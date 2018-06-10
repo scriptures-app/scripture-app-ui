@@ -1,24 +1,7 @@
 import * as React from "react";
-import Downshift from "downshift";
 
+import BibleVersionAutocomplete from "../BibleVersionAutocomplete";
 import "./BibleVersionSelect.css";
-
-import { bibles } from "../../config";
-const versionsData = bibles.reduce((data, bible) => {
-  return {
-    ...data,
-    [bible.id]: {
-      id: bible.id,
-      lang: bible.lang,
-      name: bible.name
-    }
-  };
-}, {});
-
-interface ListItem {
-  value: string;
-  text: string;
-}
 
 interface BibleVersionSelectProps {
   allVersionIds: string[];
@@ -26,78 +9,36 @@ interface BibleVersionSelectProps {
   onChange: (versionId: string) => void;
 }
 
+interface BibleVersionSelectState {
+  open: boolean;
+}
+
 export default class BibleVersionSelect extends React.Component<
   BibleVersionSelectProps,
-  {}
+  BibleVersionSelectState
 > {
-  onChange = (selectedItem: ListItem) => {
-    this.props.onChange(selectedItem.value);
+  state: BibleVersionSelectState = {
+    open: false
   };
-
+  handleClick = () => {
+    this.setState(oldState => ({ ...oldState, open: !oldState.open }));
+  };
   render() {
-    const { allVersionIds } = this.props;
-    const defaultInputValue = this.props.versionId.toUpperCase();
-    const defaultSelectedItem = {
-      value: this.props.versionId,
-      text: defaultInputValue
-    };
-
-    // e.g. items = [{ value: "kjv", text: "KJV" }, { value: "bkr", text: "BKR" }, ... ]
-    const items = allVersionIds.map(value => ({
-      value,
-      text: value.toUpperCase()
-    }));
-
     return (
-      <Downshift
-        defaultSelectedItem={defaultSelectedItem}
-        defaultInputValue={defaultInputValue}
-        onChange={this.onChange}
-        itemToString={item => item.text}
-        render={({
-          getInputProps,
-          getItemProps,
-          isOpen,
-          inputValue,
-          selectedItem,
-          highlightedIndex
-        }) => (
-          <div className="BibleVersionSelect">
-            <input
-              {...getInputProps({ placeholder: "Version" })}
-              className="BibleVersionSelect__input"
+      <div className="BibleVersionSelect">
+        <div onClick={this.handleClick}>
+          {this.props.versionId.toUpperCase()}
+        </div>
+        {this.state.open && (
+          <div className="BibleVersionSelect_dropdown">
+            <BibleVersionAutocomplete
+              allVersionIds={this.props.allVersionIds}
+              versionId={this.props.versionId}
+              onChange={this.props.onChange}
             />
-            {isOpen ? (
-              <div style={{ border: "1px solid #ccc" }}>
-                {items
-                  .filter(
-                    item =>
-                      !inputValue ||
-                      item.text
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase()) ||
-                      versionsData[item.value].name
-                        .toLowerCase()
-                        .includes(inputValue.toLocaleLowerCase())
-                  )
-                  .map((item, index) => (
-                    <div
-                      {...getItemProps({ item })}
-                      key={item.value}
-                      style={{
-                        backgroundColor:
-                          highlightedIndex === index ? "gray" : "white",
-                        fontWeight: selectedItem === item ? "bold" : "normal"
-                      }}
-                    >
-                      {item.text}
-                    </div>
-                  ))}
-              </div>
-            ) : null}
           </div>
         )}
-      />
+      </div>
     );
   }
 }

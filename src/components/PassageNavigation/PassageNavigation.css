@@ -1,4 +1,5 @@
 .PassageNavigation {
+  position: relative;
   padding-top: 0.5rem;
   padding-left: 1rem;
   margin-bottom: -1px;
