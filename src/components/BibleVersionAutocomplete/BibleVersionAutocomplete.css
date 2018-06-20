@@ -1,5 +1,5 @@
 .BibleVersionAutocomplete {
-  width: 5em;
+  width: 100%;
 }
 
 .BibleVersionAutocomplete__input {
@@ -9,5 +9,15 @@
   appearance: none;
   border: none;
   border-bottom: 1px lightgray solid;
-  font-size: 150%;
+  box-sizing: border-box;
+}
+
+.BibleVersionAutocomplete__list {
+  padding: 0.5em 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.BibleVersionAutocomplete__list-item {
+  padding: 0 0.5em;
 }
