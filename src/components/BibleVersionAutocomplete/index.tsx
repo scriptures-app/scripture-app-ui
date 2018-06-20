@@ -36,10 +36,9 @@ export default class BibleVersionAutocomplete extends React.Component<
 
   render() {
     const { allVersionIds } = this.props;
-    const defaultInputValue = this.props.versionId.toUpperCase();
     const defaultSelectedItem = {
       value: this.props.versionId,
-      text: defaultInputValue
+      text: ""
     };
 
     // e.g. items = [{ value: "kjv", text: "KJV" }, { value: "bkr", text: "BKR" }, ... ]
@@ -51,9 +50,9 @@ export default class BibleVersionAutocomplete extends React.Component<
     return (
       <Downshift
         defaultSelectedItem={defaultSelectedItem}
-        defaultInputValue={defaultInputValue}
         onChange={this.onChange}
         itemToString={item => item.text}
+        isOpen
         render={({
           getInputProps,
           getItemProps,
@@ -87,7 +86,8 @@ export default class BibleVersionAutocomplete extends React.Component<
                       style={{
                         backgroundColor:
                           highlightedIndex === index ? "gray" : "white",
-                        fontWeight: selectedItem === item ? "bold" : "normal"
+                        fontWeight:
+                          selectedItem.value === item.value ? "bold" : "normal"
                       }}
                     >
                       {item.text}
