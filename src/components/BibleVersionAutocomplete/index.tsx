@@ -1,5 +1,9 @@
 import * as React from "react";
-import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
+import Downshift, {
+  StateChangeOptions,
+  DownshiftState,
+  GetItemPropsOptions
+} from "downshift";
 
 import "./BibleVersionAutocomplete.css";
 
@@ -49,6 +53,44 @@ export default class BibleVersionAutocomplete extends React.Component<
     }
   };
 
+  renderList = (
+    items: ListItem[],
+    inputValue: string | null,
+    highlightedIndex: number | null,
+    getItemProps: (options: GetItemPropsOptions) => {}
+  ) => {
+    const list = items
+      .filter(
+        item =>
+          !inputValue ||
+          item.text.toLowerCase().includes(inputValue.toLowerCase()) ||
+          versionsData[item.value].name
+            .toLowerCase()
+            .includes(inputValue.toLocaleLowerCase())
+      )
+      .map((item, index) => (
+        <div
+          {...getItemProps({ item })}
+          className="BibleVersionAutocomplete__list-item"
+          key={item.value}
+          style={{
+            backgroundColor: highlightedIndex === index ? "gray" : "white",
+            fontWeight: this.props.versionId === item.value ? "bold" : "normal"
+          }}
+        >
+          {item.text}
+        </div>
+      ));
+    if (list.length === 0) {
+      return (
+        <div className="BibleVersionAutocomplete__list-item">
+          No items satisfy the filter
+        </div>
+      );
+    }
+    return list;
+  };
+
   render() {
     const { allVersionIds } = this.props;
 
@@ -77,34 +119,13 @@ export default class BibleVersionAutocomplete extends React.Component<
               className="BibleVersionAutocomplete__input"
             />
             {isOpen ? (
-              <div style={{ border: "1px solid #ccc" }}>
-                {items
-                  .filter(
-                    item =>
-                      !inputValue ||
-                      item.text
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase()) ||
-                      versionsData[item.value].name
-                        .toLowerCase()
-                        .includes(inputValue.toLocaleLowerCase())
-                  )
-                  .map((item, index) => (
-                    <div
-                      {...getItemProps({ item })}
-                      key={item.value}
-                      style={{
-                        backgroundColor:
-                          highlightedIndex === index ? "gray" : "white",
-                        fontWeight:
-                          this.props.versionId === item.value
-                            ? "bold"
-                            : "normal"
-                      }}
-                    >
-                      {item.text}
-                    </div>
-                  ))}
+              <div className="BibleVersionAutocomplete__list">
+                {this.renderList(
+                  items,
+                  inputValue,
+                  highlightedIndex,
+                  getItemProps
+                )}
               </div>
             ) : null}
           </div>
