@@ -1,5 +1,5 @@
 import * as React from "react";
-import Downshift from "downshift";
+import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
 
 import "./BibleVersionAutocomplete.css";
 
@@ -34,12 +34,23 @@ export default class BibleVersionAutocomplete extends React.Component<
     this.props.onChange(selectedItem.value);
   };
 
+  downshiftStateReducer = (
+    state: DownshiftState,
+    changes: StateChangeOptions
+  ): StateChangeOptions => {
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.changeInput:
+        return {
+          ...changes,
+          highlightedIndex: 0
+        };
+      default:
+        return changes;
+    }
+  };
+
   render() {
     const { allVersionIds } = this.props;
-    const defaultSelectedItem = {
-      value: this.props.versionId,
-      text: ""
-    };
 
     // e.g. items = [{ value: "kjv", text: "KJV" }, { value: "bkr", text: "BKR" }, ... ]
     const items = allVersionIds.map(value => ({
@@ -49,10 +60,9 @@ export default class BibleVersionAutocomplete extends React.Component<
 
     return (
       <Downshift
-        defaultSelectedItem={defaultSelectedItem}
         onChange={this.onChange}
-        itemToString={item => item.text}
         isOpen
+        stateReducer={this.downshiftStateReducer}
         render={({
           getInputProps,
           getItemProps,
@@ -87,7 +97,9 @@ export default class BibleVersionAutocomplete extends React.Component<
                         backgroundColor:
                           highlightedIndex === index ? "gray" : "white",
                         fontWeight:
-                          selectedItem.value === item.value ? "bold" : "normal"
+                          this.props.versionId === item.value
+                            ? "bold"
+                            : "normal"
                       }}
                     >
                       {item.text}
