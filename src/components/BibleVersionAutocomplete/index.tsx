@@ -115,7 +115,9 @@ export default class BibleVersionAutocomplete extends React.Component<
         }) => (
           <div className="BibleVersionAutocomplete">
             <input
-              {...getInputProps({ placeholder: "Version" })}
+              {...getInputProps({
+                placeholder: "Type here to filter versions"
+              })}
               className="BibleVersionAutocomplete__input"
             />
             {isOpen ? (
