@@ -28,6 +28,7 @@ interface BibleVersionAutocompleteProps {
   allVersionIds: string[];
   versionId: string;
   onChange: (versionId: string) => void;
+  onCancel: () => void;
 }
 
 export default class BibleVersionAutocomplete extends React.Component<
@@ -51,12 +52,12 @@ export default class BibleVersionAutocomplete extends React.Component<
         // Enter was pressed, however, onChange was not triggered, as the value remains the same
         //  - we want to keep it the same and close the dropdown
         if (state.selectedItem === null) {
-          this.props.onChange(this.props.versionId);
+          this.props.onCancel();
         }
         return { ...changes };
       case Downshift.stateChangeTypes.keyDownEscape:
         if (state.inputValue === "" && state.highlightedIndex === null) {
-          this.props.onChange(this.props.versionId);
+          this.props.onCancel();
         }
         return { ...changes };
       case Downshift.stateChangeTypes.changeInput:

@@ -61,11 +61,6 @@ export default class BibleVersionSelect extends React.Component<
     }
   };
 
-  handleChange = (versionId: string) => {
-    this.props.onChange(versionId);
-    this.handleClose();
-  };
-
   render() {
     return (
       <div className="BibleVersionSelect">
@@ -77,7 +72,8 @@ export default class BibleVersionSelect extends React.Component<
             <BibleVersionAutocomplete
               allVersionIds={this.props.allVersionIds}
               versionId={this.props.versionId}
-              onChange={this.handleChange}
+              onChange={this.props.onChange}
+              onCancel={this.handleClose}
             />
           </div>
         )}
