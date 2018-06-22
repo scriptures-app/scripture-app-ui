@@ -115,7 +115,7 @@ export default class BibleVersionAutocomplete extends React.Component<
       <Downshift
         onChange={this.onChange}
         isOpen
-        itemToString={item => item.text}
+        itemToString={item => (item && item.text ? item.text : "")}
         stateReducer={this.downshiftStateReducer}
         render={({
           getInputProps,
