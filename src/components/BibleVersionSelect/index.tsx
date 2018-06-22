@@ -57,8 +57,6 @@ export default class BibleVersionSelect extends React.Component<
       !this.wrapperRef.contains(event.target as HTMLElement) &&
       !this.buttonRef.contains(event.target as HTMLElement)
     ) {
-      // tslint:disable-next-line
-      console.log("ahoj");
       this.handleClose();
     }
   };

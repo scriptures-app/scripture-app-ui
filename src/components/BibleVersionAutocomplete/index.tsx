@@ -54,6 +54,11 @@ export default class BibleVersionAutocomplete extends React.Component<
           this.props.onChange(this.props.versionId);
         }
         return { ...changes };
+      case Downshift.stateChangeTypes.keyDownEscape:
+        if (state.inputValue === "" && state.highlightedIndex === null) {
+          this.props.onChange(this.props.versionId);
+        }
+        return { ...changes };
       case Downshift.stateChangeTypes.changeInput:
         return {
           ...changes,
