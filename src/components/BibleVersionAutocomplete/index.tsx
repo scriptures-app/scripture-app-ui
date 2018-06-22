@@ -34,6 +34,10 @@ export default class BibleVersionAutocomplete extends React.Component<
   BibleVersionAutocompleteProps,
   {}
 > {
+  /**
+   * This does not get triggered when the selectedItem remains the same
+   * See "case Downshift.stateChangeTypes.keyDownEnter" in downshiftStateReducer
+   */
   onChange = (selectedItem: ListItem) => {
     this.props.onChange(selectedItem.value);
   };
@@ -43,6 +47,13 @@ export default class BibleVersionAutocomplete extends React.Component<
     changes: StateChangeOptions
   ): StateChangeOptions => {
     switch (changes.type) {
+      case Downshift.stateChangeTypes.keyDownEnter:
+        // Enter was pressed, however, onChange was not triggered, as the value remains the same
+        //  - we want to keep it the same and close the dropdown
+        if (state.selectedItem === null) {
+          this.props.onChange(this.props.versionId);
+        }
+        return { ...changes };
       case Downshift.stateChangeTypes.changeInput:
         return {
           ...changes,
