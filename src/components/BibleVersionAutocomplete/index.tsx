@@ -4,6 +4,7 @@ import Downshift, {
   DownshiftState,
   GetItemPropsOptions
 } from "downshift";
+import * as classNames from "classnames";
 
 import "./BibleVersionAutocomplete.css";
 
@@ -88,12 +89,13 @@ export default class BibleVersionAutocomplete extends React.Component<
       .map((item, index) => (
         <div
           {...getItemProps({ item })}
-          className="BibleVersionAutocomplete__list-item"
+          className={classNames("BibleVersionAutocomplete__list-item", {
+            "BibleVersionAutocomplete__list-item--hover":
+              highlightedIndex === index,
+            "BibleVersionAutocomplete__list-item--active":
+              this.props.versionId === item.value
+          })}
           key={item.value}
-          style={{
-            backgroundColor: highlightedIndex === index ? "gray" : "white",
-            fontWeight: this.props.versionId === item.value ? "bold" : "normal"
-          }}
         >
           {item.text}
         </div>

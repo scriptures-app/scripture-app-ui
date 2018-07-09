@@ -13,15 +13,15 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate":
-      "yarn run clean && ts-node --project src/tools src/tools/generate.ts",
-    "deploy":
-      "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
+    "generate": "yarn run clean && ts-node --project src/tools src/tools/generate.ts",
+    "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
     "postinstall": "yarn run generate"
   },
   "dependencies": {
     "@bible-reader/common": "^0.7.0",
     "@bible-reader/reference-validator": "^0.7.0",
+    "@types/classnames": "^2.2.4",
+    "classnames": "^2.2.6",
     "downshift": "^1.31.2",
     "react": "^16.2.0",
     "react-custom-scrollbars": "^4.2.1",

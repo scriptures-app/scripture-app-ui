@@ -21,3 +21,9 @@
 .BibleVersionAutocomplete__list-item {
   padding: 0 0.5em;
 }
+.BibleVersionAutocomplete__list-item--hover {
+  background-color: lightgray;
+}
+.BibleVersionAutocomplete__list-item--active {
+  font-weight: bold;
+}
