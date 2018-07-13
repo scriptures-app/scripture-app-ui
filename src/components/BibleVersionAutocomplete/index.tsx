@@ -20,11 +20,6 @@ const versionsData = bibles.reduce((data, bible) => {
   };
 }, {});
 
-interface ListItem {
-  value: string;
-  text: string;
-}
-
 interface BibleVersionAutocompleteProps {
   allVersionIds: string[];
   versionId: string;
@@ -40,8 +35,8 @@ export default class BibleVersionAutocomplete extends React.Component<
    * This does not get triggered when the selectedItem remains the same
    * See "case Downshift.stateChangeTypes.keyDownEnter" in downshiftStateReducer
    */
-  onChange = (selectedItem: ListItem) => {
-    this.props.onChange(selectedItem.value);
+  onChange = (selectedItem: string) => {
+    this.props.onChange(selectedItem);
   };
 
   downshiftStateReducer = (
@@ -72,7 +67,7 @@ export default class BibleVersionAutocomplete extends React.Component<
   };
 
   renderList = (
-    items: ListItem[],
+    items: string[],
     inputValue: string | null,
     highlightedIndex: number | null,
     getItemProps: (options: GetItemPropsOptions) => {}
@@ -81,8 +76,8 @@ export default class BibleVersionAutocomplete extends React.Component<
       .filter(
         item =>
           !inputValue ||
-          item.text.toLowerCase().includes(inputValue.toLowerCase()) ||
-          versionsData[item.value].name
+          item.toLowerCase().includes(inputValue.toLowerCase()) ||
+          versionsData[item].name
             .toLowerCase()
             .includes(inputValue.toLocaleLowerCase())
       )
@@ -93,11 +88,16 @@ export default class BibleVersionAutocomplete extends React.Component<
             "BibleVersionAutocomplete__list-item--hover":
               highlightedIndex === index,
             "BibleVersionAutocomplete__list-item--active":
-              this.props.versionId === item.value
+              this.props.versionId === item
           })}
-          key={item.value}
+          key={item}
         >
-          {item.text}
+          <span className="BibleVersionAutocomplete__list-item-id">
+            {item.toUpperCase()}
+          </span>
+          <span className="BibleVersionAutocomplete__list-item-fullname">
+            {versionsData[item].name} ({versionsData[item].lang})
+          </span>
         </div>
       ));
     if (list.length === 0) {
@@ -111,19 +111,13 @@ export default class BibleVersionAutocomplete extends React.Component<
   };
 
   render() {
-    const { allVersionIds } = this.props;
-
-    // e.g. items = [{ value: "kjv", text: "KJV" }, { value: "bkr", text: "BKR" }, ... ]
-    const items = allVersionIds.map(value => ({
-      value,
-      text: value.toUpperCase()
-    }));
-
     return (
       <Downshift
         onChange={this.onChange}
         isOpen
-        itemToString={item => (item && item.text ? item.text : "")}
+        itemToString={item =>
+          item && item.value ? item.value.toUpperCase() : ""
+        }
         stateReducer={this.downshiftStateReducer}
         render={({
           getInputProps,
@@ -144,7 +138,7 @@ export default class BibleVersionAutocomplete extends React.Component<
             {isOpen ? (
               <div className="BibleVersionAutocomplete__list">
                 {this.renderList(
-                  items,
+                  this.props.allVersionIds,
                   inputValue,
                   highlightedIndex,
                   getItemProps
