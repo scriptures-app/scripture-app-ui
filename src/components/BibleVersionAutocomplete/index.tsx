@@ -31,6 +31,7 @@ export default class BibleVersionAutocomplete extends React.Component<
   BibleVersionAutocompleteProps,
   {}
 > {
+  currentItem: HTMLDivElement | null;
   /**
    * This does not get triggered when the selectedItem remains the same
    * See "case Downshift.stateChangeTypes.keyDownEnter" in downshiftStateReducer
@@ -38,6 +39,12 @@ export default class BibleVersionAutocomplete extends React.Component<
   onChange = (selectedItem: string) => {
     this.props.onChange(selectedItem);
   };
+
+  componentDidMount() {
+    if (this.currentItem) {
+      this.currentItem.scrollIntoView();
+    }
+  }
 
   downshiftStateReducer = (
     state: DownshiftState,
@@ -91,6 +98,11 @@ export default class BibleVersionAutocomplete extends React.Component<
               this.props.versionId === item
           })}
           key={item}
+          ref={el => {
+            if (this.props.versionId === item) {
+              this.currentItem = el;
+            }
+          }}
         >
           <span className="BibleVersionAutocomplete__list-item-id">
             {item.toUpperCase()}
