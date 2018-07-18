@@ -179,7 +179,10 @@ export default class ChapterAutocomplete extends React.Component<
                         "ChapterAutocomplete__list-item--hover":
                           highlightedIndex === index,
                         "ChapterAutocomplete__list-item--active":
-                          selectedItem === item
+                          item.text ===
+                          `${bibleBookNames[this.props.book]} ${
+                            this.props.chapter
+                          }`
                       })}
                       {...getItemProps({ item })}
                       key={item.value}
