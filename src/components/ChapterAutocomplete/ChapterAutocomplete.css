@@ -13,6 +13,8 @@
 }
 
 .ChapterAutocomplete__list {
+  width: 50%;
+  float: left;
   padding: 0.5em 0;
   max-height: 400px;
   overflow-y: auto;
@@ -22,7 +24,8 @@
   padding: 0 0.5em;
   white-space: nowrap;
 }
-.ChapterAutocomplete__list-item--hover {
+.ChapterAutocomplete__list-item--hover,
+.ChapterAutocomplete__list-item:hover {
   background-color: lightgray;
 }
 .ChapterAutocomplete__list-item--active {

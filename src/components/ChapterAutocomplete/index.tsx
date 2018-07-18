@@ -18,6 +18,7 @@ interface ChapterAutocompleteProps {
 interface ListItem {
   value: string | number;
   text: string;
+  comparisonValue: string; // the value by which to compare with the input
 }
 
 enum SelectionType {
@@ -38,7 +39,7 @@ export default class ChapterAutocomplete extends React.Component<
   constructor(props: ChapterAutocompleteProps) {
     super(props);
     this.state = {
-      beingSelected: SelectionType.CHAPTER,
+      beingSelected: SelectionType.BOOK,
       selectedBook: props.book,
       selectedChapter: props.chapter
     };
@@ -135,13 +136,15 @@ export default class ChapterAutocomplete extends React.Component<
       // e.g. items = [{ value: 1, text: "Genesis 1" }, { value: 2, text: "Genesis 2" }, ... ]
       items = Array.from(Array(numberOfChapters).keys()).map(chapterNumber => ({
         value: chapterNumber + 1,
-        text: `${bibleBookNames[selectedBook]} ${chapterNumber + 1}`
+        text: `${chapterNumber + 1}`,
+        comparisonValue: `${bibleBookNames[selectedBook]} ${chapterNumber + 1}`
       }));
     } else {
       // e.g. items = [{ value: "gen", text: "Genesis" }, { value: "exo", text: "Exodus" }, ... ]
       items = Object.keys(v11n).map(value => ({
         value,
-        text: bibleBookNames[value]
+        text: bibleBookNames[value],
+        comparisonValue: bibleBookNames[value]
       }));
     }
 
@@ -165,33 +168,63 @@ export default class ChapterAutocomplete extends React.Component<
               {...getInputProps({ placeholder: "Book" })}
               className="ChapterAutocomplete__input"
             />
-            {isOpen ? (
+            {beingSelected === SelectionType.CHAPTER && (
               <div className="ChapterAutocomplete__list">
-                {items
-                  .filter(
-                    item =>
-                      !inputValue ||
-                      item.text.toLowerCase().includes(inputValue.toLowerCase())
-                  )
-                  .map((item, index) => (
+                {Object.keys(v11n).map(bookId => (
+                  <div
+                    className={classNames("ChapterAutocomplete__list-item", {
+                      "ChapterAutocomplete__list-item--active":
+                        bookId === this.state.selectedBook
+                    })}
+                    key={bookId}
+                  >
+                    {bibleBookNames[bookId]}
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="ChapterAutocomplete__list">
+              {items
+                .filter(
+                  item =>
+                    !inputValue ||
+                    item.comparisonValue
+                      .toLowerCase()
+                      .includes(inputValue.toLowerCase())
+                )
+                .map((item, index) => (
+                  <div
+                    className={classNames("ChapterAutocomplete__list-item", {
+                      "ChapterAutocomplete__list-item--hover":
+                        highlightedIndex === index,
+                      "ChapterAutocomplete__list-item--active":
+                        item.text === bibleBookNames[this.props.book] ||
+                        item.text === `${this.props.chapter}`
+                    })}
+                    {...getItemProps({ item })}
+                    key={item.value}
+                  >
+                    {item.text}
+                  </div>
+                ))}
+            </div>
+            {beingSelected === SelectionType.BOOK && (
+              <div className="ChapterAutocomplete__list">
+                {Array.from(Array(v11n[this.props.book].length).keys()).map(
+                  chapter => (
                     <div
                       className={classNames("ChapterAutocomplete__list-item", {
-                        "ChapterAutocomplete__list-item--hover":
-                          highlightedIndex === index,
                         "ChapterAutocomplete__list-item--active":
-                          item.text ===
-                          `${bibleBookNames[this.props.book]} ${
-                            this.props.chapter
-                          }`
+                          chapter + 1 === this.props.chapter
                       })}
-                      {...getItemProps({ item })}
-                      key={item.value}
+                      key={`ch_${chapter + 1}`}
                     >
-                      {item.text}
+                      {chapter + 1}
                     </div>
-                  ))}
+                  )
+                )}
               </div>
-            ) : null}
+            )}
           </div>
         )}
       />
