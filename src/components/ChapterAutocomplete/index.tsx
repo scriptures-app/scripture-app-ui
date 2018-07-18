@@ -1,5 +1,6 @@
 import * as React from "react";
 import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
+import * as classNames from "classnames";
 
 import "./ChapterAutocomplete.css";
 
@@ -174,13 +175,14 @@ export default class ChapterAutocomplete extends React.Component<
                   )
                   .map((item, index) => (
                     <div
+                      className={classNames("ChapterAutocomplete__list-item", {
+                        "ChapterAutocomplete__list-item--hover":
+                          highlightedIndex === index,
+                        "ChapterAutocomplete__list-item--active":
+                          selectedItem === item
+                      })}
                       {...getItemProps({ item })}
                       key={item.value}
-                      style={{
-                        backgroundColor:
-                          highlightedIndex === index ? "gray" : "white",
-                        fontWeight: selectedItem === item ? "bold" : "normal"
-                      }}
                     >
                       {item.text}
                     </div>

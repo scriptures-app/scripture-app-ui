@@ -1,5 +1,5 @@
 .ChapterAutocomplete {
-  width: 60%;
+  width: 100%;
 }
 
 .ChapterAutocomplete__input {
@@ -9,11 +9,22 @@
   appearance: none;
   border: none;
   border-bottom: 1px lightgray solid;
-  font-size: 150%;
+  box-sizing: border-box;
 }
 
 .ChapterAutocomplete__list {
   padding: 0.5em 0;
   max-height: 400px;
   overflow-y: auto;
+}
+
+.ChapterAutocomplete__list-item {
+  padding: 0 0.5em;
+  white-space: nowrap;
+}
+.ChapterAutocomplete__list-item--hover {
+  background-color: lightgray;
+}
+.ChapterAutocomplete__list-item--active {
+  font-weight: bold;
 }
