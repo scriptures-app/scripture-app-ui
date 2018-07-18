@@ -1,0 +1,19 @@
+.ChapterAutocomplete {
+  width: 60%;
+}
+
+.ChapterAutocomplete__input {
+  line-height: 2em;
+  width: 100%;
+  padding-left: 0.5em;
+  appearance: none;
+  border: none;
+  border-bottom: 1px lightgray solid;
+  font-size: 150%;
+}
+
+.ChapterAutocomplete__list {
+  padding: 0.5em 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
