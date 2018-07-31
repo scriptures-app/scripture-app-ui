@@ -213,6 +213,12 @@ export default class ChapterAutocomplete extends React.Component<
                 {Array.from(Array(v11n[this.props.book].length).keys()).map(
                   chapter => (
                     <div
+                      onClick={() =>
+                        this.props.onChange(
+                          this.state.selectedBook,
+                          chapter + 1
+                        )
+                      }
                       className={classNames("ChapterAutocomplete__list-item", {
                         "ChapterAutocomplete__list-item--active":
                           chapter + 1 === this.props.chapter
