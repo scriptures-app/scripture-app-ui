@@ -30,6 +30,7 @@ interface ChapterAutocompleteState {
   beingSelected: SelectionType;
   selectedBook: string;
   selectedChapter: number;
+  inputValue: string;
 }
 
 export default class ChapterAutocomplete extends React.Component<
@@ -41,7 +42,8 @@ export default class ChapterAutocomplete extends React.Component<
     this.state = {
       beingSelected: SelectionType.BOOK,
       selectedBook: props.book,
-      selectedChapter: props.chapter
+      selectedChapter: props.chapter,
+      inputValue: ""
     };
   }
 
@@ -76,6 +78,15 @@ export default class ChapterAutocomplete extends React.Component<
     }));
   };
 
+  changeBook = (bookId: string) => {
+    this.setState(prevState => ({
+      ...prevState,
+      inputValue: bibleBookNames[bookId],
+      selectedBook: bookId,
+      beingSelected: SelectionType.CHAPTER
+    }));
+  };
+
   onDownshiftStateChange = (changes: StateChangeOptions) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.changeInput:
@@ -96,12 +107,14 @@ export default class ChapterAutocomplete extends React.Component<
   ): StateChangeOptions => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.changeInput:
+        this.setState({ inputValue: changes.inputValue });
         return {
           ...changes,
           highlightedIndex: 0
         };
       case Downshift.stateChangeTypes.keyDownEnter:
       case Downshift.stateChangeTypes.clickItem:
+        this.setState({ inputValue: changes.inputValue });
         return {
           ...changes,
           isOpen: this.state.beingSelected === SelectionType.BOOK,
@@ -150,6 +163,7 @@ export default class ChapterAutocomplete extends React.Component<
 
     return (
       <Downshift
+        inputValue={this.state.inputValue}
         isOpen
         onStateChange={this.onDownshiftStateChange}
         stateReducer={this.downshiftStateReducer}
@@ -177,6 +191,7 @@ export default class ChapterAutocomplete extends React.Component<
                         bookId === this.state.selectedBook
                     })}
                     key={bookId}
+                    onClick={() => this.changeBook(bookId)}
                   >
                     {bibleBookNames[bookId]}
                   </div>
