@@ -83,7 +83,7 @@ export default class ChapterAutocomplete extends React.Component<
   changeBook = (bookId: string) => {
     this.setState(prevState => ({
       ...prevState,
-      inputValue: bibleBookNames[bookId],
+      inputValue: bibleBookNames[bookId] + " ",
       selectedBook: bookId,
       beingSelected: SelectionType.CHAPTER
     }));
@@ -119,7 +119,7 @@ export default class ChapterAutocomplete extends React.Component<
         };
       case Downshift.stateChangeTypes.keyDownEnter:
       case Downshift.stateChangeTypes.clickItem:
-        this.setState({ inputValue: changes.inputValue });
+        this.setState({ inputValue: changes.inputValue + " " });
         return {
           ...changes,
           isOpen: this.state.beingSelected === SelectionType.BOOK,
