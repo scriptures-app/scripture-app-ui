@@ -37,6 +37,8 @@ export default class ChapterAutocomplete extends React.Component<
   ChapterAutocompleteProps,
   ChapterAutocompleteState
 > {
+  inputElement: HTMLInputElement | null;
+
   constructor(props: ChapterAutocompleteProps) {
     super(props);
     this.state = {
@@ -85,6 +87,9 @@ export default class ChapterAutocomplete extends React.Component<
       selectedBook: bookId,
       beingSelected: SelectionType.CHAPTER
     }));
+    if (this.inputElement) {
+      this.inputElement.focus();
+    }
   };
 
   onDownshiftStateChange = (changes: StateChangeOptions) => {
@@ -179,6 +184,10 @@ export default class ChapterAutocomplete extends React.Component<
         }) => (
           <div className="ChapterAutocomplete">
             <input
+              autoFocus
+              ref={element => {
+                this.inputElement = element;
+              }}
               {...getInputProps({ placeholder: "Book" })}
               className="ChapterAutocomplete__input"
             />
