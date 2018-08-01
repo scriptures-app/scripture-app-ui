@@ -85,6 +85,7 @@ export default class ChapterSelect extends React.Component<
               chapter={chapter}
               v11n={v11n}
               onChange={this.handleChange}
+              onCancel={this.handleClose}
             />
           </div>
         )}

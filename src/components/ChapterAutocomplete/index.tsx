@@ -13,6 +13,7 @@ interface ChapterAutocompleteProps {
   chapter: number;
   v11n: Versification;
   onChange: (book: string, chapter: number) => void;
+  onCancel: () => void;
 }
 
 interface ListItem {
@@ -72,14 +73,6 @@ export default class ChapterAutocomplete extends React.Component<
     }
   };
 
-  onBlur = () => {
-    this.setState(oldState => ({
-      beingSelected: SelectionType.CHAPTER,
-      selectedBook: this.props.book,
-      selectedChapter: this.props.chapter
-    }));
-  };
-
   changeBook = (bookId: string) => {
     this.setState(prevState => ({
       ...prevState,
@@ -96,11 +89,6 @@ export default class ChapterAutocomplete extends React.Component<
     switch (changes.type) {
       case Downshift.stateChangeTypes.changeInput:
         this.onInputValueChange(changes.inputValue);
-        break;
-      case Downshift.stateChangeTypes.blurInput:
-      case Downshift.stateChangeTypes.mouseUp:
-      case Downshift.stateChangeTypes.keyDownEscape:
-        this.onBlur();
         break;
       default:
     }
@@ -131,6 +119,22 @@ export default class ChapterAutocomplete extends React.Component<
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
       case Downshift.stateChangeTypes.keyDownEscape:
+        if (state.inputValue === "" && state.highlightedIndex === null) {
+          this.props.onCancel();
+          return changes;
+        }
+        if (
+          this.state.beingSelected === SelectionType.BOOK ||
+          state.inputValue === bibleBookNames[this.state.selectedBook] + " "
+        ) {
+          this.setState({ inputValue: "", beingSelected: SelectionType.BOOK });
+          return changes;
+        }
+        if (this.state.beingSelected === SelectionType.CHAPTER) {
+          this.setState({
+            inputValue: bibleBookNames[this.state.selectedBook] + " "
+          });
+        }
         return {
           ...changes,
           inputValue: `${bibleBookNames[this.props.book]} ${this.props.chapter}`
