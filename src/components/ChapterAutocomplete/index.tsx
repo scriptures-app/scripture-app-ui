@@ -39,6 +39,8 @@ export default class ChapterAutocomplete extends React.Component<
   ChapterAutocompleteState
 > {
   inputElement: HTMLInputElement | null;
+  currentBookItem: HTMLDivElement | null;
+  currentChapterItem: HTMLDivElement | null;
 
   constructor(props: ChapterAutocompleteProps) {
     super(props);
@@ -53,10 +55,17 @@ export default class ChapterAutocomplete extends React.Component<
   onChange = (selectedItem: ListItem) => {
     if (this.state.beingSelected === SelectionType.BOOK) {
       // we only change mode from BOOK to CHAPTER and set book
-      this.setState({
-        beingSelected: SelectionType.CHAPTER,
-        selectedBook: selectedItem.value.toString()
-      });
+      this.setState(
+        {
+          beingSelected: SelectionType.CHAPTER,
+          selectedBook: selectedItem.value.toString()
+        },
+        () => {
+          if (this.currentBookItem) {
+            this.currentBookItem.scrollIntoView();
+          }
+        }
+      );
     } else {
       // when chapter is selected, we also submit the result using onChange action
       const chapter = parseInt(selectedItem.value.toString(), 10);
@@ -144,6 +153,15 @@ export default class ChapterAutocomplete extends React.Component<
     }
   };
 
+  componentDidMount() {
+    if (this.currentBookItem) {
+      this.currentBookItem.scrollIntoView();
+    }
+    if (this.currentChapterItem) {
+      this.currentChapterItem.scrollIntoView();
+    }
+  }
+
   render() {
     const { v11n } = this.props;
     const { selectedBook, beingSelected } = this.state;
@@ -205,6 +223,11 @@ export default class ChapterAutocomplete extends React.Component<
                     })}
                     key={bookId}
                     onClick={() => this.changeBook(bookId)}
+                    ref={element => {
+                      if (this.state.selectedBook === bookId) {
+                        this.currentBookItem = element;
+                      }
+                    }}
                   >
                     {bibleBookNames[bookId]}
                   </div>
@@ -231,6 +254,11 @@ export default class ChapterAutocomplete extends React.Component<
                     })}
                     {...getItemProps({ item })}
                     key={item.value}
+                    ref={element => {
+                      if (this.state.selectedBook === item.value) {
+                        this.currentBookItem = element;
+                      }
+                    }}
                   >
                     {item.text}
                   </div>
@@ -252,6 +280,11 @@ export default class ChapterAutocomplete extends React.Component<
                           chapter + 1 === this.props.chapter
                       })}
                       key={`ch_${chapter + 1}`}
+                      ref={element => {
+                        if (this.state.selectedChapter === chapter + 1) {
+                          this.currentChapterItem = element;
+                        }
+                      }}
                     >
                       {chapter + 1}
                     </div>
