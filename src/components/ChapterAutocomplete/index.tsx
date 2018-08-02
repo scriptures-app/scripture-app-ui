@@ -250,7 +250,8 @@ export default class ChapterAutocomplete extends React.Component<
                         highlightedIndex === index,
                       "ChapterAutocomplete__list-item--active":
                         item.text === bibleBookNames[this.props.book] ||
-                        item.text === `${this.props.chapter}`
+                        (item.text === `${this.props.chapter}` &&
+                          this.props.book === this.state.selectedBook)
                     })}
                     {...getItemProps({ item })}
                     key={item.value}
@@ -277,6 +278,7 @@ export default class ChapterAutocomplete extends React.Component<
                       }
                       className={classNames("ChapterAutocomplete__list-item", {
                         "ChapterAutocomplete__list-item--active":
+                          this.props.book === this.state.selectedBook &&
                           chapter + 1 === this.props.chapter
                       })}
                       key={`ch_${chapter + 1}`}
