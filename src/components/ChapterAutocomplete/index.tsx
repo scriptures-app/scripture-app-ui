@@ -1,5 +1,9 @@
 import * as React from "react";
-import Downshift, { StateChangeOptions, DownshiftState } from "downshift";
+import Downshift, {
+  StateChangeOptions,
+  DownshiftState,
+  GetItemPropsOptions
+} from "downshift";
 import * as classNames from "classnames";
 
 import "./ChapterAutocomplete.css";
@@ -162,6 +166,108 @@ export default class ChapterAutocomplete extends React.Component<
     }
   }
 
+  /**
+   * The main list to show the items for Downshift component.
+   * Displays either books or chapter numbers based on this.state.beingSelected
+   */
+  getDownshiftList = (
+    filteredItems: ListItem[],
+    highlightedIndex: number | null,
+    getItemProps: (options: GetItemPropsOptions) => {}
+  ) => {
+    return (
+      <div className="ChapterAutocomplete__list">
+        {filteredItems.map((item, index) => (
+          <div
+            className={classNames("ChapterAutocomplete__list-item", {
+              "ChapterAutocomplete__list-item--hover":
+                highlightedIndex === index,
+              "ChapterAutocomplete__list-item--active":
+                item.text === bibleBookNames[this.props.book] ||
+                (item.text === `${this.props.chapter}` &&
+                  this.props.book === this.state.selectedBook)
+            })}
+            {...getItemProps({ item })}
+            key={item.value}
+            ref={element => {
+              if (this.state.selectedBook === item.value) {
+                this.currentBookItem = element;
+              }
+            }}
+          >
+            {item.text}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  /**
+   * Displays as the list in the first column whenever this.state.beingSelected
+   * has value SelectionType.CHAPTER
+   */
+  getBooksList = () => {
+    return (
+      <div className="ChapterAutocomplete__list">
+        {Object.keys(this.props.v11n).map(bookId => (
+          <div
+            className={classNames("ChapterAutocomplete__list-item", {
+              "ChapterAutocomplete__list-item--active":
+                bookId === this.state.selectedBook
+            })}
+            key={bookId}
+            onClick={() => this.changeBook(bookId)}
+            ref={element => {
+              if (this.state.selectedBook === bookId) {
+                this.currentBookItem = element;
+              }
+            }}
+          >
+            {bibleBookNames[bookId]}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  /**
+   * Displays as the list in the first column whenever this.state.beingSelected
+   * has value SelectionType.BOOK
+   */
+  getChaptersList = (
+    filteredItems: ListItem[],
+    highlightedIndex: number | null
+  ) => {
+    const bookId =
+      highlightedIndex === null
+        ? this.props.book
+        : filteredItems[highlightedIndex].value;
+    return (
+      <div className="ChapterAutocomplete__list">
+        {Array.from(Array(this.props.v11n[bookId].length).keys()).map(
+          chapter => (
+            <div
+              onClick={() => this.props.onChange(`${bookId}`, chapter + 1)}
+              className={classNames("ChapterAutocomplete__list-item", {
+                "ChapterAutocomplete__list-item--active":
+                  this.props.book === bookId &&
+                  chapter + 1 === this.props.chapter
+              })}
+              key={`ch_${chapter + 1}`}
+              ref={element => {
+                if (this.state.selectedChapter === chapter + 1) {
+                  this.currentChapterItem = element;
+                }
+              }}
+            >
+              {chapter + 1}
+            </div>
+          )
+        )}
+      </div>
+    );
+  };
+
   render() {
     const { v11n } = this.props;
     const { selectedBook, beingSelected } = this.state;
@@ -203,99 +309,36 @@ export default class ChapterAutocomplete extends React.Component<
           inputValue,
           selectedItem,
           highlightedIndex
-        }) => (
-          <div className="ChapterAutocomplete">
-            <input
-              autoFocus
-              ref={element => {
-                this.inputElement = element;
-              }}
-              {...getInputProps({ placeholder: "Book" })}
-              className="ChapterAutocomplete__input"
-            />
-            {beingSelected === SelectionType.CHAPTER && (
-              <div className="ChapterAutocomplete__list">
-                {Object.keys(v11n).map(bookId => (
-                  <div
-                    className={classNames("ChapterAutocomplete__list-item", {
-                      "ChapterAutocomplete__list-item--active":
-                        bookId === this.state.selectedBook
-                    })}
-                    key={bookId}
-                    onClick={() => this.changeBook(bookId)}
-                    ref={element => {
-                      if (this.state.selectedBook === bookId) {
-                        this.currentBookItem = element;
-                      }
-                    }}
-                  >
-                    {bibleBookNames[bookId]}
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="ChapterAutocomplete__list">
-              {items
-                .filter(
-                  item =>
-                    !inputValue ||
-                    item.comparisonValue
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase())
-                )
-                .map((item, index) => (
-                  <div
-                    className={classNames("ChapterAutocomplete__list-item", {
-                      "ChapterAutocomplete__list-item--hover":
-                        highlightedIndex === index,
-                      "ChapterAutocomplete__list-item--active":
-                        item.text === bibleBookNames[this.props.book] ||
-                        (item.text === `${this.props.chapter}` &&
-                          this.props.book === this.state.selectedBook)
-                    })}
-                    {...getItemProps({ item })}
-                    key={item.value}
-                    ref={element => {
-                      if (this.state.selectedBook === item.value) {
-                        this.currentBookItem = element;
-                      }
-                    }}
-                  >
-                    {item.text}
-                  </div>
-                ))}
+        }) => {
+          const filteredItems = items.filter(
+            item =>
+              !inputValue ||
+              item.comparisonValue
+                .toLowerCase()
+                .includes(inputValue.toLowerCase())
+          );
+
+          return (
+            <div className="ChapterAutocomplete">
+              <input
+                autoFocus
+                ref={element => {
+                  this.inputElement = element;
+                }}
+                {...getInputProps({ placeholder: "Book" })}
+                className="ChapterAutocomplete__input"
+              />
+              {beingSelected === SelectionType.CHAPTER && this.getBooksList()}
+              {this.getDownshiftList(
+                filteredItems,
+                highlightedIndex,
+                getItemProps
+              )}
+              {beingSelected === SelectionType.BOOK &&
+                this.getChaptersList(filteredItems, highlightedIndex)}
             </div>
-            {beingSelected === SelectionType.BOOK && (
-              <div className="ChapterAutocomplete__list">
-                {Array.from(Array(v11n[this.props.book].length).keys()).map(
-                  chapter => (
-                    <div
-                      onClick={() =>
-                        this.props.onChange(
-                          this.state.selectedBook,
-                          chapter + 1
-                        )
-                      }
-                      className={classNames("ChapterAutocomplete__list-item", {
-                        "ChapterAutocomplete__list-item--active":
-                          this.props.book === this.state.selectedBook &&
-                          chapter + 1 === this.props.chapter
-                      })}
-                      key={`ch_${chapter + 1}`}
-                      ref={element => {
-                        if (this.state.selectedChapter === chapter + 1) {
-                          this.currentChapterItem = element;
-                        }
-                      }}
-                    >
-                      {chapter + 1}
-                    </div>
-                  )
-                )}
-              </div>
-            )}
-          </div>
-        )}
+          );
+        }}
       />
     );
   }
