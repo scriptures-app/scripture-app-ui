@@ -19,7 +19,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      passages: [defaultPassage]
+      passages: [{ ...defaultPassage, loading: false }]
     };
     this.changePassage = this.changePassage.bind(this);
     this.closePassage = this.closePassage.bind(this);
@@ -45,11 +45,12 @@ class App extends React.Component<{}, AppState> {
     versionId: string,
     book: string,
     chapter: number,
-    verses: string[]
+    verses: string[],
+    loading: boolean
   ) => ({ passages }: AppState) => ({
     passages: [
       ...passages.slice(0, passageIndex),
-      { versionId, book, chapter, verses },
+      { versionId, book, chapter, verses, loading },
       ...passages.slice(passageIndex + 1, passages.length)
     ]
   });
@@ -61,6 +62,13 @@ class App extends React.Component<{}, AppState> {
     chapter: number
   ) {
     // console.log("Changing to ", { passageIndex, versionId, book, chapter });
+    this.setState(({ passages }) => ({
+      passages: [
+        ...passages.slice(0, passageIndex),
+        { ...passages[passageIndex], loading: true },
+        ...passages.slice(passageIndex + 1, passages.length)
+      ]
+    }));
 
     if (this.isPassageValid(versionId, book, chapter)) {
       const verses = this.getPassageFromLocalStorage(versionId, book, chapter);
@@ -77,7 +85,8 @@ class App extends React.Component<{}, AppState> {
                 versionId,
                 book,
                 chapter,
-                data.verses || []
+                data.verses || [],
+                false
               )
             );
           })
@@ -91,7 +100,8 @@ class App extends React.Component<{}, AppState> {
             versionId,
             book,
             chapter,
-            verses
+            verses,
+            false
           )
         );
       }

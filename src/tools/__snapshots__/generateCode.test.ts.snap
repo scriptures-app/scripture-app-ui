@@ -15,7 +15,8 @@ export default {
     versionId: \\"kjv\\",
     book: \\"gen\\",
     chapter: 1,
-    verses: initialChapter.verses
+    verses: initialChapter.verses,
+    loading: false
   }
 };
 "

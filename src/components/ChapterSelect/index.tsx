@@ -6,12 +6,14 @@ import "./ChapterSelect.css";
 import { Versification } from "@bible-reader/types";
 
 import { bibleBookNames } from "../../lang/bibleBookNames.en";
+import { Loader } from "../Loader";
 
 interface ChapterSelectProps {
   book: string;
   chapter: number;
   v11n: Versification;
   onChange: (book: string, chapter: number) => void;
+  loading: boolean;
 }
 
 interface ChapterSelectState {
@@ -75,7 +77,11 @@ export default class ChapterSelect extends React.Component<
     const { book, chapter, v11n } = this.props;
     return (
       <div className="ChapterSelect">
-        <div onClick={this.handleButtonClick} ref={this.setButtonRef}>
+        <div
+          className="ChapterSelect_handle"
+          onClick={this.handleButtonClick}
+          ref={this.setButtonRef}
+        >
           {`${bibleBookNames[this.props.book]} ${this.props.chapter}`}
         </div>
         {this.state.open && (
@@ -89,6 +95,7 @@ export default class ChapterSelect extends React.Component<
             />
           </div>
         )}
+        {this.props.loading && <Loader />}
       </div>
     );
   }

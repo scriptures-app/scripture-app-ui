@@ -1,0 +1,46 @@
+.Loader {
+  height: 0px;
+  width: 100%;
+  position: relative;
+}
+.Loader:before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background-color: #be7d54;
+  animation: loading 2s linear infinite;
+  z-index: 20;
+}
+
+@keyframes loading {
+  from {
+    left: 0;
+    width: 0;
+  }
+  35% {
+    left: 0;
+    width: 30%;
+  }
+  50% {
+    left: 0;
+    width: 50%;
+  }
+  70% {
+    width: 60%;
+  }
+  80% {
+    left: 50%;
+    width: 50%;
+  }
+  90% {
+    left: 80%;
+    width: 20%;
+  }
+  to {
+    left: 100%;
+    width: 0;
+  }
+}

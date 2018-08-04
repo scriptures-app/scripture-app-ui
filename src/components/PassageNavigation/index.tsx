@@ -16,6 +16,7 @@ interface PassageNavigationProps {
   v11n: Versification;
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
+  loading: boolean;
 }
 
 export default class PassageNavigation extends React.Component<
@@ -50,6 +51,7 @@ export default class PassageNavigation extends React.Component<
           chapter={chapter}
           v11n={v11n}
           onChange={this.onChapterChange}
+          loading={this.props.loading}
         />
         <BibleVersionSelect
           versionId={versionId}

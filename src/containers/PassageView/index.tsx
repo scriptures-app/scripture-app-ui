@@ -17,6 +17,7 @@ interface PassageViewProps {
   verses: string[];
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
+  loading: boolean;
 }
 
 const PassageView: React.SFC<PassageViewProps> = ({
@@ -27,7 +28,8 @@ const PassageView: React.SFC<PassageViewProps> = ({
   v11n,
   verses,
   onPassageChange,
-  onPassageClose
+  onPassageClose,
+  loading
 }: PassageViewProps) => (
   <div className="PassageView">
     <div className="PassageView__passage">
@@ -40,6 +42,7 @@ const PassageView: React.SFC<PassageViewProps> = ({
           v11n={v11n}
           onPassageChange={onPassageChange}
           onPassageClose={onPassageClose}
+          loading={loading}
         />
       </div>
       <div className="PassageView__verses">

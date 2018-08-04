@@ -43,7 +43,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
           <div className="main">
             {passages.map(
               (
-                { versionId, book, chapter, verses }: Chapter,
+                { versionId, book, chapter, verses, loading }: Chapter,
                 index: number
               ) => (
                 <PassageView
@@ -60,6 +60,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
                     chapter: number
                   ) => onPassageChange(index, versionId, book, chapter)}
                   onPassageClose={() => onPassageClose(index)}
+                  loading={loading}
                 />
               )
             )}

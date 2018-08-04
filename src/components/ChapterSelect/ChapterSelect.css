@@ -1,11 +1,14 @@
 .ChapterSelect {
   width: 50%;
   line-height: 2em;
-  padding-left: 0.5em;
   border: none;
   border-bottom: 1px lightgray solid;
   font-size: 150%;
   cursor: pointer;
+}
+
+.ChapterSelect_handle {
+  margin-left: 0.5em;
 }
 
 .ChapterSelect_dropdown {

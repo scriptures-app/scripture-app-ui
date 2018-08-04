@@ -26,7 +26,8 @@ export type PassageChangeCreatorFunc = (
   versionId: string,
   book: string,
   chapter: number,
-  verses: string[]
+  verses: string[],
+  loading: boolean
 ) => StateReducerFunc;
 
 export type PassageChangeFunc = (
