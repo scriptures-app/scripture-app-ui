@@ -13,10 +13,8 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate":
-      "yarn run clean && ts-node --project src/tools/tsconfig.json src/tools/generate.ts",
-    "deploy":
-      "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
+    "generate": "yarn run clean && ts-node --project src/tools/tsconfig.json src/tools/generate.ts",
+    "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
     "postinstall": "yarn run generate"
   },
   "dependencies": {
@@ -27,9 +25,9 @@
     "@types/react-swipe": "^5.0.3",
     "classnames": "^2.2.6",
     "downshift": "^1.31.2",
-    "react": "^16.2.0",
+    "react": "^16.5.0",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.5.0",
     "react-responsive": "^5.0.0",
     "react-swipe": "^5.1.1",
     "swipe-js-iso": "^2.0.4",
@@ -43,9 +41,8 @@
     "@types/mz": "^0.0.31",
     "@types/node": "^8.5.1",
     "@types/node-fetch": "^1.6.7",
-    "@types/react": "^16.0.31",
     "@types/react-custom-scrollbars": "^4.0.1",
-    "@types/react-dom": "^16.0.3",
+    "@types/react-dom": "^16.0.7",
     "adm-zip": "^0.4.7",
     "gh-pages": "^1.1.0",
     "mz": "^2.7.0",
