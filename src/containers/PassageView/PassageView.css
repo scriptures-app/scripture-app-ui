@@ -46,3 +46,19 @@
   padding-right: 2.5rem;
   white-space: normal;
 }
+
+@media (max-width: 800px) {
+  .PassageView {
+    width: 100%;
+    display: block;
+  }
+  .PassageView__passage {
+    box-shadow: none;
+  }
+  .PassageView:first-child .PassageView__passage {
+    box-shadow: none;
+  }
+  .PassageView.add-passage {
+    display: none;
+  }
+}
