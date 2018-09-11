@@ -1,8 +1,10 @@
 import * as React from "react";
+import * as classNames from "classnames";
 
 import "./PassagesNavbar.css";
 
 interface PassagesNavbarProps {
+  activePassageIndex: number;
   passages: Array<{
     versionId: string;
     book: string;
@@ -16,7 +18,10 @@ export class PassagesNavbar extends React.Component<PassagesNavbarProps> {
       <div className="PassagesNavbar">
         {this.props.passages.map(({ versionId, book, chapter }, index) => (
           <div
-            className="PassagesNavbar__item"
+            className={classNames("PassagesNavbar__item", {
+              "PassagesNavbar__item--active":
+                this.props.activePassageIndex === index
+            })}
             key={`${versionId}_${book}_${chapter}_${index}`}
           >
             <div className="PassagesNavbar__passage">

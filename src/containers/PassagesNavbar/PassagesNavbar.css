@@ -1,5 +1,4 @@
 .PassagesNavbar {
-  box-sizing: border-box;
   display: flex;
   justify-content: space-around;
   height: 4.5rem;
@@ -8,9 +7,9 @@
 }
 
 .PassagesNavbar__item {
-  height: 3rem;
-  margin-top: 0.5rem;
-  padding: 0.3rem 1.5rem;
+  box-sizing: border-box;
+  height: 4.5rem;
+  padding: 0.8rem 1.5rem;
   font-weight: 500;
   text-transform: capitalize;
   color: #555;
@@ -19,8 +18,7 @@
 
 .PassagesNavbar__item--active {
   font-weight: 800;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
+  border-bottom: 2px solid darkgray;
 }
 
 .PassagesNavbar__passage {

@@ -22,8 +22,19 @@ interface MainLayoutProps {
   onPassageClose: PassageCloseFunc;
 }
 
-class MainLayout extends React.Component<MainLayoutProps> {
+interface MainLayoutState {
+  passageIndex: number;
+}
+
+class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
   props: MainLayoutProps;
+  state = {
+    passageIndex: 0
+  };
+
+  changeActivePassage = (index: number) => {
+    this.setState({ passageIndex: index });
+  };
 
   renderPassages = (wrapInDiv = false) => {
     const { bibles, passages, onPassageChange, onPassageClose } = this.props;
@@ -107,7 +118,10 @@ class MainLayout extends React.Component<MainLayoutProps> {
             <MediaQuery query="(max-device-width: 800px)">
               <ReactSwipe
                 key={passages.length}
-                swipeOptions={{ continuous: false }}
+                swipeOptions={{
+                  continuous: false,
+                  callback: this.changeActivePassage
+                }}
                 style={swipeStyles}
               >
                 {this.renderPassages(true)}
@@ -117,6 +131,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
         </div>
         <MediaQuery query="(max-device-width: 800px)">
           <PassagesNavbar
+            activePassageIndex={this.state.passageIndex}
             passages={passages.map(({ versionId, book, chapter }) => ({
               versionId,
               book,
