@@ -1,0 +1,33 @@
+.PassagesNavbar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  height: 4.5rem;
+  border-top: 1px solid lightgray;
+  overflow-y: hidden;
+}
+
+.PassagesNavbar__item {
+  height: 3rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem 1.5rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #555;
+  overflow-y: hidden;
+}
+
+.PassagesNavbar__item--active {
+  font-weight: 800;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+}
+
+.PassagesNavbar__passage {
+  font-size: 120%;
+  margin-bottom: 0.2rem;
+}
+
+.PassagesNavbar__version {
+  font-size: 100%;
+}

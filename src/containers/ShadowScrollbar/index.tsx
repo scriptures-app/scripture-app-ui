@@ -48,9 +48,9 @@ class ShadowScrollbars extends React.Component<
       bottom: 0,
       left: 0,
       right: 0,
-      height: 10,
+      height: 20,
       background:
-        "linear-gradient(to top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%)",
+        "linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%)",
       opacity: this.state.shadowBottomOpacity
     });
     return (

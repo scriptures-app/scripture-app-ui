@@ -12,6 +12,7 @@ import {
 } from "../../types";
 
 import PassageView from "../PassageView";
+import { PassagesNavbar } from "../PassagesNavbar";
 
 interface MainLayoutProps {
   bibles: BibleVersionsMap;
@@ -50,7 +51,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
           />
         );
         if (wrapInDiv) {
-          return <div>{passage}</div>;
+          return <div key={index}>{passage}</div>;
         } else {
           return passage;
         }
@@ -59,7 +60,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
   };
 
   render() {
-    const { onPassageAdd } = this.props;
+    const { passages, onPassageAdd } = this.props;
 
     const swipeStyles: ReactSwipe.Style = {
       // using default styles from react-swipe,
@@ -105,6 +106,7 @@ class MainLayout extends React.Component<MainLayoutProps> {
             </MediaQuery>
             <MediaQuery query="(max-device-width: 800px)">
               <ReactSwipe
+                key={passages.length}
                 swipeOptions={{ continuous: false }}
                 style={swipeStyles}
               >
@@ -113,6 +115,15 @@ class MainLayout extends React.Component<MainLayoutProps> {
             </MediaQuery>
           </div>
         </div>
+        <MediaQuery query="(max-device-width: 800px)">
+          <PassagesNavbar
+            passages={passages.map(({ versionId, book, chapter }) => ({
+              versionId,
+              book,
+              chapter
+            }))}
+          />
+        </MediaQuery>
       </div>
     );
   }
