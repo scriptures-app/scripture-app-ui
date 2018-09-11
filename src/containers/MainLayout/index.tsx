@@ -137,6 +137,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               book,
               chapter
             }))}
+            onPassageAdd={onPassageAdd}
           />
         </MediaQuery>
       </div>

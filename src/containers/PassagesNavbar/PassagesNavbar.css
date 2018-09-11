@@ -1,8 +1,28 @@
 .PassagesNavbar {
   display: flex;
+  border-top: 1px solid lightgray;
+}
+
+.PassagesNavbar__add-button {
+  flex: 0 0 auto;
+  height: 4.5rem;
+  width: 3rem;
+  box-sizing: border-box;
+  border-radius: 3rem 0 0 0;
+  line-height: 4.5rem;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 250%;
+  color: gray;
+  background-color: #eee;
+  box-shadow: 3px 3px 5px 5px lightgray;
+}
+
+.PassagesNavbar_items {
+  flex: 1 1 auto;
+  display: flex;
   justify-content: space-around;
   height: 4.5rem;
-  border-top: 1px solid lightgray;
   overflow-y: hidden;
 }
 
@@ -22,7 +42,7 @@
 }
 
 .PassagesNavbar__passage {
-  font-size: 120%;
+  font-size: 140%;
   margin-bottom: 0.2rem;
 }
 
