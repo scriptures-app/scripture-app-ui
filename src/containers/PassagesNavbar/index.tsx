@@ -11,6 +11,7 @@ interface PassagesNavbarProps {
     chapter: number;
   }>;
   onPassageAdd: () => void;
+  onPassageNavigate: (index: number) => void;
 }
 
 export class PassagesNavbar extends React.Component<PassagesNavbarProps> {
@@ -25,6 +26,7 @@ export class PassagesNavbar extends React.Component<PassagesNavbarProps> {
                   this.props.activePassageIndex === index
               })}
               key={`${versionId}_${book}_${chapter}_${index}`}
+              onClick={() => this.props.onPassageNavigate(index)}
             >
               <div className="PassagesNavbar__passage">
                 {`${book} ${chapter}`}

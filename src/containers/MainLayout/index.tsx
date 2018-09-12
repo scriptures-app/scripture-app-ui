@@ -31,6 +31,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
   state = {
     passageIndex: 0
   };
+  reactSwipe: ReactSwipe | null;
 
   changeActivePassage = (index: number) => {
     this.setState({ passageIndex: index });
@@ -68,6 +69,13 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
         }
       }
     );
+  };
+
+  handlePassageNavigate = (index: number) => {
+    const transitionSpeed = 300; // miliseconds
+    if (this.reactSwipe) {
+      this.reactSwipe.slide(index, transitionSpeed);
+    }
   };
 
   render() {
@@ -117,6 +125,9 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
             </MediaQuery>
             <MediaQuery query="(max-device-width: 800px)">
               <ReactSwipe
+                ref={element => {
+                  this.reactSwipe = element;
+                }}
                 key={passages.length}
                 swipeOptions={{
                   continuous: false,
@@ -138,6 +149,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               chapter
             }))}
             onPassageAdd={onPassageAdd}
+            onPassageNavigate={this.handlePassageNavigate}
           />
         </MediaQuery>
       </div>
