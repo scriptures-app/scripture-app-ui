@@ -38,7 +38,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
   };
 
   renderPassages = (wrapInDiv = false) => {
-    const { bibles, passages, onPassageChange, onPassageClose } = this.props;
+    const { bibles, passages, onPassageChange } = this.props;
     return passages.map(
       (
         { versionId, book, chapter, verses, loading }: Chapter,
@@ -58,7 +58,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               book: string,
               chapter: number
             ) => onPassageChange(index, versionId, book, chapter)}
-            onPassageClose={() => onPassageClose(index)}
+            onPassageClose={() => this.handlePassageClose(index)}
             loading={loading}
           />
         );
@@ -69,6 +69,15 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
         }
       }
     );
+  };
+
+  handlePassageClose = (index: number) => {
+    if (index > 0) {
+      this.setState(({ passageIndex }) => ({
+        passageIndex: passageIndex - 1
+      }));
+    }
+    this.props.onPassageClose(index);
   };
 
   handlePassageNavigate = (index: number) => {
@@ -130,6 +139,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
                 }}
                 key={passages.length}
                 swipeOptions={{
+                  startSlide: this.state.passageIndex,
                   continuous: false,
                   callback: this.changeActivePassage
                 }}
