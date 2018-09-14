@@ -71,6 +71,11 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
     );
   };
 
+  handlePassageAdd = () => {
+    this.setState({ passageIndex: this.props.passages.length });
+    this.props.onPassageAdd();
+  };
+
   handlePassageClose = (index: number) => {
     if (index > 0) {
       this.setState(({ passageIndex }) => ({
@@ -88,7 +93,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
   };
 
   render() {
-    const { passages, onPassageAdd } = this.props;
+    const { passages } = this.props;
 
     const swipeStyles: ReactSwipe.Style = {
       // using default styles from react-swipe,
@@ -129,7 +134,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
             <MediaQuery query="(min-device-width: 801px)">
               {this.renderPassages(false)}
               <div className="PassageView add-passage">
-                <button onClick={onPassageAdd}>Add</button>
+                <button onClick={this.handlePassageAdd}>Add</button>
               </div>
             </MediaQuery>
             <MediaQuery query="(max-device-width: 800px)">
@@ -158,7 +163,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               book,
               chapter
             }))}
-            onPassageAdd={onPassageAdd}
+            onPassageAdd={this.handlePassageAdd}
             onPassageNavigate={this.handlePassageNavigate}
           />
         </MediaQuery>
