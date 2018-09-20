@@ -9,6 +9,7 @@ body {
 html {
   font-size: 10px;
   height: 100%;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
 }
 
 #root {
