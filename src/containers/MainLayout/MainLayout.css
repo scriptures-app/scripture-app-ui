@@ -1,0 +1,17 @@
+.fixed-add-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding-top: 0.2rem;
+  padding-left: 0.3rem;
+  box-sizing: border-box;
+  background-color: #eee;
+  height: 4.5rem;
+  width: 3rem;
+  border-radius: 3rem 0 0 0;
+  text-align: center;
+  line-height: 4.5rem;
+  font-size: 250%;
+  color: gray;
+  box-shadow: 3px 3px 5px 5px lightgray;
+}

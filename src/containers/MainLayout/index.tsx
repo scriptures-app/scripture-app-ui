@@ -2,6 +2,8 @@ import * as React from "react";
 import MediaQuery from "react-responsive";
 import * as ReactSwipe from "react-swipe";
 
+import "./MainLayout.css";
+
 import { Chapter } from "@bible-reader/types";
 
 import {
@@ -156,17 +158,24 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
           </div>
         </div>
         <MediaQuery query="(max-device-width: 800px)">
-          <PassagesNavbar
-            activePassageIndex={this.state.passageIndex}
-            passages={passages.map(({ versionId, book, chapter }) => ({
-              versionId,
-              book,
-              chapter
-            }))}
-            onPassageAdd={this.handlePassageAdd}
-            onPassageNavigate={this.handlePassageNavigate}
-          />
+          {passages.length > 1 && (
+            <PassagesNavbar
+              activePassageIndex={this.state.passageIndex}
+              passages={passages.map(({ versionId, book, chapter }) => ({
+                versionId,
+                book,
+                chapter
+              }))}
+              onPassageAdd={this.handlePassageAdd}
+              onPassageNavigate={this.handlePassageNavigate}
+            />
+          )}
         </MediaQuery>
+        {passages.length <= 1 && (
+          <div onClick={this.handlePassageAdd} className="fixed-add-button">
+            +
+          </div>
+        )}
       </div>
     );
   }
