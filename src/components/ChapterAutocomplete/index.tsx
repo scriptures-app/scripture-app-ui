@@ -16,6 +16,7 @@ interface ChapterAutocompleteProps {
   book: string;
   chapter: number;
   v11n: Versification;
+  touchEnabled: boolean;
   onChange: (book: string, chapter: number) => void;
   onCancel: () => void;
 }
@@ -321,7 +322,7 @@ export default class ChapterAutocomplete extends React.Component<
           return (
             <div className="ChapterAutocomplete">
               <input
-                autoFocus
+                autoFocus={!this.props.touchEnabled}
                 ref={element => {
                   this.inputElement = element;
                 }}

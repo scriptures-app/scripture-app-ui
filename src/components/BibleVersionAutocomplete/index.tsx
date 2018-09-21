@@ -23,6 +23,7 @@ const versionsData = bibles.reduce((data, bible) => {
 interface BibleVersionAutocompleteProps {
   allVersionIds: string[];
   versionId: string;
+  touchEnabled: boolean;
   onChange: (versionId: string) => void;
   onCancel: () => void;
 }
@@ -141,7 +142,7 @@ export default class BibleVersionAutocomplete extends React.Component<
         }) => (
           <div className="BibleVersionAutocomplete">
             <input
-              autoFocus
+              autoFocus={!this.props.touchEnabled}
               {...getInputProps({
                 placeholder: "Type here to filter versions"
               })}

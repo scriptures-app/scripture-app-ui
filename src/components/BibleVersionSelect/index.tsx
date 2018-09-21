@@ -11,6 +11,7 @@ interface BibleVersionSelectProps {
 
 interface BibleVersionSelectState {
   open: boolean;
+  wasTouched: boolean;
 }
 
 export default class BibleVersionSelect extends React.Component<
@@ -18,13 +19,18 @@ export default class BibleVersionSelect extends React.Component<
   BibleVersionSelectState
 > {
   state: BibleVersionSelectState = {
-    open: false
+    open: false,
+    wasTouched: false
   };
   wrapperRef: HTMLDivElement;
   buttonRef: HTMLDivElement;
 
   handleButtonClick = () => {
     this.setState(oldState => ({ ...oldState, open: !oldState.open }));
+  };
+
+  handleOnTouchEnd = () => {
+    this.setState({ wasTouched: true });
   };
 
   handleClose = () => {
@@ -69,7 +75,11 @@ export default class BibleVersionSelect extends React.Component<
   render() {
     return (
       <div className="BibleVersionSelect">
-        <div onClick={this.handleButtonClick} ref={this.setButtonRef}>
+        <div
+          onClick={this.handleButtonClick}
+          onTouchEnd={this.handleOnTouchEnd}
+          ref={this.setButtonRef}
+        >
           {this.props.versionId.toUpperCase()}
         </div>
         {this.state.open && (
@@ -79,6 +89,7 @@ export default class BibleVersionSelect extends React.Component<
               versionId={this.props.versionId}
               onChange={this.handleChange}
               onCancel={this.handleClose}
+              touchEnabled={this.state.wasTouched}
             />
           </div>
         )}

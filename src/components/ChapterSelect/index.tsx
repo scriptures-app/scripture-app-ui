@@ -18,6 +18,7 @@ interface ChapterSelectProps {
 
 interface ChapterSelectState {
   open: boolean;
+  wasTouched: boolean;
 }
 
 export default class ChapterSelect extends React.Component<
@@ -25,13 +26,18 @@ export default class ChapterSelect extends React.Component<
   ChapterSelectState
 > {
   state: ChapterSelectState = {
-    open: false
+    open: false,
+    wasTouched: false
   };
   wrapperRef: HTMLDivElement;
   buttonRef: HTMLDivElement;
 
   handleButtonClick = () => {
     this.setState(oldState => ({ ...oldState, open: !oldState.open }));
+  };
+
+  handleOnTouchEnd = () => {
+    this.setState({ wasTouched: true });
   };
 
   handleClose = () => {
@@ -80,6 +86,7 @@ export default class ChapterSelect extends React.Component<
         <div
           className="ChapterSelect_handle"
           onClick={this.handleButtonClick}
+          onTouchEnd={this.handleOnTouchEnd}
           ref={this.setButtonRef}
         >
           {`${bibleBookNames[this.props.book]} ${this.props.chapter}`}
@@ -92,6 +99,7 @@ export default class ChapterSelect extends React.Component<
               v11n={v11n}
               onChange={this.handleChange}
               onCancel={this.handleClose}
+              touchEnabled={this.state.wasTouched}
             />
           </div>
         )}
