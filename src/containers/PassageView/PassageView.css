@@ -1,5 +1,5 @@
 .PassageView {
-  width: 35rem;
+  width: 45rem;
   height: 100%;
   box-sizing: border-box;
   display: inline-block;
@@ -38,7 +38,7 @@
   overflow-y: auto;
   z-index: 1;
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 160%;
 }
 
 .PassageView__passage p {
