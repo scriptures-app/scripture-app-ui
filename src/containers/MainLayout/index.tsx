@@ -122,6 +122,10 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
       }
     };
 
+    const columnsClass = `passages_${
+      passages.length < 6 ? passages.length : "many"
+    }_columns`;
+
     return (
       <div className="container">
         <div className="toolbar">
@@ -132,7 +136,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
           </div>
         </div>
         <div className="content">
-          <div className="main">
+          <div className={`main ${columnsClass}`}>
             <MediaQuery query="(min-device-width: 801px)">
               {this.renderPassages(false)}
               <div className="PassageView add-passage">

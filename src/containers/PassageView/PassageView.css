@@ -8,6 +8,20 @@
   white-space: nowrap;
 }
 
+.main.passages_3_columns .PassageView,
+.main.passages_4_columns .PassageView,
+.main.passages_5_columns .PassageView {
+  width: 35rem;
+}
+
+.main.passages_many_columns .PassageView {
+  width: 30rem;
+}
+
+.main.passages_3_columns .PassageView.add-passage,
+.main.passages_4_columns .PassageView.add-passage,
+.main.passages_5_columns .PassageView.add-passage,
+.main.passages_many_columns .PassageView.add-passage,
 .PassageView.add-passage {
   width: 4rem;
 }
