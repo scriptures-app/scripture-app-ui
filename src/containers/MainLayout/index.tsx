@@ -181,12 +181,12 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               onPassageNavigate={this.handlePassageNavigate}
             />
           )}
+          {passages.length <= 1 && (
+            <div onClick={this.handlePassageAdd} className="fixed-add-button">
+              +
+            </div>
+          )}
         </MediaQuery>
-        {passages.length <= 1 && (
-          <div onClick={this.handlePassageAdd} className="fixed-add-button">
-            +
-          </div>
-        )}
       </div>
     );
   }
