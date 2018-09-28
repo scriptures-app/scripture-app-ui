@@ -90,7 +90,7 @@
   margin-bottom: 2.5rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 825px) {
   .PassageView {
     width: 100%;
     display: block;

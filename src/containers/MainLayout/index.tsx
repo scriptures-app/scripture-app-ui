@@ -137,7 +137,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
         </div>
         <div className="content">
           <div className={`main ${columnsClass}`}>
-            <MediaQuery query="(min-device-width: 801px)">
+            <MediaQuery query="(min-device-width: 826px)">
               {this.renderPassages(false)}
               <div
                 onClick={this.handlePassageAdd}
@@ -150,7 +150,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
                 +
               </div>
             </MediaQuery>
-            <MediaQuery query="(max-device-width: 800px)">
+            <MediaQuery query="(max-device-width: 825px)">
               <ReactSwipe
                 ref={element => {
                   this.reactSwipe = element;
@@ -168,7 +168,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
             </MediaQuery>
           </div>
         </div>
-        <MediaQuery query="(max-device-width: 800px)">
+        <MediaQuery query="(max-device-width: 825px)">
           {passages.length > 1 && (
             <PassagesNavbar
               activePassageIndex={this.state.passageIndex}
