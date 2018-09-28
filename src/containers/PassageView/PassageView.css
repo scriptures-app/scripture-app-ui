@@ -91,6 +91,12 @@
 }
 
 @media (max-width: 825px) {
+  .main.passages_1_columns .PassageView,
+  .main.passages_2_columns .PassageView,
+  .main.passages_3_columns .PassageView,
+  .main.passages_4_columns .PassageView,
+  .main.passages_5_columns .PassageView,
+  .main.passages_many_columns .PassageView,
   .PassageView {
     width: 100%;
     display: block;
