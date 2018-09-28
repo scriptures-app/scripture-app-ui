@@ -139,8 +139,15 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
           <div className={`main ${columnsClass}`}>
             <MediaQuery query="(min-device-width: 801px)">
               {this.renderPassages(false)}
-              <div className="PassageView add-passage">
-                <button onClick={this.handlePassageAdd}>Add</button>
+              <div
+                onClick={this.handlePassageAdd}
+                className="PassageView add-passage"
+                title="Open new passage"
+                aria-label="Open new passage"
+                role="button"
+                tabIndex={0}
+              >
+                +
               </div>
             </MediaQuery>
             <MediaQuery query="(max-device-width: 800px)">

@@ -23,7 +23,26 @@
 .main.passages_5_columns .PassageView.add-passage,
 .main.passages_many_columns .PassageView.add-passage,
 .PassageView.add-passage {
-  width: 4rem;
+  cursor: pointer;
+  margin: 1rem 1.5rem 1rem 2rem;
+  padding: 0;
+  width: 5rem;
+  height: 6rem;
+  line-height: 6rem;
+  vertical-align: middle;
+  text-align: center;
+  color: darkgray;
+  font-size: 400%;
+  white-space: normal;
+  border: 1px dashed lightgray;
+  border-top-right-radius: 2rem;
+}
+
+.PassageView.add-passage:hover,
+.PassageView.add-passage:active,
+.PassageView.add-passage:focus {
+  background-color: white;
+  border: 1px solid lightgray;
 }
 
 .PassageView__passage {
@@ -59,6 +78,16 @@
   padding-left: 1.5rem;
   padding-right: 2.5rem;
   white-space: normal;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+}
+
+.PassageView__passage p:first-child {
+  margin-top: 1.5rem;
+}
+
+.PassageView__passage p:last-child {
+  margin-bottom: 2.5rem;
 }
 
 @media (max-width: 800px) {
