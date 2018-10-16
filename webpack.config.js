@@ -1,7 +1,7 @@
-const webpack = require("webpack");
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = (env = "dev") => {
   const devMode = env === "dev";
@@ -52,7 +52,8 @@ module.exports = (env = "dev") => {
       new MiniCssExtractPlugin({
         filename: devMode ? "[name].css" : "[name].[hash].css",
         chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
-      })
+      }),
+      new FaviconsWebpackPlugin({ logo: "./logo.png", title: "Bible Reader" })
     ],
     devServer: {
       contentBase: [path.join(__dirname, "public")],
