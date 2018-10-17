@@ -50,8 +50,11 @@ module.exports = (env = "dev") => {
         filename: "./index.html"
       }),
       new MiniCssExtractPlugin({
-        filename: devMode ? "[name].css" : "[name].[hash].css",
-        chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+        filename:
+          "static/css/" +
+          (devMode ? "[name].css" : "[name].[contenthash:8].css"),
+        chunkFilename:
+          "static/css/" + (devMode ? "[id].css" : "[id].[contenthash:8].css")
       }),
       new FaviconsWebpackPlugin({ logo: "./logo.png", title: "Bible Reader" })
     ],
