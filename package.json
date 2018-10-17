@@ -9,10 +9,13 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env dev",
-    "build": "webpack --config webpack.config.js --mode production --env prod",
+    "build": "yarn run build:clean && yarn run build:webpack && yarn run build:copy",
+    "build:clean": "rimraf build",
+    "build:copy": "cp -r public/bibles build/",
+    "build:webpack": "webpack --config webpack.config.js --mode production --env prod",
     "test": "",
-    "clean": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate": "yarn run clean && ts-node --project src/tools/tsconfig.json src/tools/generate.ts",
+    "clean:generated": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
+    "generate": "yarn run clean:generated && ts-node --project src/tools/tsconfig.json src/tools/generate.ts",
     "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
     "postinstall": "yarn run generate"
   },
