@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -11,104 +9,98 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
-   id="svg2"
    version="1.1"
+   id="svg2"
+   viewBox="0 0 744.09448819 1052.3622047"
+   height="297mm"
+   width="210mm"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/pst/code/github/bible-reader/static-web-app-generator/logo.png"
+   inkscape:export-xdpi="296"
+   inkscape:export-ydpi="296">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="858"
+     id="namedview40"
+     showgrid="false"
+     inkscape:zoom="0.63429568"
+     inkscape:cx="135.31338"
+     inkscape:cy="909.14909"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4">
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient5622">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1;"
+         id="stop5624"
          offset="0"
-         id="stop5624" />
+         style="stop-color:#ffffff;stop-opacity:1;" />
       <stop
-         style="stop-color:#ffffff;stop-opacity:0;"
+         id="stop5626"
          offset="1"
-         id="stop5626" />
+         style="stop-color:#ffffff;stop-opacity:0;" />
     </linearGradient>
     <linearGradient
-       id="linearGradient4176"
-       osb:paint="solid">
+       osb:paint="solid"
+       id="linearGradient4176">
       <stop
-         style="stop-color:#613711;stop-opacity:1;"
+         id="stop4178"
          offset="0"
-         id="stop4178" />
+         style="stop-color:#613711;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5622"
-       id="linearGradient5636"
-       x1="266.71194"
-       y1="169.33896"
-       x2="290.91232"
-       y2="169.33896"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5622"
-       id="linearGradient5638"
-       x1="266.45227"
-       y1="169.80635"
-       x2="290.39301"
-       y2="169.80635"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5622"
-       id="linearGradient5640"
-       x1="175.4157"
-       y1="162.52608"
-       x2="205.9005"
-       y2="162.52608"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5622"
-       id="linearGradient5642"
-       x1="175.4157"
-       y1="162.57005"
-       x2="205.81252"
-       y2="162.57005"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5622"
-       id="linearGradient5666"
        gradientUnits="userSpaceOnUse"
-       x1="266.45227"
-       y1="169.80635"
+       y2="169.33896"
+       x2="290.91232"
+       y1="169.33896"
+       x1="266.71194"
+       id="linearGradient5636"
+       xlink:href="#linearGradient5622" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="169.80635"
        x2="290.39301"
-       y2="169.80635" />
+       y1="169.80635"
+       x1="266.45227"
+       id="linearGradient5638"
+       xlink:href="#linearGradient5622" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="162.52608"
+       x2="205.9005"
+       y1="162.52608"
+       x1="175.4157"
+       id="linearGradient5640"
+       xlink:href="#linearGradient5622" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="162.57005"
+       x2="205.81252"
+       y1="162.57005"
+       x1="175.4157"
+       id="linearGradient5642"
+       xlink:href="#linearGradient5622" />
+    <linearGradient
+       y2="169.80635"
+       x2="290.39301"
+       y1="169.80635"
+       x1="266.45227"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient5666"
+       xlink:href="#linearGradient5622" />
   </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-454.95995"
-     inkscape:cy="618.82988"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     showguides="true"
-     inkscape:window-width="1600"
-     inkscape:window-height="858"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid4215" />
-  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -121,72 +113,122 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <rect
-       style="opacity:1;fill:#613711;fill-opacity:1;stroke:#000000;stroke-width:0.90844369;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4152"
-       width="480.19458"
-       height="480.19458"
-       x="131.34117"
-       y="82.570007" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot4147"
-       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       transform="matrix(5.5375115,0,0,4.1682733,-1069.6379,-488.82449)"><flowRegion
-         id="flowRegion4149"
-         style="fill:url(#linearGradient5666);fill-opacity:1"><rect
-           id="rect4151"
-           width="118.18785"
-           height="97.984795"
-           x="174.75639"
-           y="136.15384"
-           style="font-size:50px;fill:#ebcf65;fill-opacity:1;" /></flowRegion><flowPara
-         id="flowPara4153"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:51.9321785px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#ebcf65;fill-opacity:1;">א</flowPara></flowRoot>    <flowRoot
-       transform="matrix(4.6422902,0,0,4.255169,-408.71346,-274.73255)"
-       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       id="flowRoot4179"
-       xml:space="preserve"><flowRegion
-         id="flowRegion4181"
-         style="fill-opacity:1;fill:url(#linearGradient5640)"><rect
-           style="font-size:50px;fill:#ebcf65;fill-opacity:1;"
-           y="136.15384"
-           x="174.75639"
-           height="97.984795"
-           width="118.18785"
-           id="rect4183" /></flowRegion><flowPara
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:43.98960876px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#ebcf65;fill-opacity:1;"
-         id="flowPara4185">Ω</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot4187"
-       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       transform="matrix(5.4663232,0,0,4.1130242,-1254.2276,-278.13829)"><flowRegion
-         id="flowRegion4189"
-         style="fill-opacity:1;fill:url(#linearGradient5636)"><rect
-           id="rect4191"
-           width="118.18785"
-           height="97.984795"
-           x="174.75639"
-           y="136.15384"
-           style="font-size:50px;fill:#ebcf65;fill-opacity:1;" /></flowRegion><flowPara
-         id="flowPara4193"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:51.9321785px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#ebcf65;fill-opacity:1;">ת</flowPara></flowRoot>    <flowRoot
-       transform="matrix(4.6586072,0,0,4.1682733,-618.33179,-456.55825)"
-       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       id="flowRoot4195"
-       xml:space="preserve"><flowRegion
-         id="flowRegion4197"
-         style="fill-opacity:1;fill:url(#linearGradient5642)"><rect
-           style="font-size:50px;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-opacity:1;"
-           y="136.15384"
-           x="174.75639"
-           height="49.732288"
-           width="33.275219"
-           id="rect4199" /></flowRegion><flowPara
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:43.98960876px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#ebcf65;fill-opacity:1;stroke:none;stroke-opacity:1;"
-         id="flowPara4201">Α</flowPara></flowRoot>  </g>
+  <rect
+     ry="84.47879"
+     y="74.225098"
+     x="133.50035"
+     height="491.77829"
+     width="491.75958"
+     id="rect4161"
+     style="opacity:1;fill:#724114;fill-opacity:1;stroke:none;stroke-width:0.9103511;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="opacity:1;fill:#fbf1ac;fill-opacity:1;stroke:#e2d471;stroke-width:2.03683877;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4163"
+     width="485.48306"
+     height="484.38193"
+     x="133.49548"
+     y="74.220253"
+     ry="82.816139" />
+  <rect
+     ry="83.527283"
+     y="74.21637"
+     x="133.49159"
+     height="474.89203"
+     width="483.8609"
+     id="rect4165"
+     style="opacity:1;fill:#fbf1ac;fill-opacity:1;stroke:#e2d471;stroke-width:2.03683877;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="opacity:1;fill:#fbf1ac;fill-opacity:1;stroke:#e2d471;stroke-width:2.03683877;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4167"
+     width="482.5672"
+     height="461.98996"
+     x="133.48576"
+     y="74.210548"
+     ry="88.563148" />
+  <rect
+     style="opacity:1;fill:#fbf1ac;fill-opacity:1;stroke:#e2d471;stroke-width:2.03683877;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4171"
+     width="479.59109"
+     height="449.14111"
+     x="133.47992"
+     y="74.204727"
+     ry="85.534943" />
+  <rect
+     style="opacity:1;fill:#724114;fill-opacity:1;stroke:none;stroke-width:0.90844369;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4152"
+     width="489.8663"
+     height="444.57767"
+     x="125.25995"
+     y="66.003395"
+     ry="82.712852" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4147"
+     style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#faec8f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     transform="matrix(5.2102763,0,0,3.859422,-969.14281,-463.07148)"><flowRegion
+       id="flowRegion4149"
+       style="fill:url(#linearGradient5666);fill-opacity:1"><rect
+         id="rect4151"
+         width="118.18785"
+         height="97.984795"
+         x="174.75639"
+         y="136.15384"
+         style="font-size:50px;fill:#faec8f;fill-opacity:1" /></flowRegion><flowPara
+       id="flowPara4153"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:51.9321785px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#faec8f;fill-opacity:1">א</flowPara></flowRoot>  <flowRoot
+     transform="matrix(4.3679573,0,0,3.9398792,-347.2752,-264.84283)"
+     style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#faec8f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="flowRoot4179"
+     xml:space="preserve"><flowRegion
+       id="flowRegion4181"
+       style="fill:url(#linearGradient5640);fill-opacity:1"><rect
+         style="font-size:50px;fill:#faec8f;fill-opacity:1"
+         y="136.15384"
+         x="174.75639"
+         height="97.984795"
+         width="118.18785"
+         id="rect4183" /></flowRegion><flowPara
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:43.98960876px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#faec8f;fill-opacity:1"
+       id="flowPara4185">Ω</flowPara></flowRoot>  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4187"
+     style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#faec8f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     transform="matrix(5.1432948,0,0,3.8082667,-1142.8243,-267.99621)"><flowRegion
+       id="flowRegion4189"
+       style="fill:url(#linearGradient5636);fill-opacity:1"><rect
+         id="rect4191"
+         width="118.18785"
+         height="97.984795"
+         x="174.75639"
+         y="136.15384"
+         style="font-size:50px;fill:#faec8f;fill-opacity:1" /></flowRegion><flowPara
+       id="flowPara4193"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:51.9321785px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#faec8f;fill-opacity:1">ת</flowPara></flowRoot>  <flowRoot
+     transform="matrix(4.38331,0,0,3.859422,-544.50627,-433.19602)"
+     style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#faec8f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="flowRoot4195"
+     xml:space="preserve"><flowRegion
+       id="flowRegion4197"
+       style="fill:url(#linearGradient5642);fill-opacity:1"><rect
+         style="font-size:50px;fill:#faec8f;fill-opacity:1;stroke:none;stroke-opacity:1"
+         y="136.15384"
+         x="174.75639"
+         height="49.732288"
+         width="33.275219"
+         id="rect4199" /></flowRegion><flowPara
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:43.98960876px;font-family:FreeSerif;-inkscape-font-specification:FreeSerif;fill:#faec8f;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="flowPara4201">Α</flowPara></flowRoot>  <rect
+     ry="77.619308"
+     y="76.810448"
+     x="173.74779"
+     height="422.96359"
+     width="429.81641"
+     id="rect4173"
+     style="opacity:1;fill:none;fill-opacity:1;stroke:#fbf1ac;stroke-width:1.47234654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:8.83407844, 8.83407844;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#724114;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 203.43758,564.19115 c -56.23252,-10.61902 -77.68317,-48.01281 -77.89646,-132.85956 -0.14615,-58.1337 76.23801,79.0472 76.23801,79.0472 -80.06527,-2.90271 -58.55058,26.02 1.65845,53.81236 z"
+     id="path4177"
+     sodipodi:nodetypes="cscc" />
 </svg>
