@@ -108,6 +108,41 @@ class App extends React.Component<{}, AppState> {
     }
   }
 
+  goToPreviousPassage = (passageIndex: number) => {
+    const { versionId, book, chapter } = this.state.passages[passageIndex];
+    const booksArray = Object.keys(bibles[versionId].v11n);
+
+    const bookIndex = booksArray.indexOf(book);
+    let nextBook;
+    let nextChapter;
+    if (chapter > 1) {
+      nextBook = book;
+      nextChapter = chapter - 1;
+    } else {
+      nextBook = booksArray[bookIndex - 1];
+      nextChapter = bibles[versionId].v11n[nextBook].length;
+    }
+    this.changePassage(passageIndex, versionId, nextBook, nextChapter);
+  };
+
+  goToNextPassage = (passageIndex: number) => {
+    const { versionId, book, chapter } = this.state.passages[passageIndex];
+    const currentBookNumChapters = bibles[versionId].v11n[book].length;
+    const booksArray = Object.keys(bibles[versionId].v11n);
+
+    const bookIndex = booksArray.indexOf(book);
+    let nextBook;
+    let nextChapter;
+    if (chapter < currentBookNumChapters) {
+      nextBook = book;
+      nextChapter = chapter + 1;
+    } else {
+      nextBook = booksArray[bookIndex + 1];
+      nextChapter = 1;
+    }
+    this.changePassage(passageIndex, versionId, nextBook, nextChapter);
+  };
+
   closePassageReducer: PassageCloseCreatorFunc = (passageIndex: number) => ({
     passages
   }: AppState) => ({
@@ -137,6 +172,8 @@ class App extends React.Component<{}, AppState> {
         onPassageChange={this.changePassage}
         onPassageClose={this.closePassage}
         onPassageAdd={this.addPassage}
+        onPassageNext={this.goToNextPassage}
+        onPassagePrevious={this.goToPreviousPassage}
       />
     );
   }
