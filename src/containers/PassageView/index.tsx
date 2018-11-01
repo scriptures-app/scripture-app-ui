@@ -4,6 +4,7 @@ import { Versification } from "@bible-reader/types";
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
 import PassageNavigation from "../../components/PassageNavigation";
+import { PassagePreviousNextButtons } from "../../components/PassagePreviousNextButtons";
 import ShadowScrollbar from "../ShadowScrollbar";
 
 import "./PassageView.css";
@@ -31,10 +32,10 @@ class PassageView extends React.Component<PassageViewProps> {
     ));
 
     const previousNextChapter = (
-      <div>
-        <button onClick={this.props.onPrevious}>Previous</button>
-        <button onClick={this.props.onNext}>Next</button>
-      </div>
+      <PassagePreviousNextButtons
+        onNext={this.props.onNext}
+        onPrevious={this.props.onPrevious}
+      />
     );
 
     return [previousNextChapter, ...versesComponents, previousNextChapter];
