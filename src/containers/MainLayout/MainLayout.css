@@ -2,12 +2,12 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  padding-top: 0.2rem;
+  padding-top: 0rem;
   padding-left: 0.3rem;
   box-sizing: border-box;
   background-color: #eee;
   height: 4.5rem;
-  width: 3rem;
+  width: 3.5rem;
   border-radius: 3rem 0 0 0;
   text-align: center;
   line-height: 4.5rem;
