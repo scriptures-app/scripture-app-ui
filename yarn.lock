@@ -30,6 +30,16 @@
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-0.8.0.tgz#a4e2c4fa79463e5b10221fefdabae645e95cde34"
 
+"@bible-reader/types@^1.0.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-0.9.0.tgz#52771b06e7cf3551bd812825c14a7f8afc077c80"
+
+"@bible-reader/v11n-utils@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bible-reader/v11n-utils/-/v11n-utils-1.0.2.tgz#3daa3f3d2017d8ffe7fdd892cee08f2fa1549b33"
+  dependencies:
+    "@bible-reader/types" "^1.0.0"
+
 "@types/adm-zip@^0.4.31":
   version "0.4.31"
   resolved "http://registry.npmjs.org/@types/adm-zip/-/adm-zip-0.4.31.tgz#a3376b9fa8f4c6e9c078c176d2df2caeb7939de3"

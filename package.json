@@ -22,6 +22,7 @@
   "dependencies": {
     "@bible-reader/common": "^0.7.0",
     "@bible-reader/reference-validator": "^0.8.0",
+    "@bible-reader/v11n-utils": "^1.0.2",
     "@types/classnames": "^2.2.4",
     "@types/react-responsive": "^3.0.2",
     "@types/react-swipe": "^5.0.3",

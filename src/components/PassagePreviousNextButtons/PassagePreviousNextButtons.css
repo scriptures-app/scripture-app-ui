@@ -1,8 +1,12 @@
 .PassagePreviousNextButtons {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.PassagePreviousNextButtons:last-child {
+  margin-bottom: 3rem;
 }
 
 .PassagePreviousNextButtons__button {

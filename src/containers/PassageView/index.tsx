@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Versification } from "@bible-reader/types";
+import { getPreviousChapter, getNextChapter } from "@bible-reader/v11n-utils";
 
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
@@ -18,27 +19,36 @@ interface PassageViewProps {
   verses: string[];
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
-  onPrevious: () => void;
-  onNext: () => void;
   loading: boolean;
 }
 
 class PassageView extends React.Component<PassageViewProps> {
   getPassageViewContent = (verses: string[]) => {
-    const versesComponents = verses.map((text, index) => (
-      <p key={index + 1}>
-        <sup>{index + 1}</sup> {text}
-      </p>
-    ));
+    const { v11n, book, chapter, versionId } = this.props;
+    const previousChapterRef = getPreviousChapter(v11n, {
+      book,
+      chapter
+    });
+    const nextChapterRef = getNextChapter(v11n, { book, chapter });
 
-    const previousNextChapter = (
-      <PassagePreviousNextButtons
-        onNext={this.props.onNext}
-        onPrevious={this.props.onPrevious}
-      />
+    // curry versionId parameter
+    const onPassageChange = (book: string, chapter: number) =>
+      this.props.onPassageChange(versionId, book, chapter);
+
+    return (
+      <>
+        {verses.map((text, index) => (
+          <p key={index + 1}>
+            <sup>{index + 1}</sup> {text}
+          </p>
+        ))}
+        <PassagePreviousNextButtons
+          nextChapterRef={nextChapterRef}
+          previousChapterRef={previousChapterRef}
+          onPassageChange={onPassageChange}
+        />
+      </>
     );
-
-    return [previousNextChapter, ...versesComponents, previousNextChapter];
   };
   render() {
     const {
