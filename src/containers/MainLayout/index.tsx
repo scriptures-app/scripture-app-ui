@@ -22,8 +22,6 @@ interface MainLayoutProps {
   onPassageAdd: PassageAddFunc;
   onPassageChange: PassageChangeFunc;
   onPassageClose: PassageCloseFunc;
-  onPassageNext: (index: number) => void;
-  onPassagePrevious: (index: number) => void;
 }
 
 interface MainLayoutState {
@@ -42,18 +40,14 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
   };
 
   renderPassages = (wrapInDiv = false) => {
-    const {
-      bibles,
-      passages,
-      onPassageChange,
-      onPassagePrevious,
-      onPassageNext
-    } = this.props;
+    const { bibles, passages, onPassageChange } = this.props;
+
     return passages.map(
       (
         { versionId, book, chapter, verses, loading }: Chapter,
         index: number
       ) => {
+        const v11n = bibles[versionId].v11n;
         const passage = (
           <PassageView
             key={`${versionId}_${book}_${chapter}_${index}`}
@@ -61,7 +55,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
             versionId={versionId}
             book={book}
             chapter={chapter}
-            v11n={bibles[versionId].v11n}
+            v11n={v11n}
             verses={verses}
             onPassageChange={(
               versionId: string,
@@ -69,8 +63,6 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
               chapter: number
             ) => onPassageChange(index, versionId, book, chapter)}
             onPassageClose={() => this.handlePassageClose(index)}
-            onPrevious={() => onPassagePrevious(index)}
-            onNext={() => onPassageNext(index)}
             loading={loading}
           />
         );
