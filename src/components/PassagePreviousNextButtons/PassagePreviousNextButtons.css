@@ -1,0 +1,26 @@
+.PassagePreviousNextButtons {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.PassagePreviousNextButtons:last-child {
+  margin-bottom: 3rem;
+}
+
+.PassagePreviousNextButtons__button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.PassagePreviousNextButtons__button > button {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: 1.4rem;
+  color: #aaa;
+  cursor: pointer;
+}
