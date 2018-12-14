@@ -15,7 +15,7 @@
     "build:webpack": "webpack --config webpack.config.js --mode production --env prod",
     "test": "",
     "clean:generated": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate": "yarn run clean:generated && ts-node --project src/tools/tsconfig.json src/tools/generate.ts",
+    "generate": "yarn run clean:generated && ts-node --files --project src/tools/tsconfig.json src/tools/generate.tsx",
     "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
     "postinstall": "yarn run generate"
   },
