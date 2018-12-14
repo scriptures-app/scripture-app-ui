@@ -16,21 +16,30 @@ const sanitizeUrl = (url: string) => {
   return url;
 };
 
-export default (sourceFile: string, pathInArchive?: string) => {
+export default (
+  sourceFile: string,
+  updateProgress: (progress: Number) => void,
+  updateStatus: (statusMsg: string) => void,
+  pathInArchive?: string
+) => {
   const isZip = sourceFile.substr(-4) === ".zip";
   if (sourceFile.indexOf("http") === 0) {
     const sanitizedUrl = sanitizeUrl(sourceFile);
-    return axios.get(sanitizedUrl, { responseType: "arraybuffer" }).then(res => {
-      if (isZip && pathInArchive) {
-        // console.log(res.toString());
-        return extractZip(res.data, pathInArchive);        
-      } else {
-        return res.data;
-      }
-    });
+    return axios
+      .get(sanitizedUrl, { responseType: "arraybuffer" })
+      .then(res => {
+        if (isZip && pathInArchive) {
+          // console.log(res.toString());
+          updateStatus("Unzipping");
+          return extractZip(res.data, pathInArchive);
+        } else {
+          return res.data;
+        }
+      });
   } else {
     return fs.readFile(sourceFile).then(buffer => {
       if (isZip && pathInArchive) {
+        updateStatus("Unzipping");
         return extractZip(buffer, pathInArchive);
       } else {
         return buffer.toString();
