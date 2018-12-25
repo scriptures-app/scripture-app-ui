@@ -18,8 +18,7 @@ const sanitizeUrl = (url: string) => {
 
 export default (
   sourceFile: string,
-  updateProgress: (progress: Number) => void,
-  updateStatus: (statusMsg: string) => void,
+  updateProgress: (progress: Number, statusMsg: string) => void,
   pathInArchive?: string
 ) => {
   const isZip = sourceFile.substr(-4) === ".zip";
@@ -30,7 +29,7 @@ export default (
       .then(res => {
         if (isZip && pathInArchive) {
           // console.log(res.toString());
-          updateStatus("Unzipping");
+          updateProgress(-1, "Unzipping");
           return extractZip(res.data, pathInArchive);
         } else {
           return res.data;
@@ -39,7 +38,7 @@ export default (
   } else {
     return fs.readFile(sourceFile).then(buffer => {
       if (isZip && pathInArchive) {
-        updateStatus("Unzipping");
+        updateProgress(-1, "Unzipping");
         return extractZip(buffer, pathInArchive);
       } else {
         return buffer.toString();

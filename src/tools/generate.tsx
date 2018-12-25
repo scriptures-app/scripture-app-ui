@@ -11,8 +11,20 @@ import { outputPath, bibles, defaultChapter } from "../config";
 
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
-class Generator extends React.Component {
-  state = {
+interface GeneratorState {
+  bibles: {
+    [bibleId: string]: {
+      id: string;
+      lang: string;
+      name: string;
+      progress: number;
+      status: string;
+    };
+  };
+}
+
+class Generator extends React.Component<{}, GeneratorState> {
+  state: GeneratorState = {
     bibles: bibles.reduce(
       (previous, { id, lang, name }) => ({
         ...previous,
@@ -20,45 +32,57 @@ class Generator extends React.Component {
           id,
           lang,
           name,
-          progress: 0,
-          status: ""
+          progress: -1,
+          status: "Waiting ..."
         }
       }),
       {}
     )
   };
-  handleUpdateProgress = (bibleId: string, progress: Number) => {
+
+  handleUpdateProgress = (
+    bibleId: string,
+    progress: number,
+    status: string
+  ) => {
     this.setState(state => ({
       ...state,
-      [bibleId]: {
-        ...state[bibleId],
-        progress
+      bibles: {
+        ...state.bibles,
+        [bibleId]: {
+          ...state.bibles[bibleId],
+          progress,
+          status
+        }
       }
     }));
   };
-  handleUpdateStatus = (bibleId: string, status: string) => {
-    this.setState(state => ({
-      ...state,
-      [bibleId]: {
-        ...state[bibleId],
-        status
-      }
-    }));
-  };
+
   componentDidMount() {
     Promise.all(
       bibles.map((bible: BibleInputConfig) => {
         const parseData = xml2json.getParser(bible.type);
         return readSource(
           path.join(bible.input || ""),
-          this.handleUpdateProgress.bind(bible.id),
-          this.handleUpdateStatus.bind(bible.id),
+          this.handleUpdateProgress.bind(this, bible.id),
           bible.pathInArchive
         )
-          .then(data => parseData(data, bible.id, bible.name, bible.lang))
+          .then(data =>
+            parseData(
+              data,
+              bible.id,
+              bible.name,
+              bible.lang,
+              this.handleUpdateProgress.bind(this, bible.id)
+            )
+          )
           .then((bibleObj: BibleVersionContent) => {
             const pathOut = path.join(publicBiblesPath, bible.id);
-            return xml2json.generate(pathOut, bibleObj);
+            return xml2json.generate(
+              pathOut,
+              bibleObj,
+              this.handleUpdateProgress.bind(this, bible.id)
+            );
           })
           .then(() => {
             const biblesMap = bibles.reduce(
@@ -105,12 +129,20 @@ class Generator extends React.Component {
   render() {
     const { bibles } = this.state;
     return (
-      <Box>
+      <Box flexDirection="column">
         {Object.keys(bibles).map(id => (
-          <Box key={id}>
-            <Color green>{`${id} - ${bibles[id].name} ${
-              bibles[id].status
-            }`}</Color>
+          <Box key={id} justifyContent="flex-start">
+            <Box width={40}>
+              <Color green>{`${id} - ${bibles[id].name}`}</Color>
+            </Box>
+            <Box width={30} marginLeft={2}>
+              {bibles[id].status}
+            </Box>
+            <Box marginLeft={2}>
+              {bibles[id].progress >= 0
+                ? Math.floor(100 * bibles[id].progress) + "%"
+                : ""}
+            </Box>
           </Box>
         ))}
       </Box>
