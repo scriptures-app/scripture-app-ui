@@ -15,9 +15,8 @@
     "build:webpack": "webpack --config webpack.config.js --mode production --env prod",
     "test": "",
     "clean:generated": "rimraf public/bibles && rimraf src/initialDataGenerated.ts",
-    "generate": "yarn run clean:generated && ts-node --files --project src/tools/tsconfig.json src/tools/generate.tsx",
-    "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master",
-    "postinstall": "yarn run generate"
+    "generate": "yarn run clean:generated && ts-node --files --project src/tools/tsconfig.json src/tools/generate.ts",
+    "deploy": "gh-pages -d build -r git@github.com:bible-reader/bible-reader.github.io.git -b master"
   },
   "dependencies": {
     "@bible-reader/common": "^1.0.3",
@@ -40,6 +39,7 @@
     "@bible-reader/types": "^1.0.3",
     "@types/adm-zip": "^0.4.31",
     "@types/axios": "^0.14.0",
+    "@types/cli-progress": "^1.8.0",
     "@types/jest": "^23.3.3",
     "@types/mz": "^0.0.31",
     "@types/node": "^10.11.4",
@@ -49,6 +49,7 @@
     "@types/react-dom": "^16.0.8",
     "adm-zip": "^0.4.7",
     "axios": "^0.18.0",
+    "cli-progress": "^2.1.1",
     "css-loader": "^1.0.0",
     "favicons-webpack-plugin": "^0.0.9",
     "gh-pages": "^1.1.0",
