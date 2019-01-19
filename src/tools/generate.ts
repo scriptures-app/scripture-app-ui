@@ -3,7 +3,9 @@ import * as path from "path";
 import { BibleVersionContent } from "@bible-reader/types";
 import * as xml2json from "@bible-reader/bible-converter";
 import * as _cliProgress from "cli-progress";
+import * as _colors from "colors";
 
+import { leftPad } from "./leftPad";
 import { BibleInputConfig } from "../types";
 import readSource from "./readSource";
 import generateCode from "./generateCode";
@@ -11,23 +13,22 @@ import { outputPath, bibles, defaultChapter } from "../config";
 
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
-let stateBibles = bibles.reduce(
-  (previous, { id, lang, name }) => ({
-    ...previous,
-    [id]: {
-      id,
-      lang,
-      name,
-      progress: -1,
-      status: "Waiting ..."
-    }
-  }),
-  {}
-);
+const progressbarPreset = {
+  ..._cliProgress.Presets.shades_classic,
+  format:
+    "{id} - {name} ({lang}) " +
+    _colors.grey("{bar}") +
+    " {percentage}% | {status}"
+};
 
-const progressbars = bibles.reduce((prev, { id }) => {
-  const bar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic);
-  bar.start(100, 0);
+const progressbars = bibles.reduce((prev, { id, lang, name }) => {
+  const bar = new _cliProgress.Bar({}, progressbarPreset);
+  bar.start(100, 0, {
+    id: leftPad(id, 5, " "),
+    lang: leftPad(lang, 2, " "),
+    name: leftPad(name, 12, " "),
+    status: "Waiting ..."
+  });
   return {
     ...prev,
     [id]: bar
@@ -39,15 +40,7 @@ const handleUpdateProgress = (
   progress: number,
   status: string
 ) => {
-  stateBibles = {
-    ...stateBibles,
-    [bibleId]: {
-      ...stateBibles[bibleId],
-      progress,
-      status
-    }
-  };
-  progressbars[bibleId].update(Math.floor(100 * progress));
+  progressbars[bibleId].update(Math.floor(100 * progress), { status });
 };
 
 Promise.all(
