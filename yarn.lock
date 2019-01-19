@@ -44,13 +44,6 @@
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.6.tgz#dbe8a666156d556ed018e15a4c65f08937c3f628"
 
-"@types/cli-progress@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@types/cli-progress/-/cli-progress-1.8.0.tgz#d7cc20191efa0374b9b919531a6bee90ee223e99"
-  integrity sha512-anbR1K9PtAzzB7Uc577Nq5KzgLhax1AuiJp7SC029wEZTmgpOT68uKOs+LMXpvLn0aVjwOiU6ijEwkcNWT0/JA==
-  dependencies:
-    "@types/node" "*"
-
 "@types/fs-promise@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/fs-promise/-/fs-promise-1.0.3.tgz#1ee71e7a1edd3503a905cdec26240f485dcdcbaf"
@@ -61,6 +54,14 @@
 "@types/jest@^23.3.3":
   version "23.3.10"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
+
+"@types/multi-progress@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/multi-progress/-/multi-progress-2.0.3.tgz#259d05168ff9f350f7346346218784526f838799"
+  integrity sha512-PXz4rYSCODCzlqIeqYSU5Lg34i1Rah2BErl2OOlBR1BLT0CXG3h9NbmJW0fWx+dPc4GROKWsJcjYqV7iV59aMg==
+  dependencies:
+    "@types/node" "*"
+    "@types/progress" "*"
 
 "@types/mz@*":
   version "0.0.32"
@@ -87,6 +88,13 @@
 "@types/node@^8.0.2":
   version "8.10.38"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.38.tgz#e05c201a668492e534b48102aca0294898f449f6"
+
+"@types/progress@*":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/progress/-/progress-2.0.3.tgz#7ccbd9c6d4d601319126c469e73b5bb90dfc8ccc"
+  integrity sha512-bPOsfCZ4tsTlKiBjBhKnM8jpY5nmIll166IPD58D92hR7G7kZDfx5iB9wGF4NfZrdKolebjeAr3GouYkSGoJ/A==
+  dependencies:
+    "@types/node" "*"
 
 "@types/prop-types@*":
   version "15.5.6"
@@ -840,14 +848,6 @@ cli-cursor@^2.0.0, cli-cursor@^2.1.0:
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
   dependencies:
     restore-cursor "^2.0.0"
-
-cli-progress@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/cli-progress/-/cli-progress-2.1.1.tgz#45ee1b143487c19043a3262131ccb4676f87f032"
-  integrity sha512-TSJw3LY9ZRSis7yYzQ7flIdtQMbacd9oYoiFphJhI4SzgmqF0zErO+uNv0lbUjk1L4AGfHQJ4OVYYzW+JV66KA==
-  dependencies:
-    colors "^1.1.2"
-    string-width "^2.1.1"
 
 cliui@^3.0.3:
   version "3.2.0"
@@ -2962,6 +2962,13 @@ ms@2.0.0:
 ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
+
+multi-progress@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/multi-progress/-/multi-progress-2.0.0.tgz#29ccb42cf24874b1c6384f03127ce5dff7b22f2c"
+  integrity sha1-Kcy0LPJIdLHGOE8DEnzl3/eyLyw=
+  dependencies:
+    progress "^1.1.8"
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"

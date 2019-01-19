@@ -2,8 +2,7 @@ import { fs } from "mz";
 import * as path from "path";
 import { BibleVersionContent } from "@bible-reader/types";
 import * as xml2json from "@bible-reader/bible-converter";
-import * as _cliProgress from "cli-progress";
-import * as _colors from "colors";
+import * as Multiprogress from "multi-progress";
 
 import { leftPad } from "./leftPad";
 import { BibleInputConfig } from "../types";
@@ -13,34 +12,41 @@ import { outputPath, bibles, defaultChapter } from "../config";
 
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
-const progressbarPreset = {
-  ..._cliProgress.Presets.shades_classic,
-  format:
-    "{id} - {name} ({lang}) " +
-    _colors.grey("{bar}") +
-    " {percentage}% | {status}"
-};
+const progressbarFormat = ":id - :name (:lang) :bar :percent | :status";
 
-const progressbars = bibles.reduce((prev, { id, lang, name }) => {
-  const bar = new _cliProgress.Bar({}, progressbarPreset);
-  bar.start(100, 0, {
+var multiProgress = new Multiprogress();
+const progressbars = {};
+
+for (const { id, lang, name } of bibles) {
+  const bar = multiProgress.newBar(progressbarFormat, {
+    complete: "\u2588",
+    incomplete: "\u2591",
+    width: 40,
+    total: 100,
+    renderThrottle: 100
+  });
+  const values = {
     id: leftPad(id, 5, " "),
     lang: leftPad(lang, 2, " "),
     name: leftPad(name, 12, " "),
     status: "Waiting ..."
-  });
-  return {
-    ...prev,
-    [id]: bar
   };
-}, {});
+  bar.update(0, values);
+  progressbars[id] = {
+    bar,
+    values
+  };
+}
 
 const handleUpdateProgress = (
   bibleId: string,
   progress: number,
   status: string
 ) => {
-  progressbars[bibleId].update(Math.floor(100 * progress), { status });
+  progressbars[bibleId].bar.update(progress, {
+    ...progressbars[bibleId].values,
+    status
+  });
 };
 
 Promise.all(
@@ -104,8 +110,11 @@ Promise.all(
   })
   .then(() => {
     for (const id in progressbars) {
-      progressbars[id].stop();
+      progressbars[id].bar.terminate();
     }
+    console.log(
+      "\n\n\n\n\nAll data files for all Bible versions were generated successfully!\n"
+    );
   })
   .catch(err => {
     throw err;
