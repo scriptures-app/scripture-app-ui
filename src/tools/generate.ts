@@ -2,43 +2,18 @@ import { fs } from "mz";
 import * as path from "path";
 import { BibleVersionContent } from "@bible-reader/types";
 import * as xml2json from "@bible-reader/bible-converter";
-import * as Multiprogress from "multi-progress";
 
-import { leftPad } from "./leftPad";
 import { BibleInputConfig } from "../types";
 import readSource from "./readSource";
 import generateCode from "./generateCode";
 import { outputPath, bibles, defaultChapter } from "../config";
+import { getProgressBars } from "./progressBars";
 
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
-const progressbarFormat = ":id - :name (:lang) :bar :percent | :status";
+const progressbars = getProgressBars(bibles);
 
-var multiProgress = new Multiprogress();
-const progressbars = {};
-
-for (const { id, lang, name } of bibles) {
-  const bar = multiProgress.newBar(progressbarFormat, {
-    complete: "\u2588",
-    incomplete: "\u2591",
-    width: 40,
-    total: 100,
-    renderThrottle: 100
-  });
-  const values = {
-    id: leftPad(id, 5, " "),
-    lang: leftPad(lang, 2, " "),
-    name: leftPad(name, 12, " "),
-    status: "Waiting ..."
-  };
-  bar.update(0, values);
-  progressbars[id] = {
-    bar,
-    values
-  };
-}
-
-const handleUpdateProgress = (
+const updateProgressCallback = (
   bibleId: string,
   progress: number,
   status: string
@@ -54,7 +29,7 @@ Promise.all(
     const parseData = xml2json.getParser(bible.type);
     return readSource(
       path.join(bible.input || ""),
-      handleUpdateProgress.bind(null, bible.id),
+      updateProgressCallback.bind(null, bible.id),
       bible.pathInArchive
     )
       .then(data =>
@@ -63,7 +38,7 @@ Promise.all(
           bible.id,
           bible.name,
           bible.lang,
-          handleUpdateProgress.bind(null, bible.id)
+          updateProgressCallback.bind(null, bible.id)
         )
       )
       .then((bibleObj: BibleVersionContent) => {
@@ -71,7 +46,7 @@ Promise.all(
         return xml2json.generate(
           pathOut,
           bibleObj,
-          handleUpdateProgress.bind(null, bible.id)
+          updateProgressCallback.bind(null, bible.id)
         );
       })
       .then(() => {
@@ -109,11 +84,16 @@ Promise.all(
     );
   })
   .then(() => {
+    let newLines = "";
+    let count = 0;
     for (const id in progressbars) {
       progressbars[id].bar.terminate();
+      newLines += "\n";
+      count++;
     }
+    console.log(newLines);
     console.log(
-      "\n\n\n\n\nAll data files for all Bible versions were generated successfully!\n"
+      `All data files for all ${count} Bible versions were generated successfully!\n`
     );
   })
   .catch(err => {
