@@ -1,6 +1,6 @@
 import * as Multiprogress from "multi-progress";
 
-import { leftPad } from "./leftPad";
+import { rightPad } from "./rightPad";
 
 const progressbarFormat = ":id - :name (:lang) :bar :percent | :status";
 var multiProgress = new Multiprogress();
@@ -35,9 +35,9 @@ export function getProgressBars(bibles: Bible[]) {
       renderThrottle: 100
     });
     const values = {
-      id: leftPad(id, 5, " "),
-      lang: leftPad(lang, 2, " "),
-      name: leftPad(name, 12, " "),
+      id: rightPad(id, 5, " "),
+      lang: rightPad(lang, 2, " "),
+      name: rightPad(name, 30, " "),
       status: "Waiting ..."
     };
     bar.update(0, values);
