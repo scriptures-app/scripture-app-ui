@@ -1,18 +1,10 @@
 import * as Multiprogress from "multi-progress";
 
+import { BibleInputConfig } from "./interface";
 import { rightPad } from "./rightPad";
 
 const progressbarFormat = ":id - :name (:lang) :bar :percent | :status";
 var multiProgress = new Multiprogress();
-
-interface Bible {
-  id: string;
-  lang: string;
-  name: string;
-  input: string;
-  pathInArchive: string;
-  type: string;
-}
 
 interface Progressbar {
   bar: ProgressBar;
@@ -24,7 +16,7 @@ interface Progressbar {
   };
 }
 
-export function getProgressBars(bibles: Bible[]) {
+export function getProgressBars(bibles: BibleInputConfig[]) {
   const progressbars: Progressbar[] = [];
   for (const { id, lang, name } of bibles) {
     const bar = multiProgress.newBar(progressbarFormat, {
