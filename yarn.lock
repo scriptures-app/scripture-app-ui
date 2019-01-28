@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@bible-reader/bible-converter@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-1.1.0.tgz#ce0235117743115c3e3a9cfb99e9eac0da522bfc"
+"@bible-reader/bible-converter@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-1.2.0.tgz#f33ec4e11b302e44ea137a8fe972b7da2f50b3fa"
+  integrity sha512-vjKyOmelWBW4NwvfZgRsRxIvZQz73MJb4FhZ0V5cJXN9zNq+hQAiNuoT46EOsN+sdUvSjLtNspGlDPHquodXDA==
   dependencies:
     "@bible-reader/common" "^1.0.3"
     "@bible-reader/types" "^1.0.3"
