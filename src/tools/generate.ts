@@ -63,9 +63,11 @@ Promise.all(
           }),
           {}
         );
+        const biblesMapPayload = JSON.stringify(biblesMap);
+        const biblesMapHash = xml2json.getHash(biblesMapPayload);
         return fs.writeFile(
-          path.join(publicBiblesPath, "bibles.json"),
-          JSON.stringify(biblesMap)
+          path.join(publicBiblesPath, `bibles.${biblesMapHash}.json`),
+          biblesMapPayload
         );
       })
       .catch((err: Error) => {
