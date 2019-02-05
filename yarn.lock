@@ -2,13 +2,12 @@
 # yarn lockfile v1
 
 
-"@bible-reader/bible-converter@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-1.2.0.tgz#f33ec4e11b302e44ea137a8fe972b7da2f50b3fa"
-  integrity sha512-vjKyOmelWBW4NwvfZgRsRxIvZQz73MJb4FhZ0V5cJXN9zNq+hQAiNuoT46EOsN+sdUvSjLtNspGlDPHquodXDA==
+"@bible-reader/bible-converter@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-2.0.0.tgz#78863b2453481c9b5309bdcbbe3dd4f1ba2b09fb"
   dependencies:
-    "@bible-reader/common" "^1.0.3"
-    "@bible-reader/types" "^1.0.3"
+    "@bible-reader/common" "^2.0.0"
+    "@bible-reader/types" "^2.0.0"
     "@types/fs-promise" "^1.0.3"
     "@types/node" "^8.0.2"
     "@types/xml-parser" "^1.2.28"
@@ -19,9 +18,17 @@
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@bible-reader/common/-/common-1.0.3.tgz#8661ad9daeb9905f7800fabd230def818b7d82ca"
 
+"@bible-reader/common@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/common/-/common-2.0.0.tgz#0405ddd05c73379ab4a776b4dad177c76e70b099"
+
 "@bible-reader/types@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-1.0.3.tgz#f16f27ac44926a74785d977710dcd1acfe55d4b4"
+
+"@bible-reader/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-2.0.0.tgz#a530817f8b58818842f7b18ff62d7653307922d2"
 
 "@bible-reader/v11n-utils@^1.0.3":
   version "1.0.3"
@@ -59,7 +66,6 @@
 "@types/multi-progress@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/multi-progress/-/multi-progress-2.0.3.tgz#259d05168ff9f350f7346346218784526f838799"
-  integrity sha512-PXz4rYSCODCzlqIeqYSU5Lg34i1Rah2BErl2OOlBR1BLT0CXG3h9NbmJW0fWx+dPc4GROKWsJcjYqV7iV59aMg==
   dependencies:
     "@types/node" "*"
     "@types/progress" "*"
@@ -93,7 +99,6 @@
 "@types/progress@*":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/progress/-/progress-2.0.3.tgz#7ccbd9c6d4d601319126c469e73b5bb90dfc8ccc"
-  integrity sha512-bPOsfCZ4tsTlKiBjBhKnM8jpY5nmIll166IPD58D92hR7G7kZDfx5iB9wGF4NfZrdKolebjeAr3GouYkSGoJ/A==
   dependencies:
     "@types/node" "*"
 
@@ -2967,7 +2972,6 @@ ms@^2.1.1:
 multi-progress@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/multi-progress/-/multi-progress-2.0.0.tgz#29ccb42cf24874b1c6384f03127ce5dff7b22f2c"
-  integrity sha1-Kcy0LPJIdLHGOE8DEnzl3/eyLyw=
   dependencies:
     progress "^1.1.8"
 
