@@ -55,7 +55,7 @@ class App extends React.Component<{}, AppState> {
     ]
   });
 
-  changePassage(
+  async changePassage(
     passageIndex: number,
     versionId: string,
     book: string,
@@ -72,27 +72,32 @@ class App extends React.Component<{}, AppState> {
 
     if (this.isPassageValid(versionId, book, chapter)) {
       const verses = this.getPassageFromLocalStorage(versionId, book, chapter);
+      const booksHashes = bibles[versionId].hashes.booksHashes;
+      const bookHash =
+        booksHashes && booksHashes[book] ? booksHashes[book] : "";
       if (!verses.length) {
-        const urlPath = buildChapterPath(versionId, book, chapter);
-        fetch(urlPath)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.setState(
-              this.changePassageReducer(
-                passageIndex,
-                versionId,
-                book,
-                chapter,
-                data.verses || [],
-                false
-              )
-            );
-          })
-          .catch(err => {
-            throw err;
-          });
+        const urlPath = await buildChapterPath(
+          versionId,
+          book,
+          chapter,
+          bookHash
+        );
+        try {
+          const response = await fetch(urlPath);
+          const data = await response.json();
+          this.setState(
+            this.changePassageReducer(
+              passageIndex,
+              versionId,
+              book,
+              chapter,
+              data.verses || [],
+              false
+            )
+          );
+        } catch (err) {
+          throw err;
+        }
       } else {
         this.setState(
           this.changePassageReducer(
