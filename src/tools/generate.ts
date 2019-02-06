@@ -3,15 +3,21 @@ import * as path from "path";
 import { BibleVersionContent } from "@bible-reader/types";
 import * as xml2json from "@bible-reader/bible-converter";
 
-import { BibleInputConfig } from "../types";
+import { BibleInputConfig, BiblesHashes } from "../types";
 import readSource from "./readSource";
 import generateCode from "./generateCode";
 import { outputPath, bibles, defaultChapter } from "../config";
 import { getProgressBars } from "./progressBars";
 
+const { getHash } = xml2json;
+
 const publicBiblesPath = path.join(__dirname, "..", "..", outputPath);
 
 const progressbars = getProgressBars(bibles);
+
+const biblesHashes: BiblesHashes = {};
+
+let biblesJsonHash = "";
 
 const updateProgressCallback = (
   bibleId: string,
@@ -43,32 +49,21 @@ Promise.all(
       )
       .then((bibleObj: BibleVersionContent) => {
         const pathOut = path.join(publicBiblesPath, bible.id);
+        biblesHashes[bible.id] = {};
+        biblesHashes[bible.id].allHash = getHash(JSON.stringify(bibleObj));
+        biblesHashes[bible.id].v11nHash = getHash(
+          JSON.stringify(bibleObj.v11n)
+        );
         return xml2json.generate(
           pathOut,
           bibleObj,
           updateProgressCallback.bind(null, bible.id)
         );
       })
-      .then(() => {
-        const biblesMap = bibles.reduce(
-          (map, bible) => ({
-            ...map,
-            [bible.id]: {
-              ...bible,
-              // "un-define" config-specific fields
-              input: undefined,
-              pathInArchive: undefined,
-              type: undefined
-            }
-          }),
-          {}
-        );
-        const biblesMapPayload = JSON.stringify(biblesMap);
-        const biblesMapHash = xml2json.getHash(biblesMapPayload);
-        return fs.writeFile(
-          path.join(publicBiblesPath, `bibles.${biblesMapHash}.json`),
-          biblesMapPayload
-        );
+      .then(booksHashes => {
+        if (booksHashes) {
+          biblesHashes[bible.id].booksHashes = booksHashes;
+        }
       })
       .catch((err: Error) => {
         throw err;
@@ -76,13 +71,41 @@ Promise.all(
   })
 )
   .then(() => {
+    const biblesMap = bibles.reduce(
+      (map, bible) => ({
+        ...map,
+        [bible.id]: {
+          ...bible,
+          hashes: biblesHashes[bible.id],
+          // "un-define" config-specific fields
+          input: undefined,
+          pathInArchive: undefined,
+          type: undefined
+        }
+      }),
+      {}
+    );
+    const biblesMapPayload = JSON.stringify(biblesMap);
+    biblesJsonHash = getHash(biblesMapPayload);
+    return fs.writeFile(
+      path.join(publicBiblesPath, `bibles.${biblesJsonHash}.json`),
+      biblesMapPayload
+    );
+  })
+  .then(() => {
     // console.log("The conversion finished successfully.");
   })
   .then(() => {
     const preBundledFile = "../initialDataGenerated.ts";
     return fs.writeFile(
       path.join(__dirname, preBundledFile),
-      generateCode(publicBiblesPath, bibles, defaultChapter)
+      generateCode(
+        publicBiblesPath,
+        bibles,
+        defaultChapter,
+        biblesJsonHash,
+        biblesHashes
+      )
     );
   })
   .then(() => {
