@@ -117,12 +117,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bible-reader/bible-converter@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-1.2.0.tgz#f33ec4e11b302e44ea137a8fe972b7da2f50b3fa"
+"@bible-reader/bible-converter@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-2.0.0.tgz#78863b2453481c9b5309bdcbbe3dd4f1ba2b09fb"
   dependencies:
-    "@bible-reader/common" "^1.0.3"
-    "@bible-reader/types" "^1.0.3"
+    "@bible-reader/common" "^2.0.0"
+    "@bible-reader/types" "^2.0.0"
     "@types/fs-promise" "^1.0.3"
     "@types/node" "^8.0.2"
     "@types/xml-parser" "^1.2.28"
@@ -133,9 +133,17 @@
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@bible-reader/common/-/common-1.0.3.tgz#8661ad9daeb9905f7800fabd230def818b7d82ca"
 
+"@bible-reader/common@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/common/-/common-2.0.0.tgz#0405ddd05c73379ab4a776b4dad177c76e70b099"
+
 "@bible-reader/types@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-1.0.3.tgz#f16f27ac44926a74785d977710dcd1acfe55d4b4"
+
+"@bible-reader/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bible-reader/types/-/types-2.0.0.tgz#a530817f8b58818842f7b18ff62d7653307922d2"
 
 "@bible-reader/v11n-utils@^1.0.3":
   version "1.0.3"

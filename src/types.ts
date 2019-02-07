@@ -4,8 +4,12 @@ export interface AppState {
   passages: Chapter[];
 }
 
+export interface BibleVersionWithHashes extends BibleVersion {
+  hashes: BibleHashes;
+}
+
 export interface BibleVersionsMap {
-  [bibleId: string]: BibleVersion;
+  [bibleId: string]: BibleVersionWithHashes;
 }
 
 export interface BibleInputConfig {
@@ -50,3 +54,17 @@ export type PassageCloseCreatorFunc = (
 export type PassageCloseFunc = (index: number) => void;
 
 export type PassageCloseFuncCurried = () => void;
+
+type Hash = string;
+
+interface BibleHashes {
+  allHash?: Hash;
+  v11nHash?: Hash;
+  booksHashes?: {
+    [bookId: string]: Hash;
+  };
+}
+
+export interface BiblesHashes {
+  [bibleId: string]: BibleHashes;
+}
