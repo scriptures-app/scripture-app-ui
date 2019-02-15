@@ -37,7 +37,7 @@
     "typestyle": "^1.3.4"
   },
   "devDependencies": {
-    "@bible-reader/bible-converter": "^2.0.0",
+    "@bible-reader/bible-converter": "^2.1.1",
     "@bible-reader/types": "^1.0.3",
     "@types/adm-zip": "^0.4.31",
     "@types/axios": "^0.14.0",

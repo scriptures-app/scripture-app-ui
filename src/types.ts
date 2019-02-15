@@ -60,8 +60,9 @@ type Hash = string;
 interface BibleHashes {
   allHash?: Hash;
   v11nHash?: Hash;
-  booksHashes?: {
-    [bookId: string]: Hash;
+  descriptorHash?: Hash;
+  chaptersHashes?: {
+    [book: string]: Hash[];
   };
 }
 

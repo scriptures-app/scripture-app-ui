@@ -26,6 +26,25 @@ class App extends React.Component<{}, AppState> {
     this.addPassage = this.addPassage.bind(this);
   }
 
+  async componentDidMount() {
+    const { versionId } = defaultPassage;
+    try {
+      const response = await fetch(
+        `bibles/${versionId}/descriptor.${
+          bibles[versionId].hashes.descriptorHash
+        }.json`
+      );
+      const responseJson = await response.json();
+      bibles[versionId].hashes.chaptersHashes = responseJson.chapters;
+    } catch (err) {
+      throw new Error(
+        `Failed at downloading descriptor file of ${versionId}.\n Error: ${
+          err.message
+        }`
+      );
+    }
+  }
+
   isPassageValid(versionId: string, book: string, chapter: number) {
     return (
       chapter > 0 &&
@@ -72,15 +91,30 @@ class App extends React.Component<{}, AppState> {
 
     if (this.isPassageValid(versionId, book, chapter)) {
       const verses = this.getPassageFromLocalStorage(versionId, book, chapter);
-      const booksHashes = bibles[versionId].hashes.booksHashes;
-      const bookHash =
-        booksHashes && booksHashes[book] ? booksHashes[book] : "";
-      if (!verses.length) {
+      if (!bibles[versionId].hashes.chaptersHashes) {
+        try {
+          const response = await fetch(
+            `bibles/${versionId}/descriptor.${
+              bibles[versionId].hashes.descriptorHash
+            }.json`
+          );
+          const descriptor = await response.json();
+          bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
+        } catch (err) {
+          throw new Error(
+            `Failed at downloading descriptor file of ${versionId}.\n Error: ${
+              err.message
+            }`
+          );
+        }
+      }
+      const chaptersHashes = bibles[versionId].hashes.chaptersHashes;
+      if (!verses.length && chaptersHashes) {
         const urlPath = await buildChapterPath(
           versionId,
           book,
           chapter,
-          bookHash
+          chaptersHashes[book][chapter - 1]
         );
         try {
           const response = await fetch(urlPath);
