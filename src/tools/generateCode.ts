@@ -25,12 +25,10 @@ import { BibleVersionsMap } from "./types";
   });
   code += `const bibles: BibleVersionsMap = ${JSON.stringify(biblesJSON)};\n`;
 
-  const booksHashes = biblesHashes[versionId].booksHashes;
-  const hashfileHash =
-    booksHashes && booksHashes[book] ? booksHashes[book] : "";
-  const bookHashes = require(`${publicPath}/${versionId}/${book}/hashfile.${hashfileHash}.json`);
+  const descriptorHash = biblesHashes[versionId].descriptorHash;
+  const descriptor = require(`${publicPath}/${versionId}/descriptor.${descriptorHash}.json`);
 
-  const hash = bookHashes[chapter - 1];
+  const hash = descriptor.chapters[book][chapter - 1];
   const initialChapterJSON = require(`${publicPath}/${versionId}/${book}/ch${pad(
     chapter.toString(),
     3

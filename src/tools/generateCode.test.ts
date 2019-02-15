@@ -25,18 +25,12 @@ const biblesHashes: BiblesHashes = {
   bkr: {
     allHash: "c678a9",
     v11nHash: "d21033",
-    booksHashes: { gen: "a53443", exo: "a8888d" }
+    descriptorHash: "afa3ce"
   },
   kjv: {
     allHash: "edb19a",
     v11nHash: "c9bbd0",
-    booksHashes: {
-      gen: "65bd48",
-      exo: "e22dea",
-      lev: "bbdf85",
-      num: "bbdf85",
-      deu: "bbdf85"
-    }
+    descriptorHash: "b29dce"
   }
 };
 
@@ -51,7 +45,7 @@ const path = "../../src/tools/testData/bibles/";
 describe("generateCode", () => {
   it("should generate correct code", () => {
     expect(
-      generateCode(path, bibles, defaultChapter, "2f8b83", biblesHashes)
+      generateCode(path, bibles, defaultChapter, "a25269", biblesHashes)
     ).toMatchSnapshot();
   });
 });

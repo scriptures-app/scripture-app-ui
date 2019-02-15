@@ -60,9 +60,9 @@ Promise.all(
           updateProgressCallback.bind(null, bible.id)
         );
       })
-      .then(booksHashes => {
-        if (booksHashes) {
-          biblesHashes[bible.id].booksHashes = booksHashes;
+      .then(descriptorHash => {
+        if (descriptorHash) {
+          biblesHashes[bible.id].descriptorHash = descriptorHash;
         }
       })
       .catch((err: Error) => {

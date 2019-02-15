@@ -117,9 +117,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bible-reader/bible-converter@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-2.0.0.tgz#78863b2453481c9b5309bdcbbe3dd4f1ba2b09fb"
+"@bible-reader/bible-converter@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@bible-reader/bible-converter/-/bible-converter-2.1.1.tgz#5b0eaf63cd9319cee897bc37b7922df06d061f3d"
   dependencies:
     "@bible-reader/common" "^2.0.0"
     "@bible-reader/types" "^2.0.0"
