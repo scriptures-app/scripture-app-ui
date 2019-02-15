@@ -18,15 +18,13 @@ function generateCode(
 import { ChapterContent } from "@bible-reader/types";
 import { BibleVersionsMap } from "./types";
 `;
-  bibles.forEach(({ id, lang, name }: BibleInputConfig) => {
-    const hash = biblesHashes[id].v11nHash;
-    const v11nJSON = require(`${publicPath}/${id}/v11n.${hash}.json`);
-    biblesJSON[id].v11n = v11nJSON;
-  });
-  code += `const bibles: BibleVersionsMap = ${JSON.stringify(biblesJSON)};\n`;
-
   const descriptorHash = biblesHashes[versionId].descriptorHash;
   const descriptor = require(`${publicPath}/${versionId}/descriptor.${descriptorHash}.json`);
+
+  bibles.forEach(({ id }: BibleInputConfig) => {
+    biblesJSON[id].v11n = {}; // v11n data for current bible will be loaded right after first page load
+  });
+  code += `const bibles: BibleVersionsMap = ${JSON.stringify(biblesJSON)};\n`;
 
   const hash = descriptor.chapters[book][chapter - 1];
   const initialChapterJSON = require(`${publicPath}/${versionId}/${book}/ch${pad(

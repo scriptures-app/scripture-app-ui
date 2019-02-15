@@ -34,8 +34,10 @@ class App extends React.Component<{}, AppState> {
           bibles[versionId].hashes.descriptorHash
         }.json`
       );
-      const responseJson = await response.json();
-      bibles[versionId].hashes.chaptersHashes = responseJson.chapters;
+      const descriptor = await response.json();
+      bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
+      bibles[versionId].v11n = descriptor.v11n;
+      this.setState(state => ({ ...state })); // @TODO: remove this hack to rerender: Add bible data to state.
     } catch (err) {
       throw new Error(
         `Failed at downloading descriptor file of ${versionId}.\n Error: ${
@@ -89,26 +91,30 @@ class App extends React.Component<{}, AppState> {
       ]
     }));
 
+    if (!bibles[versionId].hashes.chaptersHashes) {
+      try {
+        const response = await fetch(
+          `bibles/${versionId}/descriptor.${
+            bibles[versionId].hashes.descriptorHash
+          }.json`
+        );
+        const descriptor = await response.json();
+        bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
+        bibles[versionId].v11n = descriptor.v11n;
+      } catch (err) {
+        throw new Error(
+          `Failed at downloading descriptor file of ${versionId}.\n Error: ${
+            err.message
+          }`
+        );
+      }
+    }
+
     if (this.isPassageValid(versionId, book, chapter)) {
       const verses = this.getPassageFromLocalStorage(versionId, book, chapter);
-      if (!bibles[versionId].hashes.chaptersHashes) {
-        try {
-          const response = await fetch(
-            `bibles/${versionId}/descriptor.${
-              bibles[versionId].hashes.descriptorHash
-            }.json`
-          );
-          const descriptor = await response.json();
-          bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
-        } catch (err) {
-          throw new Error(
-            `Failed at downloading descriptor file of ${versionId}.\n Error: ${
-              err.message
-            }`
-          );
-        }
-      }
+
       const chaptersHashes = bibles[versionId].hashes.chaptersHashes;
+
       if (!verses.length && chaptersHashes) {
         const urlPath = await buildChapterPath(
           versionId,
