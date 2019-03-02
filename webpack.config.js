@@ -1,7 +1,9 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const AppManifestWebpackPlugin = require("app-manifest-webpack-plugin");
+
+const appName = process.env.APP_NAME || "Bible Reader";
 
 module.exports = (env = "dev") => {
   const devMode = env === "dev";
@@ -56,7 +58,25 @@ module.exports = (env = "dev") => {
         chunkFilename:
           "static/css/" + (devMode ? "[id].css" : "[id].[contenthash:8].css")
       }),
-      new FaviconsWebpackPlugin({ logo: "./logo.png", title: "Bible Reader" })
+      new AppManifestWebpackPlugin({
+        logo: "./logo.png",
+        output: "/static/icons-[hash:8]/",
+        inject: true,
+        config: {
+          appName,
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            favicons: true,
+            firefox: true,
+            opengraph: true,
+            twitter: true,
+            yandex: false,
+            windows: true
+          }
+        }
+      })
     ],
     devServer: {
       contentBase: [path.join(__dirname, "public")],
