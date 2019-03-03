@@ -133,7 +133,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
         <div className="toolbar">
           <div className="header">
             <header>
-              <h1>Bible Reader</h1>
+              <h1>{process.env.APP_NAME || "Bible Reader"}</h1>
             </header>
           </div>
         </div>

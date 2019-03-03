@@ -1,9 +1,10 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const AppManifestWebpackPlugin = require("app-manifest-webpack-plugin");
 
-const appName = process.env.APP_NAME || "Bible Reader";
+const defaultAppName = "Bible Reader";
 
 module.exports = (env = "dev") => {
   const devMode = env === "dev";
@@ -29,15 +30,6 @@ module.exports = (env = "dev") => {
           ]
         },
         {
-          test: /\.html$/,
-          use: [
-            {
-              loader: "html-loader",
-              options: { minimize: !devMode }
-            }
-          ]
-        },
-        {
           test: /\.svg$/,
           loader: "svg-inline-loader"
         }
@@ -47,9 +39,13 @@ module.exports = (env = "dev") => {
       extensions: ["*", ".ts", ".tsx", ".js", ".jsx", ".json"]
     },
     plugins: [
+      new webpack.EnvironmentPlugin({
+        APP_NAME: defaultAppName
+      }),
       new HtmlWebPackPlugin({
+        title: process.env.APP_NAME || defaultAppName,
         template: "./public/index.html",
-        filename: "./index.html"
+        filename: "index.html"
       }),
       new MiniCssExtractPlugin({
         filename:
@@ -63,7 +59,7 @@ module.exports = (env = "dev") => {
         output: "/static/icons-[hash:8]/",
         inject: true,
         config: {
-          appName,
+          appName: process.env.APP_NAME || defaultAppName,
           icons: {
             android: true,
             appleIcon: true,
