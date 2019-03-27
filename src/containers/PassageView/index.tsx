@@ -22,7 +22,7 @@ interface PassageViewProps {
   loading: boolean;
 }
 
-class PassageView extends React.Component<PassageViewProps> {
+export class PassageView extends React.Component<PassageViewProps> {
   getPassageViewContent = (verses: string[]) => {
     const { v11n, book, chapter, versionId } = this.props;
     const previousChapterRef = getPreviousChapter(v11n, {
@@ -87,5 +87,3 @@ class PassageView extends React.Component<PassageViewProps> {
     );
   }
 }
-
-export default PassageView;
