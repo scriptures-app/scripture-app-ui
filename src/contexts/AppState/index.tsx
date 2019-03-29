@@ -27,6 +27,7 @@ interface ContextValue extends AppState {
 interface AppStateProviderProps {
   defaultPassage: Chapter;
   bibles: BibleVersionsMap;
+  loadBibleVersionDescriptor: (versionId: string) => Promise<void>;
 }
 
 const { Provider, Consumer } = React.createContext<ContextValue>({
@@ -52,28 +53,6 @@ class AppStateProvider extends React.Component<
     };
   }
 
-  async componentDidMount() {
-    const { defaultPassage, bibles } = this.props;
-    const { versionId } = defaultPassage;
-    try {
-      const response = await fetch(
-        `bibles/${versionId}/descriptor.${
-          bibles[versionId].hashes.descriptorHash
-        }.json`
-      );
-      const descriptor = await response.json();
-      bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
-      bibles[versionId].v11n = descriptor.v11n;
-      this.setState(state => ({ ...state })); // @TODO: remove this hack to rerender: Add bible data to state.
-    } catch (err) {
-      throw new Error(
-        `Failed at downloading descriptor file of ${versionId}.\n Error: ${
-          err.message
-        }`
-      );
-    }
-  }
-
   isPassageValid(versionId: string, book: string, chapter: number) {
     const { bibles } = this.props;
     return (
@@ -97,8 +76,6 @@ class AppStateProvider extends React.Component<
   ) => {
     // console.log("Changing to ", { passageIndex, versionId, book, chapter });
 
-    const { bibles } = this.props;
-
     this.setState(({ passages }) => ({
       passages: [
         ...passages.slice(0, passageIndex),
@@ -107,24 +84,11 @@ class AppStateProvider extends React.Component<
       ]
     }));
 
-    if (!bibles[versionId].hashes.chaptersHashes) {
-      try {
-        const response = await fetch(
-          `bibles/${versionId}/descriptor.${
-            bibles[versionId].hashes.descriptorHash
-          }.json`
-        );
-        const descriptor = await response.json();
-        bibles[versionId].hashes.chaptersHashes = descriptor.chapters;
-        bibles[versionId].v11n = descriptor.v11n;
-      } catch (err) {
-        throw new Error(
-          `Failed at downloading descriptor file of ${versionId}.\n Error: ${
-            err.message
-          }`
-        );
-      }
-    }
+    await this.props.loadBibleVersionDescriptor(versionId);
+
+    // It is essential to do this assignment after the previous await call
+    // chapterHashes would be undefined otherwise
+    const { bibles } = this.props;
 
     if (this.isPassageValid(versionId, book, chapter)) {
       const verses = this.getPassageFromLocalStorage(versionId, book, chapter);
@@ -132,7 +96,7 @@ class AppStateProvider extends React.Component<
       const chaptersHashes = bibles[versionId].hashes.chaptersHashes;
 
       if (!verses.length && chaptersHashes) {
-        const urlPath = await buildChapterPath(
+        const urlPath = buildChapterPath(
           versionId,
           book,
           chapter,
