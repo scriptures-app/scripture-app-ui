@@ -3,22 +3,13 @@ import MediaQuery from "react-responsive";
 
 import "./MainLayout.css";
 
-import { BibleVersionsMap } from "../../types";
-
 import { Passages } from "../Passages";
 import { PassagesNavbar } from "../PassagesNavbar";
 
-interface MainLayoutProps {
-  bibles: BibleVersionsMap;
-}
-
 const MOBILE_BREAKPOINT = 825;
 
-export class MainLayout extends React.Component<MainLayoutProps> {
-  props: MainLayoutProps;
+export class MainLayout extends React.Component {
   render() {
-    const { bibles } = this.props;
-
     return (
       <div className="container">
         <div className="toolbar">
@@ -30,10 +21,10 @@ export class MainLayout extends React.Component<MainLayoutProps> {
         </div>
         <div className="content">
           <MediaQuery query={`(min-device-width: ${MOBILE_BREAKPOINT + 1}px)`}>
-            <Passages bibles={bibles} isForMobile={false} />
+            <Passages isForMobile={false} />
           </MediaQuery>
           <MediaQuery query={`(max-device-width: ${MOBILE_BREAKPOINT}px)`}>
-            <Passages bibles={bibles} isForMobile={true} />
+            <Passages isForMobile={true} />
           </MediaQuery>
         </div>
         <MediaQuery query={`(max-device-width: ${MOBILE_BREAKPOINT}px)`}>

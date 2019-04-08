@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import BibleVersionAutocomplete from "../BibleVersionAutocomplete";
+import * as BibleContext from "../../contexts/BibleData";
+
 import "./BibleVersionSelect.css";
 
 interface BibleVersionSelectProps {
-  allVersionIds: string[];
   versionId: string;
   onChange: (versionId: string) => void;
 }
@@ -84,13 +85,17 @@ export default class BibleVersionSelect extends React.Component<
         </div>
         {this.state.open && (
           <div className="BibleVersionSelect_dropdown" ref={this.setWrapperRef}>
-            <BibleVersionAutocomplete
-              allVersionIds={this.props.allVersionIds}
-              versionId={this.props.versionId}
-              onChange={this.handleChange}
-              onCancel={this.handleClose}
-              touchEnabled={this.state.wasTouched}
-            />
+            <BibleContext.Consumer>
+              {({ bibles }) => (
+                <BibleVersionAutocomplete
+                  allVersionIds={Object.keys(bibles)}
+                  versionId={this.props.versionId}
+                  onChange={this.handleChange}
+                  onCancel={this.handleClose}
+                  touchEnabled={this.state.wasTouched}
+                />
+              )}
+            </BibleContext.Consumer>
           </div>
         )}
       </div>

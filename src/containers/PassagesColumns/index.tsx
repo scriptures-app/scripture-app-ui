@@ -2,7 +2,6 @@ import * as React from "react";
 import { Chapter } from "@bible-reader/types";
 
 import {
-  BibleVersionsMap,
   PassageChangeFunc,
   PassageCloseFunc,
   PassageAddFunc
@@ -10,7 +9,6 @@ import {
 import { PassageView } from "../PassageView";
 
 interface PassagesColumnsProps {
-  bibles: BibleVersionsMap;
   passages: Chapter[];
   onPassageAdd: PassageAddFunc;
   onPassageChange: PassageChangeFunc;
@@ -23,7 +21,6 @@ interface PassagesColumnsProps {
  * of React components.
  */
 export const renderPassagesColumns = ({
-  bibles,
   passages,
   onPassageAdd,
   onPassageChange,
@@ -32,15 +29,12 @@ export const renderPassagesColumns = ({
 }: PassagesColumnsProps) => {
   const passagesColumns = passages.map(
     ({ versionId, book, chapter, verses, loading }: Chapter, index: number) => {
-      const v11n = bibles[versionId].v11n;
       const passage = (
         <PassageView
           key={`${versionId}_${book}_${chapter}_${index}`}
-          allVersionIds={Object.keys(bibles)}
           versionId={versionId}
           book={book}
           chapter={chapter}
-          v11n={v11n}
           verses={verses}
           onPassageChange={(versionId: string, book: string, chapter: number) =>
             onPassageChange(index, versionId, book, chapter)
@@ -77,7 +71,6 @@ export const renderPassagesColumns = ({
 };
 
 export const PassagesColumns = ({
-  bibles,
   passages,
   onPassageAdd,
   onPassageChange,
@@ -86,7 +79,6 @@ export const PassagesColumns = ({
 }: PassagesColumnsProps) => (
   <React.Fragment>
     {renderPassagesColumns({
-      bibles,
       passages,
       isForMobile,
       onPassageAdd,

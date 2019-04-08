@@ -16,7 +16,7 @@ class App extends React.Component {
               defaultPassage={defaultPassage}
               loadBibleVersionDescriptor={loadBibleVersionDescriptor}
             >
-              <MainLayout bibles={bibles} />
+              <MainLayout />
             </AppStateContext.Provider>
           )}
         </BibleContext.Consumer>

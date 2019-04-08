@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Versification } from "@bible-reader/types";
-import { getPreviousChapter, getNextChapter } from "@bible-reader/v11n-utils";
 
 import { PassageChangeFuncCurried, PassageCloseFuncCurried } from "../../types";
 
@@ -11,11 +9,9 @@ import ShadowScrollbar from "../ShadowScrollbar";
 import "./PassageView.css";
 
 interface PassageViewProps {
-  allVersionIds: string[];
   versionId: string;
   book: string;
   chapter: number;
-  v11n: Versification;
   verses: string[];
   onPassageChange: PassageChangeFuncCurried;
   onPassageClose: PassageCloseFuncCurried;
@@ -24,12 +20,7 @@ interface PassageViewProps {
 
 export class PassageView extends React.Component<PassageViewProps> {
   getPassageViewContent = (verses: string[]) => {
-    const { v11n, book, chapter, versionId } = this.props;
-    const previousChapterRef = getPreviousChapter(v11n, {
-      book,
-      chapter
-    });
-    const nextChapterRef = getNextChapter(v11n, { book, chapter });
+    const { book, chapter, versionId } = this.props;
 
     // curry versionId parameter
     const onPassageChange = (book: string, chapter: number) =>
@@ -43,8 +34,9 @@ export class PassageView extends React.Component<PassageViewProps> {
           </p>
         ))}
         <PassagePreviousNextButtons
-          nextChapterRef={nextChapterRef}
-          previousChapterRef={previousChapterRef}
+          book={book}
+          chapter={chapter}
+          versionId={versionId}
           onPassageChange={onPassageChange}
         />
       </>
@@ -52,11 +44,9 @@ export class PassageView extends React.Component<PassageViewProps> {
   };
   render() {
     const {
-      allVersionIds,
       versionId,
       book,
       chapter,
-      v11n,
       verses,
       onPassageChange,
       onPassageClose,
@@ -67,11 +57,9 @@ export class PassageView extends React.Component<PassageViewProps> {
         <div className="PassageView__passage">
           <div className="PassageView__header">
             <PassageNavigation
-              allVersionIds={allVersionIds}
               versionId={versionId}
               book={book}
               chapter={chapter}
-              v11n={v11n}
               onPassageChange={onPassageChange}
               onPassageClose={onPassageClose}
               loading={loading}

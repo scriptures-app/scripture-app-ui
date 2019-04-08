@@ -1,13 +1,11 @@
 import * as React from "react";
 
-import { BibleVersionsMap } from "../../types";
 import * as AppStateContext from "../../contexts/AppState";
 import { renderPassagesColumns } from "../PassagesColumns";
 import { SwipeWrapper } from "../../components/SwipeWrapper";
 
 interface PassagesProps {
   isForMobile: boolean;
-  bibles: BibleVersionsMap;
 }
 
 export class Passages extends React.Component<PassagesProps> {
@@ -28,7 +26,6 @@ export class Passages extends React.Component<PassagesProps> {
 
           // @TODO: memoize
           const passagesColumns = renderPassagesColumns({
-            bibles: this.props.bibles,
             passages: passages,
             isForMobile: this.props.isForMobile,
             onPassageAdd: onAddPassage,
