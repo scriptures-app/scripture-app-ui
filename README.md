@@ -41,3 +41,19 @@ You can use [serve](https://www.npmjs.com/package/serve) to test production buil
 ```
 serve -d build/
 ```
+
+### Custom app name
+
+Instead of Bible Reader, you can use your own app name, like "My Bible App". Use `APP_NAME` environment variable for setting your custom app name like this:
+
+In development:
+
+```
+APP_NAME="My Bible App" yarn start
+```
+
+In production
+
+```
+APP_NAME="My Bible App" yarn build
+```

@@ -2,6 +2,7 @@ import { BibleVersion, Chapter } from "@bible-reader/types";
 
 export interface AppState {
   passages: Chapter[];
+  activePassage: number; // makes sense in mobile view when only one passage is in (swipable) view
 }
 
 export interface BibleVersionWithHashes extends BibleVersion {
@@ -22,6 +23,10 @@ export interface BibleInputConfig {
 }
 
 export type StateReducerFunc = (state: AppState) => AppState;
+
+export type PassageAddCreatorFunc = (
+  defaultPassage: Chapter
+) => StateReducerFunc;
 
 export type PassageAddFunc = () => void;
 
@@ -52,6 +57,8 @@ export type PassageCloseCreatorFunc = (
 ) => StateReducerFunc;
 
 export type PassageCloseFunc = (index: number) => void;
+
+export type PassageChangeActivePassageFunc = (index: number) => void;
 
 export type PassageCloseFuncCurried = () => void;
 

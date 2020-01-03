@@ -1,17 +1,16 @@
 import * as React from "react";
 
+import * as BibleContext from "../../contexts/BibleData";
 import ChapterAutocomplete from "../ChapterAutocomplete";
-import "./ChapterSelect.css";
-
-import { Versification } from "@bible-reader/types";
-
-import { bibleBookNames } from "../../lang/bibleBookNames.en";
 import { Loader } from "../Loader";
+import { bibleBookNames } from "../../lang/bibleBookNames.en";
+
+import "./ChapterSelect.css";
 
 interface ChapterSelectProps {
   book: string;
   chapter: number;
-  v11n: Versification;
+  versionId: string;
   onChange: (book: string, chapter: number) => void;
   loading: boolean;
 }
@@ -80,7 +79,7 @@ export default class ChapterSelect extends React.Component<
   };
 
   render() {
-    const { book, chapter, v11n } = this.props;
+    const { book, chapter } = this.props;
     return (
       <div className="ChapterSelect">
         <div
@@ -93,14 +92,18 @@ export default class ChapterSelect extends React.Component<
         </div>
         {this.state.open && (
           <div className="ChapterSelect_dropdown" ref={this.setWrapperRef}>
-            <ChapterAutocomplete
-              book={book}
-              chapter={chapter}
-              v11n={v11n}
-              onChange={this.handleChange}
-              onCancel={this.handleClose}
-              touchEnabled={this.state.wasTouched}
-            />
+            <BibleContext.Consumer>
+              {({ bibles }) => (
+                <ChapterAutocomplete
+                  book={book}
+                  chapter={chapter}
+                  v11n={bibles[this.props.versionId].v11n}
+                  onChange={this.handleChange}
+                  onCancel={this.handleClose}
+                  touchEnabled={this.state.wasTouched}
+                />
+              )}
+            </BibleContext.Consumer>
           </div>
         )}
         {this.props.loading && <Loader />}
