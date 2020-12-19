@@ -1,7 +1,10 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const AppManifestWebpackPlugin = require("app-manifest-webpack-plugin");
+
+const defaultAppName = "Bible Reader";
 
 module.exports = (env = "dev") => {
   const devMode = env === "dev";
@@ -27,15 +30,6 @@ module.exports = (env = "dev") => {
           ]
         },
         {
-          test: /\.html$/,
-          use: [
-            {
-              loader: "html-loader",
-              options: { minimize: !devMode }
-            }
-          ]
-        },
-        {
           test: /\.svg$/,
           loader: "svg-inline-loader"
         }
@@ -45,9 +39,13 @@ module.exports = (env = "dev") => {
       extensions: ["*", ".ts", ".tsx", ".js", ".jsx", ".json"]
     },
     plugins: [
+      new webpack.EnvironmentPlugin({
+        APP_NAME: defaultAppName
+      }),
       new HtmlWebPackPlugin({
+        title: process.env.APP_NAME || defaultAppName,
         template: "./public/index.html",
-        filename: "./index.html"
+        filename: "index.html"
       }),
       new MiniCssExtractPlugin({
         filename:
@@ -56,7 +54,25 @@ module.exports = (env = "dev") => {
         chunkFilename:
           "static/css/" + (devMode ? "[id].css" : "[id].[contenthash:8].css")
       }),
-      new FaviconsWebpackPlugin({ logo: "./logo.png", title: "Bible Reader" })
+      new AppManifestWebpackPlugin({
+        logo: "./logo.png",
+        output: "/static/icons-[hash:8]/",
+        inject: true,
+        config: {
+          appName: process.env.APP_NAME || defaultAppName,
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            favicons: true,
+            firefox: true,
+            opengraph: true,
+            twitter: true,
+            yandex: false,
+            windows: true
+          }
+        }
+      })
     ],
     devServer: {
       contentBase: [path.join(__dirname, "public")],
